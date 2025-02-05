@@ -38,10 +38,13 @@ int	keypress_hook(int key_code, t_cub *cub)
 
 int	loop(t_cub *cub)
 {
+	//if (cub->img.img)
+	//{
+	//	mlx_destroy_image(cub->mlx, cub->img.img);
+	//	cub->img.img = NULL;
 	paint_background(cub);
 	raycasting(cub);
 	paint_img(cub);
-	mlx_destroy_image(cub->mlx, cub->img.img);
 	return (0);
 }
 

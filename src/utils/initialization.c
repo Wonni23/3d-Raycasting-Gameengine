@@ -18,14 +18,14 @@ void	init_mlx(t_cub *cub)
 	cub->win = mlx_new_window(cub->mlx, WIDTH, HEIGHT, "cub3D");
 }
 
-void	init_player(t_player *player)
+void	init_player(t_player *player) // debug
 {
 	player->pos_x = 4; // debug
-	player->pos_y = 4; // debug
+	player->pos_y = 2; // debug
 	player->dir_x = -1; // should be determined by the starting face
 	player->dir_y = 0; // should be determined by the starting face
 	player->plane_x = 0;
-	player->plane_y = 0.66;
+	player->plane_y = -0.66;
 }
 
 void	init_test_map(t_map *map) // debug

@@ -60,12 +60,8 @@ void perform_dda(t_ray *ray, char world_map[10][10])
 	int hit;
 
 	hit = 0;
-	//printf("Start pos: (%d, %d)\n", ray->map_x, ray->map_y);
 	while (!hit)
 	{
-		//printf("Current position: (%d, %d)\n", ray->map_x, ray->map_y);
-		//printf("step_xy: (%d, %d)\n", ray->step_x, ray->step_y);
-		//printf("ray_dir: (%f, %f)\n", ray->ray_dir_x, ray->ray_dir_y);
 		if (ray->side_dist_x < ray->side_dist_y)
 		{
 			ray->side_dist_x += ray->delta_dist_x;
@@ -110,9 +106,9 @@ void	calculate_texture_coords(t_cub *cub, t_ray *ray, t_texturing *tex)
 		tex->wall_x = cub->player.pos_x + (ray->perp_wall_dist * ray->ray_dir_x);
 	tex->wall_x -= floor(tex->wall_x);
 	tex->tex_x = (int)(tex->wall_x * (double)TEX_WIDTH);
-	if (ray->side == 0 && ray->ray_dir_x > 0)
+	if (ray->side == WALL_X && ray->ray_dir_x < 0)
 		tex->tex_x = TEX_WIDTH - tex->tex_x - 1;
-	if (ray->side == 1 && ray->ray_dir_y < 0)
+	if (ray->side == WALL_Y && ray->ray_dir_y > 0)
 		tex->tex_x = TEX_WIDTH - tex->tex_x - 1;
 	tex->step = 1.0 * TEX_HEIGHT / tex->line_height;
 	tex->tex_pos = (tex->draw_start - HEIGHT / 2 + tex->line_height / 2) * tex->step;
@@ -162,8 +158,6 @@ void	raycasting(t_cub *cub)
 		calculate_line_height(&ray, &tex);
 		calculate_texture_coords(cub, &ray, &tex);
 		set_buffer(cub, &ray, &tex, x);
-		//printf("draw start end %d, %d\n", tex.draw_start, tex.draw_end); //debug
 		x++;
 	}
 }
-
