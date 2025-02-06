@@ -9,8 +9,7 @@
 /*   Updated: 2025/02/05 23:40:26 by jisopark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
 static char	**read_file(char **map. int fd, int counter)
 {
