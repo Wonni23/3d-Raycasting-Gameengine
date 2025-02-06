@@ -59,6 +59,9 @@
 # define FLOOR 0
 # define CEILING 1
 
+# define MVSPEED 0.2
+# define RTSPEED 0.1
+
 typedef	struct s_parse
 {
 	char	**file;
@@ -160,6 +163,12 @@ int		keypress_hook(int key_code, t_cub *cub);
 /* Rendering */
 int		loop(t_cub *cub);
 void	raycasting(t_cub *cub);
+
+/* Movements */
+void	move_w(t_cub *cub);
+void	move_s(t_cub *cub);
+void	move_a(t_cub *cub);
+void	move_d(t_cub *cub);
 
 /* Painting */
 void	paint_background(t_cub *cub);

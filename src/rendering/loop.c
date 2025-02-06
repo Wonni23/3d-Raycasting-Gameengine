@@ -22,10 +22,10 @@ int	keypress_hook(int key_code, t_cub *cub)
 		move_s(cub);
 	else if (key_code == KEY_D)
 		move_d(cub);
-	else if (key_code == KEY_LEFT)
-		rotate_left(cub);
-	else if (key_code == KEY_RIGHT)
-		rotate_right(cub);
+	//else if (key_code == KEY_LEFT)
+	//	rotate_left(cub);
+	//else if (key_code == KEY_RIGHT)
+	//	rotate_right(cub);
 	else if (key_code == KEY_ESC)
 	{
 		printf("Exiting cub3D.\n");
@@ -37,10 +37,11 @@ int	keypress_hook(int key_code, t_cub *cub)
 
 int	loop(t_cub *cub)
 {
-	if (cub->img.img)
-	{
-		mlx_destroy_image(cub->mlx, cub->img.img);
-		cub->img.img = NULL;
+	//if (cub->img.img)
+	//{
+	//	mlx_destroy_image(cub->mlx, cub->img.img);
+	//	cub->img.img = NULL;
+	//}
 	paint_background(cub);
 	raycasting(cub);
 	paint_img(cub);

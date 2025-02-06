@@ -47,7 +47,7 @@ char	**parse_main(t_cub *cub, char *name)
 	t_parse	parse;
 	char	**path;
 	int		fd;
-	int		i;
+	//int		i;
 
 	parse.file = NULL;
 	parse.path_to_img = NULL;
