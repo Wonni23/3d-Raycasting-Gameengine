@@ -56,6 +56,13 @@
 # define FRAME_RATE 60
 # define TBD 69
 
+typedef	struct s_parse
+{
+	char	**file;
+	char	**path_to_img;
+	int		num_vars;
+}	t_parse;
+
 typedef struct s_ray {
 	double	ray_dir_x;
 	double	ray_dir_y;
@@ -94,6 +101,8 @@ typedef struct s_img
 	int			h;
 	int			buffer[HEIGHT][WIDTH];
 	int			**wallimgs;
+	int			colors[2];
+	char		order[5];
 }	t_img;
 
 typedef struct s_player
@@ -111,7 +120,7 @@ typedef struct s_player
 
 typedef struct s_map
 {
-	char		map[10][10]; // debug, should be **map
+	char		**map; // debug, should be **map
 	char		*no_path;
 	char		*so_path;
 	char		*we_path;
@@ -128,17 +137,11 @@ typedef struct s_map
 typedef struct s_cub {
 	void		*mlx;
 	void		*win;
+	int			num_player;
 	t_img		img;
 	t_player	player;
 	t_map		map;
 }	t_cub;
-
-typedef	struct s_parse
-{
-	char	**file;
-	char	**path_to_img;
-	int		num_vars;
-}	t_parse;
 
 /* initializing */
 void	initialization(t_cub *cub);
@@ -160,5 +163,13 @@ void	paint_img(t_cub *cub);
 
 /* Utils */
 void	ft_exit(char *msg);
+
+/* Parsing */
+char	**parse_main(t_cub *cub, char *name);
+void	parse_file(t_cub *cub, t_parse *parse);
+int		get_vars(t_cub *cub, t_parse *parse);
+void	free_matrix(void **matrix);
+void	free_parse(t_parse *parse);
+void	exit_parse(t_cub *cub, int status, char *str, t_parse *parse);
 
 #endif
