@@ -17,7 +17,7 @@ int	init_image(t_img *img)
 	int	i;
 	int	j;
 
-	ft_memset(img, 0, sizeof(t_img));
+	//ft_memset(img, 0, sizeof(t_img));
 	i = 0;
 	while (i < HEIGHT)
 	{
@@ -60,7 +60,7 @@ void	fill_wall_arr_pixel(t_cub *cub, int i)
 	}
 }
 
-void	load_image(t_cub *cub)
+void	load_image(t_cub *cub, char **path_to_image)
 {
 	char	*path;
 	int		i;
@@ -69,15 +69,14 @@ void	load_image(t_cub *cub)
 	while (i < 4)
 	{
 		if (i == N)
-			path = cub->img.order[0];
+			path = path_to_image[0];
 		else if (i == S)
-			path = cub->img.order[1];
+			path = path_to_image[1];
 		else if (i == W)
-			path = cub->img.order[2];
+			path = path_to_image[2];
 		else
-			path = cub->img.order[3];
-		cub->img.img = \
-			mlx_xpm_file_to_image(cub->mlx, path, &cub->img.w, &cub->img.h);
+			path = path_to_image[3];
+		cub->img.img = mlx_xpm_file_to_image(cub->mlx, path, &cub->img.w, &cub->img.h);
 		if (cub->img.w != TEX_WIDTH || cub->img.h != TEX_HEIGHT
 			|| cub->img.img == NULL)
 			exit_parse(cub, 1, "image_load xpm file error", NULL); // change function: free : map, img.wallimgs

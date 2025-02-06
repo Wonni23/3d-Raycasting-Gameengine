@@ -62,6 +62,7 @@ static int	fill_args(t_cub *cub, t_parse *parse, char *s, int path_i)
 		while (ft_isspace(*s))
 			s++;
 		cub->img.colors[cub->img.color_i] = fill_color(cub, parse, s);
+		printf("%d\n", cub->img.colors[cub->img.color_i]);
 	}
 	return (0);
 }
@@ -76,7 +77,8 @@ static int	find_args(t_cub *cub, t_parse *parse, char *s, char *compare)
 		else if (!ft_strncmp(s, "F", 1))
 			cub->img.color_i = 0;
 		else
-			cub->img.order[++parse->num_vars][0] = compare[0];
+			++parse->num_vars;
+			//cub->img.order[++parse->num_vars] = compare;
 		if (fill_args(cub, parse, s, parse->num_vars))
 			exit_parse(cub, 1, "Error with malloc", parse);
 		return (0);

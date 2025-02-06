@@ -108,7 +108,8 @@ typedef struct s_img
 	//int			floor;
 	//int			ceiling;
 	int			colors[2];
-	char		order[5][0];
+	//char		order[5][1];
+	char		**order;
 }	t_img;
 
 typedef struct s_player
@@ -151,6 +152,7 @@ typedef struct s_cub {
 
 /* initializing */
 void	initialization(t_cub *cub);
+void	init_mlx(t_cub *cub);
 
 /* Mlx related */
 int		keypress_hook(int key_code, t_cub *cub);
@@ -168,7 +170,7 @@ void	ft_exit(char *msg);
 
 /* Parsing */
 void	parse(t_cub *cub, char *argv);
-void	parse_main(t_cub *cub, char *name);
+char	**parse_main(t_cub *cub, char *name);
 void	parse_file(t_cub *cub, t_parse *parse);
 int		get_vars(t_cub *cub, t_parse *parse);
 void	check_map(t_cub *cub);
@@ -176,6 +178,6 @@ void	free_matrix(void **matrix);
 void	free_parse(t_parse *parse);
 void	exit_parse(t_cub *cub, int status, char *str, t_parse *parse);
 int		init_image(t_img *img);
-void	load_image(t_cub *cub);
+void	load_image(t_cub *cub, char **path_to_image);
 
 #endif

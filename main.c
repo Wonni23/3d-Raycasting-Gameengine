@@ -21,7 +21,9 @@ int	main(int argc, char **argv)
 		printf("Error\nThere must be only two files.\n");
 		return (0);
 	}
+	init_mlx(&cub);
 	parse(&cub, argv[1]);
+	printf("%d\n%d\n", cub.img.colors[0], cub.img.colors[1]);
 	initialization(&cub);
 	mlx_loop_hook(cub.mlx, loop, &cub);
 	mlx_hook(cub.win, X_EVENT_KEY_RELEASE, 1L << 1, keypress_hook, &cub);

@@ -52,7 +52,6 @@ void	init_player(t_player *player)
 
 void	initialization(t_cub *cub)
 {
-	init_mlx(cub);
 	init_player(&cub->player);
 	cub->img.img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	cub->img.data = (int *)mlx_get_data_addr(cub->img.img, &cub->img.bpp,
