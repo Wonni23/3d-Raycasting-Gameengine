@@ -133,6 +133,13 @@ typedef struct s_cub {
 	t_map		map;
 }	t_cub;
 
+typedef	struct s_parse
+{
+	char	**file;
+	char	**path_to_img;
+	int		num_vars;
+}	t_parse;
+
 /* initializing */
 void	initialization(t_cub *cub);
 
