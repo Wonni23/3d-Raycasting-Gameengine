@@ -51,10 +51,10 @@ void	parse_main(t_cub *cub, char *name)
 	parse.file = NULL;
 	parse.path_to_img = NULL;
 	parse.num_vars = -1;
-	//i = -1;
-	//while (++i < 4)
-	//	cub->img.order[i] = 0;
-	cub->img.order = (char **)malloc(sizeof(char *) * 5);
+	i = -1;
+	while (++i < 4)
+		cub->img.order[i][0] = 0;
+	//cub->img.order = (char **)malloc(sizeof(char *) * 5);
 	if (ft_strncmp(ft_strrchr(name, '.'), ".cub", 5))
 		exit_parse(cub, 1, "The argument must end with .cub", &parse);
 	fd = open_file(cub, name, &parse);

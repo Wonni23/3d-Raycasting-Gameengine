@@ -72,7 +72,7 @@ void	load_image(t_cub *cub)
 			path = cub->img.order[0];
 		else if (i == S)
 			path = cub->img.order[1];
-		else if (i == E)
+		else if (i == W)
 			path = cub->img.order[2];
 		else
 			path = cub->img.order[3];

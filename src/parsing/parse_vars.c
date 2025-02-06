@@ -69,7 +69,7 @@ static int	fill_args(t_cub *cub, t_parse *parse, char *s, int path_i)
 static int	find_args(t_cub *cub, t_parse *parse, char *s, char *compare)
 {
 	cub->img.color_i = -1;
-	if (ft_strncmp(s, compare, ft_strlen(compare)))
+	if (!ft_strncmp(s, compare, ft_strlen(compare)))
 	{
 		if (!ft_strncmp(s, "C", 1))
 			cub->img.color_i = 1;

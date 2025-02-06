@@ -108,7 +108,7 @@ typedef struct s_img
 	//int			floor;
 	//int			ceiling;
 	int			colors[2];
-	char		**order;
+	char		order[5][0];
 }	t_img;
 
 typedef struct s_player
