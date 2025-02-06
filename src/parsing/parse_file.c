@@ -54,7 +54,7 @@ static void	get_map(t_cub *cub, t_parse *parse, int y)
 	num_lines = counting_lines(parse, y);
 	if (num_lines == -1)
 		exit_parse(cub, 1, "Invalid map", parse);
-	cub->map.map = ft_calloc(sizeof(char *) * (num_lines + 1));
+	cub->map.map = ft_calloc(num_lines + 1, sizeof(char *));
 	if (!cub->map.map)
 		exit_parse(cub, 1, "malloc with map", parse);
 	i = -1;

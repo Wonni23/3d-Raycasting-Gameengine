@@ -1,7 +1,12 @@
 NAME = cub3D
 
 SRCS =	main.c \
-		src/parsing/parsing.c \
+		src/parsing/check_map.c \
+		src/parsing/exit_parse.c \
+		src/parsing/parse_file.c \
+		src/parsing/parse_imgs.c \
+		src/parsing/parse_main.c \
+		src/parsing/parse_vars.c \
 		src/rendering/loop.c \
 		src/rendering/raycasting.c \
 		src/rendering/paint.c \

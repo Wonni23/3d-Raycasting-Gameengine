@@ -11,21 +11,21 @@
 /* ************************************************************************** */
 #include "../../include/cub3d.h"
 
-static char	**read_file(char **map. int fd, int counter)
+static char	**read_file(char **map, int fd, int counter)
 {
 	char	*str;
 	str = get_next_line(fd);
 	if (str)
 		map = read_file(map, fd, 1 + counter);
 	else if (!map && counter != 0)
-		map = ft_calloc(sizeof(char *) * (counter + 1));
+		map = ft_calloc(counter + 1, sizeof(char *));
 	if (!map)
 		return (NULL);
 	map[counter] = str;
 	return (map);
 }
 
-static int	open_file(t_cub *data, char *name, t_parse *parse)
+static int	open_file(t_cub *cub, char *name, t_parse *parse)
 {
 	int	fd;
 
@@ -42,7 +42,7 @@ static int	open_file(t_cub *data, char *name, t_parse *parse)
 	return (fd);
 }
 
-char	**parse_main(t_cub *cub, char *name)
+void	parse_main(t_cub *cub, char *name)
 {
 	t_parse	parse;
 	int		fd;
@@ -51,9 +51,10 @@ char	**parse_main(t_cub *cub, char *name)
 	parse.file = NULL;
 	parse.path_to_img = NULL;
 	parse.num_vars = -1;
-	i = -1;
-	while (++i < 4)
-		cub->img.order[i] = 0;
+	//i = -1;
+	//while (++i < 4)
+	//	cub->img.order[i] = 0;
+	cub->img.order = (char **)malloc(sizeof(char *) * 5);
 	if (ft_strncmp(ft_strrchr(name, '.'), ".cub", 5))
 		exit_parse(cub, 1, "The argument must end with .cub", &parse);
 	fd = open_file(cub, name, &parse);
@@ -62,16 +63,16 @@ char	**parse_main(t_cub *cub, char *name)
 	if (!parse.file)
 		exit_parse(cub, 1, "The file must not be empty", &parse);
 	parse_file(cub, &parse);
-	path = parse.path_to_img;
-	parse.path_to_img = NULL;
 	free_parse(&parse);
-	return (path);
 }
 
 void	parse(t_cub *cub, char *name)
 {
-	cub->img.wallimgs = parse_main(&cub, argv[1]);
-	check_map(&cub, path);
+	//cub->img.order = (char **)malloc(sizeof(char *) * 5);
+	//if (!cub->img.order)
+		//ft_exit("Malloc Failed!")
+	parse_main(cub, name);
+	check_map(cub);
 	init_image(&cub->img);
 	load_image(cub);
 }

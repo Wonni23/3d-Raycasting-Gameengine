@@ -56,13 +56,12 @@ static int	check_invalid_char(t_cub *cub)
 	return (cub->num_player != 1);
 }
 
-void	check_map(t_cub *cub, char **path)
+void	check_map(t_cub *cub)
 {
 	if (check_invalid_char(cub))
 	{
 		printf("The map must valid chars and one player position\n");
 		free_matrix((void **)cub->map.map);
-		free_matrix((void **)path);
 		exit(1);
 	}
 }

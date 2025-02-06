@@ -20,8 +20,8 @@ void	paint_background(t_cub *cub)
 	int	floor;
 
 	i = 0;
-	celling = cub->map.ceiling;
-	floor = cub->map.floor;
+	celling = cub->img.colors[CEILING];
+	floor = cub->img.colors[FLOOR];
 	while (i < HEIGHT / 2)
 	{
 		j = 0;

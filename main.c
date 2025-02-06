@@ -15,19 +15,17 @@
 int	main(int argc, char **argv)
 {
 	t_cub	cub;
-	char	**path;
 
 	if (argc != 2)
 	{
 		printf("Error\nThere must be only two files.\n");
 		return (0);
 	}
-	parse(cub, argv[1]);
+	parse(&cub, argv[1]);
 	initialization(&cub);
 	mlx_loop_hook(cub.mlx, loop, &cub);
 	mlx_hook(cub.win, X_EVENT_KEY_RELEASE, 1L << 1, keypress_hook, &cub);
 	//mlx_hook(cub.win, X_EVENT_KEY_EXIT, 0, memory_clean_exit, &cub);
 	mlx_loop(cub.mlx);
-	free_matrix((void **)path);
 	return (0);
 }

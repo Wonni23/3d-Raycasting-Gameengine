@@ -39,7 +39,7 @@ static int	fill_color(t_cub *cub, t_parse *parse, char *s)
 	return (i << 24 | rgb[0] << 16 | rgb[1] << 8 | rgb[2]);
 }
 
-static int	fill_args(t_cub *cub, t_parse *parse, char *s, int path_i, color_i)
+static int	fill_args(t_cub *cub, t_parse *parse, char *s, int path_i)
 {
 	char	*str;
 
@@ -52,7 +52,7 @@ static int	fill_args(t_cub *cub, t_parse *parse, char *s, int path_i, color_i)
 		if (!str)
 			return (1);
 		parse->path_to_img[path_i] = ft_strdup(str);
-		free_arr(str);
+		//free_arr(str); // add later
 		if (!parse->path_to_img[path_i])
 			return (1);
 	}
@@ -61,25 +61,23 @@ static int	fill_args(t_cub *cub, t_parse *parse, char *s, int path_i, color_i)
 		s += 1;
 		while (ft_isspace(*s))
 			s++;
-		cub->img.colors[color_i] = fill_color(cub, parse, s);
+		cub->img.colors[cub->img.color_i] = fill_color(cub, parse, s);
 	}
 	return (0);
 }
 
 static int	find_args(t_cub *cub, t_parse *parse, char *s, char *compare)
 {
-	int	color_i;
-
-	color_i = -1;
+	cub->img.color_i = -1;
 	if (ft_strncmp(s, compare, ft_strlen(compare)))
 	{
 		if (!ft_strncmp(s, "C", 1))
-			color_i = 1;
+			cub->img.color_i = 1;
 		else if (!ft_strncmp(s, "F", 1))
-			color_i = 0;
+			cub->img.color_i = 0;
 		else
-			cub->img.order[++parse->num_vars] = compare[0];
-		if (fill_args(parse, s, parse->num_vars, color_i))
+			cub->img.order[++parse->num_vars][0] = compare[0];
+		if (fill_args(cub, parse, s, parse->num_vars))
 			exit_parse(cub, 1, "Error with malloc", parse);
 		return (0);
 	}
@@ -109,7 +107,7 @@ int	get_vars(t_cub *cub, t_parse *parse)
 	int	j;
 	int	num_vars;
 
-	parse->path_to_img = ft_calloc(sizeof(char *) * 5);
+	parse->path_to_img = ft_calloc(5, sizeof(char *));
 	if (!parse->path_to_img)
 		exit_parse(cub, 1, "Error with malloc", parse);
 	num_vars = 0;
@@ -121,7 +119,7 @@ int	get_vars(t_cub *cub, t_parse *parse)
 		{
 			if (!ft_isspace(parse->file[i][j]) && parse->file[i][j])
 			{
-				if (choose_var(cub, &parse->file[i][j]))
+				if (choose_var(cub, parse, &parse->file[i][j]))
 					exit_parse(cub, 1, "Invalid key", parse);
 				num_vars++;
 				break ;

@@ -55,7 +55,7 @@ void	setup_dda(t_cub *cub, t_ray *ray)
 	}
 }
 
-void perform_dda(t_ray *ray, char world_map[10][10])
+void perform_dda(t_ray *ray, char **world_map)
 {
 	int hit;
 
