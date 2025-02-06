@@ -40,7 +40,7 @@ static int	counting_lines(t_parse *parse, int y)
 	return (count_lines);
 }
 
-void	get_map(t_cub *cub, t_parse *parse, int y)
+static void	get_map(t_cub *cub, t_parse *parse, int y)
 {
 	int	i;
 	int	num_lines;
