@@ -67,3 +67,11 @@ char	**parse_main(t_cub *cub, char *name)
 	free_parse(&parse);
 	return (path);
 }
+
+void	parse(t_cub *cub, char *name)
+{
+	cub->img.wallimgs = parse_main(&cub, argv[1]);
+	check_map(&cub, path);
+	init_image(&cub->img);
+	load_image(cub);
+}

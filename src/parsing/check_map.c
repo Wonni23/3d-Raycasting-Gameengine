@@ -21,13 +21,14 @@ int	valid_chars(char c)
 {
 	return (ft_isspace(c) || orientation_player(c) || \
 	c == '0' || c == '1');
+}
 
 static void	set_player(t_cub *cub, int x, int y)
 {
 	cub->player.status = cub->map.map[y][x];
 	cub->map.map[y][x] = '0';
-	cub->player.pos_x = x * 64 + 5.5;
-	cub->player.pos_y = y * 64 + 5.5;
+	cub->player.pos_x = x;
+	cub->player.pos_y = y;
 	cub->num_player = 1;
 }
 

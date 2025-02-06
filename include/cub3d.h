@@ -40,9 +40,9 @@
 # define RIGHT 3
 
 # define N 0
-# define E 1
-# define S 2
-# define W 3
+# define S 1
+# define W 2
+# define E 3
 
 # define WALL_X 6
 # define WALL_Y 9
@@ -55,6 +55,9 @@
 
 # define FRAME_RATE 60
 # define TBD 69
+
+# define FLOOR 0
+# define CEILING 1
 
 typedef	struct s_parse
 {
@@ -101,15 +104,17 @@ typedef struct s_img
 	int			h;
 	int			buffer[HEIGHT][WIDTH];
 	int			**wallimgs;
+	//int			floor;
+	//int			ceiling;
 	int			colors[2];
 	char		order[5];
 }	t_img;
 
 typedef struct s_player
 {
-	int			status;
-	double		pos_x;
-	double		pos_y;
+	int			status; //
+	double		pos_x; // 
+	double		pos_y; //
 	double		dir_x;
 	double		dir_y;
 	double		plane_x;
@@ -121,12 +126,12 @@ typedef struct s_player
 typedef struct s_map
 {
 	char		**map; // debug, should be **map
-	char		*no_path;
-	char		*so_path;
-	char		*we_path;
-	char		*ea_path;
-	int			floor;
-	int			ceiling;
+	//char		*no_path;
+	//char		*so_path;
+	//char		*we_path;
+	//char		*ea_path;
+	//int			floor;
+	//int			ceiling;
 	int			map_width;
 	int			map_height;
 	//int			mcount;
