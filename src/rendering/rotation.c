@@ -10,4 +10,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../include/cub3d.h"
 
+void	rotate_left(t_cub *cub)
+{
+	double old_dirx = cub->player.dir_x;
+	double old_diry = cub->player.dir_y;
+	double old_planex = cub->player.plane_x;
+	double old_planey = cub->player.plane_y;
+
+	cub->player.dir_x = old_dirx * cos(RTSPEED_L) - old_diry * sin(RTSPEED_L);
+	cub->player.dir_y = old_dirx * sin(RTSPEED_L) + old_diry * cos(RTSPEED_L);
+	
+	cub->player.plane_x = old_planex * cos(RTSPEED_L) - old_planey * sin(RTSPEED_L);
+	cub->player.plane_y = old_planex * sin(RTSPEED_L) + old_planey * cos(RTSPEED_L);
+}
+
+void	rotate_right(t_cub *cub)
+{
+	double old_dirx = cub->player.dir_x;
+	double old_diry = cub->player.dir_y;
+	double old_planex = cub->player.plane_x;
+	double old_planey = cub->player.plane_y;
+
+	cub->player.dir_x = old_dirx * cos(RTSPEED_R) - old_diry * sin(RTSPEED_R);
+	cub->player.dir_y = old_dirx * sin(RTSPEED_R) + old_diry * cos(RTSPEED_R);
+	
+	cub->player.plane_x = old_planex * cos(RTSPEED_R) - old_planey * sin(RTSPEED_R);
+	cub->player.plane_y = old_planex * sin(RTSPEED_R) + old_planey * cos(RTSPEED_R);
+}

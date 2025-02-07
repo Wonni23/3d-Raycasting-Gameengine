@@ -61,7 +61,8 @@
 # define CEILING 1
 
 # define MVSPEED 0.2
-# define RTSPEED 0.1
+# define RTSPEED_R 0.1
+# define RTSPEED_L -0.1
 
 typedef	struct s_parse
 {
@@ -170,6 +171,8 @@ void	move_w(t_cub *cub);
 void	move_s(t_cub *cub);
 void	move_a(t_cub *cub);
 void	move_d(t_cub *cub);
+void	rotate_left(t_cub *cub);
+void	rotate_right(t_cub *cub);
 
 /* Painting */
 void	paint_background(t_cub *cub);
