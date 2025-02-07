@@ -24,6 +24,7 @@
 # include "minilibx-linux/mlx.h"
 # include "libft/include/libft.h"
 
+# define X_EVENT_KEY_PRESS		2
 # define X_EVENT_KEY_RELEASE	3
 # define X_EVENT_KEY_EXIT	17
 # define KEY_W 119
@@ -50,8 +51,8 @@
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 
-# define WIDTH 640
-# define HEIGHT 480
+# define WIDTH 1080
+# define HEIGHT 720
 
 # define FRAME_RATE 60
 # define TBD 69
@@ -175,7 +176,7 @@ void	paint_background(t_cub *cub);
 void	paint_img(t_cub *cub);
 
 /* Utils */
-void	ft_exit(char *msg);
+void	err_exit(char *msg);
 
 /* Parsing */
 void	parse(t_cub *cub, char *argv);

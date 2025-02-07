@@ -87,6 +87,7 @@ void	parse(t_cub *cub, char *name)
 	}*/
 	path = parse_main(cub, name);
 	check_map(cub);
+	init_mlx(cub);
 	init_image(&cub->img);
 	load_image(cub, path);
 }

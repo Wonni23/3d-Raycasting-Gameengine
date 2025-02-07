@@ -21,6 +21,8 @@ void	init_ray(t_cub *cub, t_ray *ray, int x)
 	ray->ray_dir_y = cub->player.dir_y + cub->player.plane_y * camera_x;
 	ray->map_x = (int)cub->player.pos_x;
 	ray->map_y = (int)cub->player.pos_y;
+	//printf("pos x, y : %f, %f", cub->player.pos_x, cub->player.pos_y);
+	//printf("map x, y : %d, %d", ray->map_x, ray->map_y);
 }
 
 void	setup_dda(t_cub *cub, t_ray *ray)

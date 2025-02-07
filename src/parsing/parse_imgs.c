@@ -17,7 +17,6 @@ int	init_image(t_img *img)
 	int	i;
 	int	j;
 
-	//ft_memset(img, 0, sizeof(t_img));
 	i = 0;
 	while (i < HEIGHT)
 	{
@@ -28,13 +27,13 @@ int	init_image(t_img *img)
 	}
 	img->wallimgs = (int **)malloc(5 * sizeof(int *));
 	if (!img->wallimgs)
-		ft_exit("wallimgs malloc error");
+		err_exit("wallimgs malloc error");
 	i = 0;
 	while (i < 4)
 	{
 		img->wallimgs[i] = (int *)malloc(sizeof(int) * TEX_WIDTH * TEX_HEIGHT);
 		if (!img->wallimgs[i])
-			ft_exit("wallimgs malloc error");
+			err_exit("wallimgs malloc error");
 		ft_memset(img->wallimgs[i], 0, (sizeof(int) * TEX_WIDTH * TEX_HEIGHT));
 		i++;
 	}
