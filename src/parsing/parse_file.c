@@ -28,10 +28,10 @@ static int	valid_line(char *s)
 static int	counting_lines(t_parse *parse, int y)
 {
 	int	count_lines;
-	int	x;
+	//int	x;
 
 	count_lines = 0;
-	x = 0;
+	//x = 0;
 	while (parse->file[y])
 	{
 		if (!valid_line(parse->file[y]))
