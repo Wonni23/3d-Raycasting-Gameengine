@@ -8,6 +8,7 @@ SRCS =	main.c \
 		src/parsing/parse_main.c \
 		src/parsing/parse_vars.c \
 		src/rendering/movement.c \
+		src/rendering/rotation.c \
 		src/rendering/loop.c \
 		src/rendering/raycasting.c \
 		src/rendering/paint.c \

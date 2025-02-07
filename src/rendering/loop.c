@@ -22,10 +22,10 @@ int	keypress_hook(int key_code, t_cub *cub)
 		move_s(cub);
 	else if (key_code == KEY_D)
 		move_d(cub);
-	//else if (key_code == KEY_LEFT)
-	//	rotate_left(cub);
-	//else if (key_code == KEY_RIGHT)
-	//	rotate_right(cub);
+	else if (key_code == KEY_LEFT)
+		rotate_left(cub);
+	else if (key_code == KEY_RIGHT)
+		rotate_right(cub);
 	else if (key_code == KEY_ESC)
 	{
 		printf("Exiting cub3D.\n");
