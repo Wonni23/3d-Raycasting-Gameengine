@@ -62,7 +62,6 @@ static int	fill_args(t_cub *cub, t_parse *parse, char *s, int path_i)
 		while (ft_isspace(*s))
 			s++;
 		cub->img.colors[cub->img.color_i] = fill_color(cub, parse, s);
-		printf("%d\n", cub->img.colors[cub->img.color_i]);
 	}
 	return (0);
 }

@@ -113,7 +113,7 @@ typedef struct s_img
 	//int			ceiling;
 	int			colors[2];
 	//char		order[5][1];
-	char		**order;
+	//char		**order;
 }	t_img;
 
 typedef struct s_player
