@@ -12,6 +12,24 @@
 
 #include "../../include/cub3d.h"
 
+static int	check_map_front_back(t_cub *cub)
+{
+	int	y;
+
+	if (ft_strlen(cub->map.map[0]) != ft_strlen(cub->map.map[1]))
+		return (1);
+	if (ft_strchr(cub->map.map[0], '0'))
+		return (1);
+	y = 0;
+	while (cub->map.map[y])
+		y++;
+	if (ft_strlen(cub->map.map[y - 1]) != ft_strlen(cub->map.map[y - 2]))
+		return (1);
+	if (ft_strchr(cub->map.map[y - 1], '0'))
+		return (1);
+	return (0);
+}
+
 static int	valid_line(char *s)
 {
 	int	i;
@@ -28,10 +46,8 @@ static int	valid_line(char *s)
 static int	counting_lines(t_parse *parse, int y)
 {
 	int	count_lines;
-	int	x;
 
 	count_lines = 0;
-	x = 0;
 	while (parse->file[y])
 	{
 		if (!valid_line(parse->file[y]))
@@ -82,4 +98,11 @@ void	parse_file(t_cub *cub, t_parse *parse)
 		exit_parse(cub, 1, "must contain NO SO WE EA path to the files" \
 		, parse);
 	get_map(cub, parse, y);
+	if (check_map_front_back(cub))
+	{
+		printf("The map must closed by a wall\n");
+		free_matrix((void **)cub->map.map);
+		free_parse(parse);
+		exit(1);
+	}
 }
