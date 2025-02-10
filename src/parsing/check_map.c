@@ -26,7 +26,7 @@ static int	valid_chars(char c)
 static void	set_player(t_cub *cub, int x, int y)
 {
 	cub->player.status = cub->map.map[y][x];
-	cub->map.map[y][x] = '0';
+	//cub->map.map[y][x] = '0';
 	cub->player.pos_x = x + 0.54;
 	cub->player.pos_y = y;
 }
@@ -54,35 +54,26 @@ static int	check_invalid_char(t_cub *cub)
 				set_player(cub, x, y);
 			}
 		}
-		cub->map.map_width = x * 64;
 	}
-	cub->map.map_height = y * 64;
+	cub->map.map_height = y;
 	return (0);
 }
 
 void	check_map(t_cub *cub)
 {
-	int	x;
 	int	y;
 
-	y = -1;
-	x = 0;
-	while (cub->map.map[++y])
-	{
-		x = 0;
-		while (cub->map.map[y][x])
-			x++;
-		if (cub->map.map[y][x - 2] == '0')
-		{
-			printf("The map must closed by a wall\n");
-			free_matrix((void **)cub->map.map);
-			exit(1);
-		}
-	}
 	if (check_invalid_char(cub))
 	{
 		printf("The map must valid chars and one player position\n");
 		free_matrix((void **)cub->map.map);
 		exit(1);
+	}
+	y = -1;
+	cub->map.map_width = 0;
+	while (cub->map.map[++y])
+	{
+		if (y >= 1 && ft_strlen(cub->map.map[y]) > ft_strlen(cub->map.map[y - 1]))
+			cub->map.map_width = ft_strlen(cub->map.map[y]);
 	}
 }
