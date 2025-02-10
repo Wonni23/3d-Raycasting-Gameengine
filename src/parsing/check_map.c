@@ -26,8 +26,8 @@ static int	valid_chars(char c)
 static void	set_player(t_cub *cub, int x, int y)
 {
 	cub->player.status = cub->map.map[y][x];
-	cub->map.map[y][x] = '0';
-	cub->player.pos_x = x + 0.54;
+	//cub->map.map[y][x] = '0';
+	cub->player.pos_x = x;
 	cub->player.pos_y = y;
 }
 
@@ -54,9 +54,9 @@ static int	check_invalid_char(t_cub *cub)
 				set_player(cub, x, y);
 			}
 		}
-		cub->map.map_width = x * 64;
+		cub->map.map_width = x;
 	}
-	cub->map.map_height = y * 64;
+	cub->map.map_height = y;
 	return (0);
 }
 

@@ -63,6 +63,9 @@
 # define RTSPEED_R 0.1
 # define RTSPEED_L -0.1
 
+# define MINISCALE 1
+# define TILESIZE 8
+
 typedef	struct s_parse
 {
 	char	**file;
@@ -187,5 +190,8 @@ void	free_parse(t_parse *parse);
 void	exit_parse(t_cub *cub, int status, char *str, t_parse *parse);
 int		init_image(t_img *img);
 void	load_image(t_cub *cub, char **path_to_image);
+
+/* Bonus */
+void	paint_minimap(t_cub *cub);
 
 #endif

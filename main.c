@@ -12,6 +12,37 @@
 
 #include "include/cub3d.h"
 
+void	print_map(t_map *map)
+{
+	if (!map || !map->map)
+	{
+		printf("Error: Map is NULL\n");
+		return ;
+	}
+
+	printf("\n=== MAP INFO ===\n");
+	printf("Width: %d\nHeight: %d\n\n", map->map_width, map->map_height);
+
+	for (int i = 0; i < map->map_height; i++)
+	{
+		if (!map->map[i])
+		{
+			printf("Row %d: NULL\n", i);
+			continue ;
+		}
+		
+		printf("Row %02d: [", i);
+		for (int j = 0; j < map->map_width; j++)
+		{
+			if (j > 0)
+				printf(" ");
+			printf("%c", map->map[i][j]);
+		}
+		printf("]\n");
+	}
+	printf("\n");
+}
+
 int	main(int argc, char **argv)
 {
 	t_cub	cub;
@@ -23,6 +54,8 @@ int	main(int argc, char **argv)
 	}
 	parse(&cub, argv[1]);
 	initialization(&cub);
+	printf("map w, h: %d, %d", cub.map.map_width, cub.map.map_height);
+	print_map(&cub.map);
 	//mlx_hook(cub.win, X_EVENT_KEY_EXIT, 0, memory_clean_exit, &cub);
 	mlx_hook(cub.win, X_EVENT_KEY_PRESS, 1L << 0, keypress_hook, &cub);
 	mlx_loop_hook(cub.mlx, loop, &cub);

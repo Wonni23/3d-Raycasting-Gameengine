@@ -44,6 +44,7 @@ int	loop(t_cub *cub)
 	//}
 	paint_background(cub);
 	raycasting(cub);
+	paint_minimap(cub);
 	paint_img(cub);
 	return (0);
 }
