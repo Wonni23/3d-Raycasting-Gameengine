@@ -27,7 +27,7 @@ static void	set_player(t_cub *cub, int x, int y)
 {
 	cub->player.status = cub->map.map[y][x];
 	//cub->map.map[y][x] = '0';
-	cub->player.pos_x = x + 0.54;
+	cub->player.pos_x = x;
 	cub->player.pos_y = y;
 }
 

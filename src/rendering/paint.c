@@ -53,3 +53,45 @@ void	paint_img(t_cub *cub)
 	}
 	mlx_put_image_to_window(cub->mlx, cub->win, cub->img.img, 0, 0);
 }
+
+void	fill_minimap(t_cub *cub, int x, int y, int color)
+{
+	int	i;
+	int	j;
+
+	j = 0;
+	while (j < (int)(MINISCALE * TILESIZE))
+	{
+		i = 0;
+		while (i < (int)(MINISCALE * TILESIZE))
+		{
+			cub->img.buffer[y + j][x + i] = color;
+			i++;
+		}
+		j++;
+	}
+}
+
+void	paint_minimap(t_cub *cub)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < cub->map.map_height)
+	{
+		x = 0;
+		while (x < cub->map.map_width - 1)
+		{
+			if (cub->map.map[y][x] == '1')
+				fill_minimap(cub, (int)(MINISCALE * TILESIZE * x), (int)(MINISCALE * TILESIZE * y), 0x000000);
+			else if (cub->map.map[y][x] == 'N' || cub->map.map[y][x] == 'W' || cub->map.map[y][x] == 'E' || cub->map.map[y][x] == 'S')
+				fill_minimap(cub, (int)(MINISCALE * TILESIZE * x), (int)(MINISCALE * TILESIZE * y), 0x760c0c);
+			else
+				fill_minimap(cub, (int)(MINISCALE * TILESIZE * x), (int)(MINISCALE * TILESIZE * y), 0xffffff);
+			x++;
+		}
+		y++;
+	}
+	//mlx_put_image_to_window(cub->mlx, cub->win, cub->img.img, 0, 0);
+}
