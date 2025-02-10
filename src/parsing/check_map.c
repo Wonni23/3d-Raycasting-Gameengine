@@ -70,10 +70,11 @@ void	check_map(t_cub *cub)
 		exit(1);
 	}
 	y = -1;
-	cub->map.map_width = 0;
+	cub->map.map_width = ft_strlen(cub->map.map[0]);
 	while (cub->map.map[++y])
 	{
-		if (y >= 1 && ft_strlen(cub->map.map[y]) > ft_strlen(cub->map.map[y - 1]))
-			cub->map.map_width = ft_strlen(cub->map.map[y]) + 1;
+		if (y >= 1 && ft_strlen(cub->map.map[y]) > ft_strlen(cub->map.map[y - 1]) \
+		&& (int)ft_strlen(cub->map.map[y]) > cub->map.map_width)
+			cub->map.map_width = ft_strlen(cub->map.map[y]);
 	}
 }
