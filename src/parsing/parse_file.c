@@ -12,7 +12,7 @@
 
 #include "../../include/cub3d.h"
 
-static int	check_map_front_back(t_cub *cub)
+/*static int	check_map_front_back(t_cub *cub)
 {
 	int	y;
 
@@ -28,7 +28,7 @@ static int	check_map_front_back(t_cub *cub)
 	if (ft_strchr(cub->map.map[y - 1], '0'))
 		return (1);
 	return (0);
-}
+}*/
 
 static int	valid_line(char *s)
 {
@@ -98,11 +98,11 @@ void	parse_file(t_cub *cub, t_parse *parse)
 		exit_parse(cub, 1, "must contain NO SO WE EA path to the files" \
 		, parse);
 	get_map(cub, parse, y);
-	if (check_map_front_back(cub))
+	/*if (check_map_front_back(cub))
 	{
 		printf("The map must closed by a wall\n");
 		free_matrix((void **)cub->map.map);
 		free_parse(parse);
 		exit(1);
-	}
+	}*/
 }
