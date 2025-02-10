@@ -14,10 +14,24 @@ SRCS =	main.c \
 		src/rendering/paint.c \
 		src/utils/initialization.c \
 		src/utils/utils.c
-SRCS_B =
+
+SRCS_B = main.c \
+		src/parsing/check_map.c \
+		src/parsing/exit_parse.c \
+		src/parsing/parse_file.c \
+		src/parsing/parse_imgs.c \
+		src/parsing/parse_main.c \
+		src/parsing/parse_vars.c \
+		src/rendering/movement.c \
+		src/rendering/rotation.c \
+		src/rendering/raycasting.c \
+		src/utils/initialization.c \
+		src/utils/utils.c \
+		src/bonus/loop_bonus.c \
+		src/bonus/paint_bonus.c
 
 OBJS = $(SRCS:.c=.o)
-OBJS_B = $(addprefix ./bonus/, $(SRCS_B:.c=.o))
+OBJS_B = $(SRCS_B:.c=.o)
 
 CFLAGS = -Wall -Werror -Wextra
 LDFLAGS = -lm

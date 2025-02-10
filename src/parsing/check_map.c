@@ -27,8 +27,8 @@ static void	set_player(t_cub *cub, int x, int y)
 {
 	cub->player.status = cub->map.map[y][x];
 	//cub->map.map[y][x] = '0';
-	cub->player.pos_x = x;
-	cub->player.pos_y = y;
+	cub->player.pos_x = x + 0.5;
+	cub->player.pos_y = y + 0.5;
 }
 
 static int	check_invalid_char(t_cub *cub)
@@ -74,6 +74,6 @@ void	check_map(t_cub *cub)
 	while (cub->map.map[++y])
 	{
 		if (y >= 1 && ft_strlen(cub->map.map[y]) > ft_strlen(cub->map.map[y - 1]))
-			cub->map.map_width = ft_strlen(cub->map.map[y]);
+			cub->map.map_width = ft_strlen(cub->map.map[y]) + 1;
 	}
 }
