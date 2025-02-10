@@ -81,7 +81,7 @@ void	paint_minimap(t_cub *cub)
 	while (y < cub->map.map_height)
 	{
 		x = 0;
-		while (x < cub->map.map_width)
+		while (x < cub->map.map_width - 1)
 		{
 			if (cub->map.map[y][x] == '1')
 				fill_minimap(cub, (int)(MINISCALE * TILESIZE * x), (int)(MINISCALE * TILESIZE * y), 0x000000);
