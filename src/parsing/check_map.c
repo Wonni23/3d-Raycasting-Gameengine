@@ -76,6 +76,5 @@ void	check_map(t_cub *cub)
 		if (y >= 1 && ft_strlen(cub->map.map[y]) > ft_strlen(cub->map.map[y - 1]) \
 		&& (int)ft_strlen(cub->map.map[y]) > cub->map.map_width)
 			cub->map.map_width = ft_strlen(cub->map.map[y]);
-		
 	}
 }
