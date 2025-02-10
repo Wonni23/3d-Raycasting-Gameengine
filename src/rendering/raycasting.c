@@ -16,13 +16,11 @@ void	init_ray(t_cub *cub, t_ray *ray, int x)
 {
 	double	camera_x;
 
-	camera_x = 2 * x / (double)WIDTH - 1; // normalize each x pixels in range of -1 ~ 1
+	camera_x = 2 * x / (double)WIDTH - 1;
 	ray->ray_dir_x = cub->player.dir_x + cub->player.plane_x * camera_x;
 	ray->ray_dir_y = cub->player.dir_y + cub->player.plane_y * camera_x;
 	ray->map_x = (int)cub->player.pos_x;
 	ray->map_y = (int)cub->player.pos_y;
-	//printf("pos x, y : %f, %f", cub->player.pos_x, cub->player.pos_y);
-	//printf("map x, y : %d, %d", ray->map_x, ray->map_y);
 }
 
 void	setup_dda(t_cub *cub, t_ray *ray)
@@ -43,7 +41,8 @@ void	setup_dda(t_cub *cub, t_ray *ray)
 	else
 	{
 		ray->step_x = 1;
-		ray->side_dist_x = (ray->map_x + 1.0 - cub->player.pos_x) * ray->delta_dist_x;
+		ray->side_dist_x = (ray->map_x + 1.0 - cub->player.pos_x) \
+		* ray->delta_dist_x;
 	}
 	if (ray->ray_dir_y < 0)
 	{
@@ -53,13 +52,14 @@ void	setup_dda(t_cub *cub, t_ray *ray)
 	else
 	{
 		ray->step_y = 1;
-		ray->side_dist_y = (ray->map_y + 1.0 - cub->player.pos_y) * ray->delta_dist_y;
+		ray->side_dist_y = (ray->map_y + 1.0 - cub->player.pos_y) \
+		* ray->delta_dist_y;
 	}
 }
 
-void perform_dda(t_ray *ray, char **world_map)
+void	perform_dda(t_ray *ray, char **world_map)
 {
-	int hit;
+	int	hit;
 
 	hit = 0;
 	while (!hit)
@@ -79,18 +79,18 @@ void perform_dda(t_ray *ray, char **world_map)
 		if (world_map[ray->map_y][ray->map_x] == '1')
 			hit = 1;
 	}
-	if (ray->side == WALL_X) // Wall Distance Calculation
+	if (ray->side == WALL_X)
 		ray->perp_wall_dist = ray->side_dist_x - ray->delta_dist_x;
 	else
 		ray->perp_wall_dist = ray->side_dist_y - ray->delta_dist_y;
 }
 
-void calculate_line_height(t_ray *ray, t_texturing *tex)
+void	calculate_line_height(t_ray *ray, t_texturing *tex)
 {
 	tex->line_height = (int)(HEIGHT / ray->perp_wall_dist);
 	tex->draw_start = (-tex->line_height / 2) + (HEIGHT / 2);
 	tex->draw_end = (tex->line_height / 2) + (HEIGHT / 2);
-	if (tex->draw_start < 0) // draw limits
+	if (tex->draw_start < 0)
 	{
 		tex->draw_start = 0;
 	}
@@ -103,9 +103,11 @@ void calculate_line_height(t_ray *ray, t_texturing *tex)
 void	calculate_texture_coords(t_cub *cub, t_ray *ray, t_texturing *tex)
 {
 	if (ray->side == WALL_X)
-		tex->wall_x = cub->player.pos_y + (ray->perp_wall_dist * ray->ray_dir_y);
+		tex->wall_x = cub->player.pos_y \
+		+ (ray->perp_wall_dist * ray->ray_dir_y);
 	else
-		tex->wall_x = cub->player.pos_x + (ray->perp_wall_dist * ray->ray_dir_x);
+		tex->wall_x = cub->player.pos_x \
+		+ (ray->perp_wall_dist * ray->ray_dir_x);
 	tex->wall_x -= floor(tex->wall_x);
 	tex->tex_x = (int)(tex->wall_x * (double)TEX_WIDTH);
 	if (ray->side == WALL_X && ray->ray_dir_x < 0)
@@ -113,7 +115,8 @@ void	calculate_texture_coords(t_cub *cub, t_ray *ray, t_texturing *tex)
 	if (ray->side == WALL_Y && ray->ray_dir_y > 0)
 		tex->tex_x = TEX_WIDTH - tex->tex_x - 1;
 	tex->step = 1.0 * TEX_HEIGHT / tex->line_height;
-	tex->tex_pos = (tex->draw_start - HEIGHT / 2 + tex->line_height / 2) * tex->step;
+	tex->tex_pos = (tex->draw_start - HEIGHT / 2 \
+		+ tex->line_height / 2) * tex->step;
 }
 
 void	set_buffer(t_cub *cub, t_ray *ray, t_texturing *tex, int x)
@@ -128,16 +131,16 @@ void	set_buffer(t_cub *cub, t_ray *ray, t_texturing *tex, int x)
 		if (ray->side == WALL_X)
 		{
 			if (ray->ray_dir_x >= 0)
-				color = cub->img.wallimgs[E][TEX_HEIGHT * tex->tex_y + tex->tex_x];
+				color = cub->img.walls[E][TEX_HEIGHT * tex->tex_y + tex->tex_x];
 			else
-				color = cub->img.wallimgs[W][TEX_HEIGHT * tex->tex_y + tex->tex_x];
+				color = cub->img.walls[W][TEX_HEIGHT * tex->tex_y + tex->tex_x];
 		}
 		else if (ray->side == WALL_Y)
 		{
 			if (ray->ray_dir_y >= 0)
-				color = cub->img.wallimgs[S][TEX_HEIGHT * tex->tex_y + tex->tex_x];
+				color = cub->img.walls[S][TEX_HEIGHT * tex->tex_y + tex->tex_x];
 			else
-				color = cub->img.wallimgs[N][TEX_HEIGHT * tex->tex_y + tex->tex_x];
+				color = cub->img.walls[N][TEX_HEIGHT * tex->tex_y + tex->tex_x];
 		}
 		cub->img.buffer[y][x] = color;
 		tex->tex_pos += tex->step;

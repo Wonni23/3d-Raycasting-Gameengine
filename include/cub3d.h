@@ -25,7 +25,6 @@
 # include "libft/include/libft.h"
 
 # define X_EVENT_KEY_PRESS		2
-# define X_EVENT_KEY_RELEASE	3
 # define X_EVENT_KEY_EXIT	17
 # define KEY_W 119
 # define KEY_A 97
@@ -108,20 +107,16 @@ typedef struct s_img
 	int			w;
 	int			h;
 	int			buffer[HEIGHT][WIDTH];
-	int			**wallimgs;
+	int			**walls;
 	int			color_i;
-	//int			floor;
-	//int			ceiling;
 	int			colors[2];
-	//char		order[5][1];
-	//char		**order;
 }	t_img;
 
 typedef struct s_player
 {
-	int			status; //
-	double		pos_x; // 
-	double		pos_y; //
+	int			status;
+	double		pos_x;
+	double		pos_y;
 	double		dir_x;
 	double		dir_y;
 	double		plane_x;
