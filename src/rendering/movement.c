@@ -31,6 +31,11 @@ void	move_w(t_cub *cub)
 	mv_pos_y = cub->player.pos_y + cub->player.dir_y * MVSPEED;
 	if (!collide_wall(cub, mv_pos_x, mv_pos_y))
 	{
+		if ((int)mv_pos_y != (int)cub->player.pos_y || (int)mv_pos_x != (int)cub->player.pos_x)
+		{
+			cub->map.map[(int)mv_pos_y][(int)mv_pos_x] = cub->map.map[(int)cub->player.pos_y][(int)cub->player.pos_x];
+			cub->map.map[(int)cub->player.pos_y][(int)cub->player.pos_x] = '0';
+		}
 		cub->player.pos_x = mv_pos_x;
 		cub->player.pos_y = mv_pos_y;
 	}
@@ -45,6 +50,11 @@ void	move_s(t_cub *cub)
 	mv_pos_y = cub->player.pos_y - cub->player.dir_y * MVSPEED;
 	if (!collide_wall(cub, mv_pos_x, mv_pos_y))
 	{
+		if ((int)mv_pos_y != (int)cub->player.pos_y || (int)mv_pos_x != (int)cub->player.pos_x)
+		{
+			cub->map.map[(int)mv_pos_y][(int)mv_pos_x] = cub->map.map[(int)cub->player.pos_y][(int)cub->player.pos_x];
+			cub->map.map[(int)cub->player.pos_y][(int)cub->player.pos_x] = '0';
+		}
 		cub->player.pos_x = mv_pos_x;
 		cub->player.pos_y = mv_pos_y;
 	}
@@ -63,6 +73,11 @@ void	move_a(t_cub *cub)
 	mv_pos_y = cub->player.pos_y - perp_y * MVSPEED;
 	if (!collide_wall(cub, mv_pos_x, mv_pos_y))
 	{
+		if ((int)mv_pos_y != (int)cub->player.pos_y || (int)mv_pos_x != (int)cub->player.pos_x)
+		{
+			cub->map.map[(int)mv_pos_y][(int)mv_pos_x] = cub->map.map[(int)cub->player.pos_y][(int)cub->player.pos_x];
+			cub->map.map[(int)cub->player.pos_y][(int)cub->player.pos_x] = '0';
+		}
 		cub->player.pos_x = mv_pos_x;
 		cub->player.pos_y = mv_pos_y;
 	}
@@ -81,6 +96,11 @@ void	move_d(t_cub *cub)
 	mv_pos_y = cub->player.pos_y - perp_y * MVSPEED;
 	if (!collide_wall(cub, mv_pos_x, mv_pos_y))
 	{
+		if ((int)mv_pos_y != (int)cub->player.pos_y || (int)mv_pos_x != (int)cub->player.pos_x)
+		{
+			cub->map.map[(int)mv_pos_y][(int)mv_pos_x] = cub->map.map[(int)cub->player.pos_y][(int)cub->player.pos_x];
+			cub->map.map[(int)cub->player.pos_y][(int)cub->player.pos_x] = '0';
+		}
 		cub->player.pos_x = mv_pos_x;
 		cub->player.pos_y = mv_pos_y;
 	}
