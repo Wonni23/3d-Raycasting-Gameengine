@@ -34,6 +34,8 @@
 # define KEY_RIGHT 65363
 # define KEY_ESC 65307
 
+# define KEY_E 101
+
 # define UP 0
 # define DOWN 1
 # define LEFT 2
@@ -63,8 +65,15 @@
 # define RTSPEED_R 0.1
 # define RTSPEED_L -0.1
 
-# define MINISCALE 1
-# define TILESIZE 8
+# define SC 1
+# define SZ 8
+# define K 0x000000
+# define WT 0xffffff
+# define B 0x005666
+# define Y 0xF7E600
+# define RD 0x760c0c
+
+/* SC: Scale, SZ: tilesize, K ~ RD: color */
 
 typedef	struct s_parse
 {
@@ -85,6 +94,7 @@ typedef struct s_ray {
 	int		step_x;
 	int		step_y;
 	int		side;
+	int		hit;
 	double	perp_wall_dist;
 }	t_ray;
 
@@ -111,6 +121,7 @@ typedef struct s_img
 	int			h;
 	int			buffer[HEIGHT][WIDTH];
 	int			**walls;
+	int			*door;
 	int			color_i;
 	int			colors[2];
 }	t_img;
@@ -162,6 +173,10 @@ int		keypress_hook(int key_code, t_cub *cub);
 
 /* Rendering */
 int		loop(t_cub *cub);
+
+/* Ray Casting */
+void	setup_dda(t_cub *cub, t_ray *ray);
+void	perform_dda(t_ray *ray, char **map);
 void	raycasting(t_cub *cub);
 
 /* Movements */
@@ -193,5 +208,6 @@ void	load_image(t_cub *cub, char **path_to_image);
 
 /* Bonus */
 void	paint_minimap(t_cub *cub);
+void	load_door(t_cub *cub);
 
 #endif

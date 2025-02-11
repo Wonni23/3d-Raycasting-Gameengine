@@ -85,4 +85,40 @@ void	load_image(t_cub *cub, char **path_to_image)
 		mlx_destroy_image(cub->mlx, cub->img.img);
 		i++;
 	}
+	load_door(cub);
+}
+
+void	fill_door_arr_pixel(t_cub *cub)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < cub->img.h)
+	{
+		x = 0;
+		while (x < cub->img.w)
+		{
+			cub->img.door[cub->img.w * y + x] = \
+				cub->img.data[cub->img.h * y + x];
+			x++;
+		}
+		y++;
+	}
+}
+
+void	load_door(t_cub *cub)
+{
+	char	*path;
+
+	path = "./images/door.xpm";
+	cub->img.door = (int *)malloc(sizeof(int) * TEX_WIDTH * TEX_HEIGHT);
+	cub->img.img = mlx_xpm_file_to_image(cub->mlx, path, &cub->img.w, &cub->img.h);
+	if (cub->img.w != TEX_WIDTH || cub->img.h != TEX_HEIGHT
+		|| cub->img.img == NULL)
+		exit_parse(cub, 1, "image_load xpm file error", NULL); // change function: free : map, img.walls
+	cub->img.data = (int *)mlx_get_data_addr(cub->img.img, \
+			&cub->img.bpp, &cub->img.line_size, &cub->img.endian);
+	fill_door_arr_pixel(cub);
+	mlx_destroy_image(cub->mlx, cub->img.img);
 }
