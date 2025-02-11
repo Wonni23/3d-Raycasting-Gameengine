@@ -20,7 +20,7 @@ static int	orientation_player(char c)
 static int	valid_chars(char c)
 {
 	return (ft_isspace(c) || orientation_player(c) || \
-	c == '0' || c == '1');
+	c == '0' || c == '1' || c =='2');
 }
 
 static void	set_player(t_cub *cub, int x, int y)
