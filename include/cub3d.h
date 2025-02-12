@@ -172,7 +172,8 @@ void	init_mlx(t_cub *cub);
 int		keypress_hook(int key_code, t_cub *cub);
 
 /* Rendering */
-int		loop(t_cub *cub);
+void	boot(t_cub *cub);
+int		loop(int key_code, t_cub *cub);
 
 /* Ray Casting */
 void	setup_dda(t_cub *cub, t_ray *ray);
