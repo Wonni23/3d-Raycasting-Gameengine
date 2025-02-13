@@ -42,20 +42,34 @@ static int	open_file(t_cub *cub, char *name, t_parse *parse)
 	return (fd);
 }
 
+static void	check_image_exist(t_cub *cub, char **path)
+{
+	int	i;
+	int	fd;
+
+	i = -1;
+	while (path[++i])
+	{
+		fd = open(path[i], O_RDONLY);
+		if (fd == -1)
+		{
+			printf("Error : The argument passed must exist\n");
+			free_matrix((void ***)&path);
+			free_matrix((void ***)&cub->map.map);
+			exit(1);
+		}
+	}
+}
+
 char	**parse_main(t_cub *cub, char *name)
 {
 	t_parse	parse;
 	char	**path;
 	int		fd;
-	//int		i;
 
 	parse.file = NULL;
 	parse.path_to_img = NULL;
 	parse.num_vars = -1;
-	//i = -1;
-	//while (++i < 4)
-	//	cub->img.order[i][0] = 0;
-	//cub->img.order = (char **)malloc(sizeof(char *) * 5);
 	if (ft_strncmp(ft_strrchr(name, '.'), ".cub", 5))
 		exit_parse(cub, 1, "The argument must end with .cub", &parse);
 	fd = open_file(cub, name, &parse);
@@ -72,21 +86,11 @@ char	**parse_main(t_cub *cub, char *name)
 
 void	parse(t_cub *cub, char *name)
 {
-	//int	i;
 	char	**path;
 
-	/*cub->img.order = ft_calloc(5, sizeof(char **));
-	if (!cub->img.order)
-		ft_exit("Malloc Failed!");
-	i = -1;
-	while (cub->img.order[++i])
-	{
-		cub->img.order[i] = ft_calloc(3, sizeof(char *));
-		if (!cub->img.order[i])
-			ft_exit("Malloc Failed!");
-	}*/
 	path = parse_main(cub, name);
-	check_map(cub);
+	check_image_exist(cub, path);
+	check_map(cub, path);
 	init_mlx(cub);
 	init_image(&cub->img);
 	load_image(cub, path);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   check_map_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jisopark <lotooska@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/06 13:21:38 by jisopark          #+#    #+#             */
-/*   Updated: 2025/02/06 13:47:19 by jisopark         ###   ########.fr       */
+/*   Created: 2025/02/11 20:54:15 by jisopark          #+#    #+#             */
+/*   Updated: 2025/02/11 20:55:09 by jisopark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	orientation_player(char c)
 static int	valid_chars(char c)
 {
 	return (ft_isspace(c) || orientation_player(c) || \
-	c == '0' || c == '1');
+	c == '0' || c == '1' || c == '2');
 }
 
 static void	set_player(t_cub *cub, int x, int y)
@@ -59,19 +59,21 @@ static int	check_invalid_char(t_cub *cub)
 	return (0);
 }
 
-void	check_map(t_cub *cub, char **path)
+void	check_map(t_cub *cub)
 {
 	int	y;
 
 	if (check_invalid_char(cub))
 	{
 		printf("The map must valid chars and one player position\n");
-		ft_exit(cub, path, 0);
+		free_matrix((void ***)&cub->map.map);
+		exit(1);
 	}
 	if (cub->num_player == 0)
 	{
 		printf("The player must exist\n");
-		ft_exit(cub, path, 0);
+		free_matrix((void ***)&cub->map.map);
+		exit(1);
 	}
 	y = -1;
 	cub->map.map_width = ft_strlen(cub->map.map[0]);
@@ -81,6 +83,6 @@ void	check_map(t_cub *cub, char **path)
 		&& (int)ft_strlen(cub->map.map[y]) > cub->map.map_width)
 			cub->map.map_width = ft_strlen(cub->map.map[y]);
 	}
-	check_map_closed(cub, path);
-	check_map_empty(cub, path);
+	check_map_closed(cub);
+	check_map_empty(cub);
 }

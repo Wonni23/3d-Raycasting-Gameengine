@@ -52,7 +52,7 @@ static int	fill_args(t_cub *cub, t_parse *parse, char *s, int path_i)
 		if (!str)
 			return (1);
 		parse->path_to_img[path_i] = ft_strdup(str);
-		//free_arr(str); // add later
+		free_array(str);
 		if (!parse->path_to_img[path_i])
 			return (1);
 	}
@@ -76,8 +76,7 @@ static int	find_args(t_cub *cub, t_parse *parse, char *s, char *compare)
 		else if (!ft_strncmp(s, "F", 1))
 			cub->img.color_i = 0;
 		else
-			++parse->num_vars;
-			//cub->img.order[++parse->num_vars] = compare;
+			check_image_order(parse, s);
 		if (fill_args(cub, parse, s, parse->num_vars))
 			exit_parse(cub, 1, "Error with malloc", parse);
 		return (0);
@@ -121,7 +120,7 @@ int	get_vars(t_cub *cub, t_parse *parse)
 			if (!ft_isspace(parse->file[i][j]) && parse->file[i][j])
 			{
 				if (choose_var(cub, parse, &parse->file[i][j]))
-					exit_parse(cub, 1, "Invalid key", parse);
+					exit_parse(NULL, 1, "Invalid key", parse);
 				num_vars++;
 				break ;
 			}
