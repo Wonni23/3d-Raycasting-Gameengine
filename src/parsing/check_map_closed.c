@@ -1,0 +1,160 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_map_util.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jisopark <lotooska@naver.com>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/07 21:24:23 by jisopark          #+#    #+#             */
+/*   Updated: 2025/02/07 23:19:21 by jisopark         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../include/cub3d.h"
+
+static void check_line_change_r(t_cub *cub, char **path)
+{
+    int x;
+    int y;
+
+    x = 0;
+    y = 0;
+    while (cub->map.map[++y])
+    {
+        x = 0;
+        if (ft_strlen(cub->map.map[y]) < ft_strlen(cub->map.map[y - 1]))
+        {
+            x = ft_strlen(cub->map.map[y]) - 1;
+            while (cub->map.map[y - 1][x++])
+            {
+                if (cub->map.map[y - 1][x] == '0' || cub->map.map[y - 1][x] == ' ')
+                {
+                    printf("1\n");
+                    ft_exit(cub, path, 1);
+                }
+            }
+        }
+        if (ft_strlen(cub->map.map[y]) > ft_strlen(cub->map.map[y - 1]))
+        {
+            x = ft_strlen(cub->map.map[y - 1]) - 1;
+            while (cub->map.map[y][x++])
+            {
+                if (cub->map.map[y][x] == '0' || cub->map.map[y][x] == ' ')
+                {
+                    printf("2\n");
+                    ft_exit(cub, path, 1);
+                }
+            }
+        }
+    }
+}
+
+static void	check_line_change_l(t_cub *cub, char **path)
+{
+	int	x;
+	int	y;
+
+    y = 0;
+    x = -1;
+    while (cub->map.map[++y])
+    {
+        if (!ft_isspace(cub->map.map[y][0]) && ft_isspace(cub->map.map[y - 1][0]))
+        {
+            x = -1;
+            while (ft_isspace(cub->map.map[y - 1][++x]))
+                if (cub->map.map[y][x] == '0' || cub->map.map[y][x] == ' ')
+                {
+                    printf("3\n");
+                    ft_exit(cub, path, 1);
+                }
+        }
+        if (ft_isspace(cub->map.map[y][0]) && !ft_isspace(cub->map.map[y - 1][0]))
+        {
+            x = -1;
+            while (ft_isspace(cub->map.map[y][++x]))
+                if (cub->map.map[y - 1][x] == '0' || cub->map.map[y - 1][x] == ' ')
+                {
+                    printf("4\n");
+                    ft_exit(cub, path, 1);
+                }
+        }
+    }
+    
+}
+
+static void	check_front_back(t_cub *cub, char **path)
+{
+	int	y;
+
+	y = 0;
+	if (ft_strchr(cub->map.map[y], '0'))
+		{
+            printf("5\n");
+            ft_exit(cub, path, 1);
+        }
+	while (cub->map.map[y])
+		y++;
+	if (ft_strchr(cub->map.map[y - 1], '0'))
+	{
+        printf("6\n");
+        ft_exit(cub, path, 1);
+    }
+}
+
+static void	check_first_c_last_c(t_cub *cub, char **path)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = -1;
+	while (cub->map.map[++y])
+	{
+        x = 0;
+		while (ft_isspace(cub->map.map[y][x]))
+			x++;
+		if (cub->map.map[y][x] == '0')
+			{
+                    printf("7\n");
+                    ft_exit(cub, path, 1);
+                }
+	}
+	x = 0;
+	y = -1;
+	while (cub->map.map[++y])
+	{
+        x = 0;
+		while (cub->map.map[y][x])
+			x++;
+		if (cub->map.map[y][x - 2] == '0')
+			{
+                    printf("8\n");
+                    ft_exit(cub, path, 1);
+                }
+	}
+}
+
+void	check_map_closed(t_cub *cub, char **path)
+{
+    int y;
+
+    if (ft_strlen(cub->map.map[0]) < ft_strlen(cub->map.map[1]) \
+    && (ft_strlen(cub->map.map[1]) - ft_strlen(cub->map.map[0])) >= 2)
+        {
+                    printf("9\n");
+                    ft_exit(cub, path, 1);
+                }
+    y = 0;
+    while (cub->map.map[y])
+        y++;
+    if (ft_strlen(cub->map.map[y - 1]) < ft_strlen(cub->map.map[y - 2]) \
+    && (ft_strlen(cub->map.map[y - 2]) - ft_strlen(cub->map.map[y - 1])) >= 2)
+    {
+        printf("10\n");
+        ft_exit(cub, path, 1);
+    }
+    check_first_c_last_c(cub, path);
+	check_front_back(cub, path);
+	check_line_change_l(cub, path);
+    check_line_change_r(cub, path);
+}

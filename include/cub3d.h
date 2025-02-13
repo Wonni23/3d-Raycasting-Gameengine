@@ -200,10 +200,15 @@ void	parse(t_cub *cub, char *argv);
 char	**parse_main(t_cub *cub, char *name);
 void	parse_file(t_cub *cub, t_parse *parse);
 int		get_vars(t_cub *cub, t_parse *parse);
-void	check_map(t_cub *cub);
-void	free_matrix(void **matrix);
+void	check_image_order(t_parse *parse, char *s);
+void	check_map(t_cub *cub, char **path);
+void	check_map_closed(t_cub *cub, char **path);
+void    check_map_empty(t_cub *cub, char **path);
+void	free_matrix(void ***matrix);
 void	free_parse(t_parse *parse);
+void	free_array(char *array);
 void	exit_parse(t_cub *cub, int status, char *str, t_parse *parse);
+void	ft_exit(t_cub *cub, char **path, int status);
 int		init_image(t_img *img);
 void	load_image(t_cub *cub, char **path_to_image);
 

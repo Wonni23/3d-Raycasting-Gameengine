@@ -2,6 +2,8 @@ NAME = cub3D
 
 SRCS =	main.c \
 		src/parsing/check_map.c \
+		src/parsing/check_map_closed.c \
+		src/parsing/check_map_empty.c \
 		src/parsing/exit_parse.c \
 		src/parsing/parse_file.c \
 		src/parsing/parse_imgs.c \
@@ -16,7 +18,9 @@ SRCS =	main.c \
 		src/utils/utils.c
 
 SRCS_B = main.c \
-		src/parsing/check_map.c \
+		src/parsing/check_map_bonus.c \
+		src/parsing/check_map_closed.c \
+		src/parsing/check_map_empty.c \
 		src/parsing/exit_parse.c \
 		src/parsing/parse_file.c \
 		src/parsing/parse_imgs.c \

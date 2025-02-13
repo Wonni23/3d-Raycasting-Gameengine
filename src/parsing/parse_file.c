@@ -12,24 +12,6 @@
 
 #include "../../include/cub3d.h"
 
-/*static int	check_map_front_back(t_cub *cub)
-{
-	int	y;
-
-	if (ft_strlen(cub->map.map[0]) != ft_strlen(cub->map.map[1]))
-		return (1);
-	if (ft_strchr(cub->map.map[0], '0'))
-		return (1);
-	y = 0;
-	while (cub->map.map[y])
-		y++;
-	if (ft_strlen(cub->map.map[y - 1]) != ft_strlen(cub->map.map[y - 2]))
-		return (1);
-	if (ft_strchr(cub->map.map[y - 1], '0'))
-		return (1);
-	return (0);
-}*/
-
 static int	valid_line(char *s)
 {
 	int	i;
@@ -85,6 +67,18 @@ static void	get_map(t_cub *cub, t_parse *parse, int y)
 	}
 }
 
+void	check_image_order(t_parse *parse, char *s)
+{
+	if (*s == 'N')
+		parse->num_vars = 0;
+	if (*s == 'S')
+		parse->num_vars = 1;
+	if (*s == 'W')
+		parse->num_vars = 2;
+	if (*s == 'E')
+		parse->num_vars = 3;
+}
+
 void	parse_file(t_cub *cub, t_parse *parse)
 {
 	int	y;
@@ -98,11 +92,4 @@ void	parse_file(t_cub *cub, t_parse *parse)
 		exit_parse(cub, 1, "must contain NO SO WE EA path to the files" \
 		, parse);
 	get_map(cub, parse, y);
-	/*if (check_map_front_back(cub))
-	{
-		printf("The map must closed by a wall\n");
-		free_matrix((void **)cub->map.map);
-		free_parse(parse);
-		exit(1);
-	}*/
 }
