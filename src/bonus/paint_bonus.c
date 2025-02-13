@@ -60,10 +60,10 @@ void	fill_minimap(t_cub *cub, int x, int y, int color)
 	int	j;
 
 	j = 0;
-	while (j < (int)(MINISCALE * TILESIZE))
+	while (j < (int)(SC * SZ))
 	{
 		i = 0;
-		while (i < (int)(MINISCALE * TILESIZE))
+		while (i < (int)(SC * SZ))
 		{
 			cub->img.buffer[y + j][x + i] = color;
 			i++;
@@ -84,14 +84,17 @@ void	paint_minimap(t_cub *cub)
 		while (x < cub->map.map_width - 1)
 		{
 			if (cub->map.map[y][x] == '1')
-				fill_minimap(cub, (int)(MINISCALE * TILESIZE * x), (int)(MINISCALE * TILESIZE * y), 0x000000);
-			else if (cub->map.map[y][x] == 'N' || cub->map.map[y][x] == 'W' || cub->map.map[y][x] == 'E' || cub->map.map[y][x] == 'S')
-				fill_minimap(cub, (int)(MINISCALE * TILESIZE * x), (int)(MINISCALE * TILESIZE * y), 0x760c0c);
+				fill_minimap(cub, (int)(SC * SZ * x), (int)(SC * SZ * y), K);
+			else if (cub->map.map[y][x] == '2')
+				fill_minimap(cub, (int)(SC * SZ * x), (int)(SC * SZ * y), B);
+			else if (cub->map.map[y][x] == '3')
+				fill_minimap(cub, (int)(SC * SZ * x), (int)(SC * SZ * y), Y);
 			else
-				fill_minimap(cub, (int)(MINISCALE * TILESIZE * x), (int)(MINISCALE * TILESIZE * y), 0xffffff);
+				fill_minimap(cub, (int)(SC * SZ * x), (int)(SC * SZ * y), WT);
 			x++;
 		}
+		fill_minimap(cub, (int)((cub->player.pos_x - 0.5) * 8 * SC),
+			(int)((cub->player.pos_y -0.5) * 8 * SC), RD);
 		y++;
 	}
-	//mlx_put_image_to_window(cub->mlx, cub->win, cub->img.img, 0, 0);
 }

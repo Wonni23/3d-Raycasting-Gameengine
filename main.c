@@ -57,8 +57,9 @@ int	main(int argc, char **argv)
 	printf("map w, h: %d, %d", cub.map.map_width, cub.map.map_height);
 	print_map(&cub.map);
 	//mlx_hook(cub.win, X_EVENT_KEY_EXIT, 0, memory_clean_exit, &cub);
-	mlx_hook(cub.win, X_EVENT_KEY_PRESS, 1L << 0, keypress_hook, &cub);
-	mlx_loop_hook(cub.mlx, loop, &cub);
+	boot(&cub);
+	mlx_hook(cub.win, X_EVENT_KEY_PRESS, 1L << 0, loop, &cub);
+	//mlx_loop_hook(cub.mlx, loop, &cub);
 	mlx_loop(cub.mlx);
 	return (0);
 }
