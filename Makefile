@@ -18,7 +18,6 @@ SRCS =	main.c \
 		src/utils/utils.c
 
 SRCS_B = main.c \
-		src/parsing/check_map_bonus.c \
 		src/parsing/check_map_closed.c \
 		src/parsing/check_map_empty.c \
 		src/parsing/exit_parse.c \
@@ -32,7 +31,8 @@ SRCS_B = main.c \
 		src/utils/utils.c \
 		src/bonus/loop_bonus.c \
 		src/bonus/paint_bonus.c \
-		src/bonus/raycasting_bonus.c
+		src/bonus/raycasting_bonus.c \
+		src/bonus/check_map_bonus.c
 
 OBJS = $(SRCS:.c=.o)
 OBJS_B = $(SRCS_B:.c=.o)
