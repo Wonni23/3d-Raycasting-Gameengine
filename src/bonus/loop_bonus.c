@@ -12,23 +12,11 @@
 
 #include "../../include/cub3d.h"
 
-void	ft_fire(t_cub *cub)
+long long get_current_time_micro(void)
 {
-	int	i;
-
-	i = 1;
-	while (i < 5)
-	{
-		paint_background(cub);
-		raycasting(cub);
-		paint_minimap(cub);
-		paint_sprite(cub, i);
-		paint_img(cub);
-		mlx_do_sync(cub->mlx);
-		usleep(40000);
-		i++;
-	}
-	loop(cub);
+	struct timeval tv;
+	gettimeofday(&tv, NULL);
+	return ((long long)tv.tv_sec * 1000000LL + tv.tv_usec);
 }
 
 int	ft_click(int button, int x, int y, void *param)
@@ -39,7 +27,11 @@ int	ft_click(int button, int x, int y, void *param)
 	printf("Mouse button %d clicked at (%d, %d)\n", button, x, y);
 	if (button == 1)
 	{
-		ft_fire(cub);
+		// ft_fire(cub);
+		cub->anim_on = 1;
+		cub->anim_frame = 1;
+		cub->anim_lasttime = get_current_time_micro();
+		loop(cub);
 	}
 	return (0);
 }
@@ -154,11 +146,26 @@ int	keypress_hook(int key_code, t_cub *cub)
 
 int	loop(t_cub *cub)
 {
+	long long	curr_time;
 
+	curr_time = get_current_time_micro();
+	if (cub->anim_on)
+	{
+		if (curr_time - cub->anim_lasttime >= 50000)
+		{
+			cub->anim_frame++;
+			cub->anim_lasttime = curr_time;
+			if (cub->anim_frame >= 5)
+				cub->anim_on = 0;
+		}
+	}
 	paint_background(cub);
 	raycasting(cub);
 	paint_minimap(cub);
-	paint_sprite(cub, 0);
+	if (cub->anim_on)
+		paint_sprite(cub, cub->anim_frame);
+	else
+		paint_sprite(cub, 0);
 	paint_img(cub);
 	return (0);
 }

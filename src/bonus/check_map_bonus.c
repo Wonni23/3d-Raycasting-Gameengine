@@ -12,7 +12,7 @@
 
 #include "../../include/cub3d.h"
 
-static int	orientation_player(char c)
+int	orientation_player(char c)
 {
 	return (c == 'N' || c == 'S' || c == 'W' || c == 'E');
 }
