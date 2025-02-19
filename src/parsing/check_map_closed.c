@@ -87,14 +87,18 @@ static void	check_front_back(t_cub *cub, char **path)
 	int	y;
 
 	y = 0;
-	if (ft_strchr(cub->map.map[y], '0'))
+	if (ft_strchr(cub->map.map[y], '0') || ft_strchr(cub->map.map[y], 'N')\
+    || ft_strchr(cub->map.map[y], 'S') || ft_strchr(cub->map.map[y], 'W')\
+    || ft_strchr(cub->map.map[y], 'E'))
 		{
             printf("5\n");
             ft_exit(cub, path, 1);
         }
 	while (cub->map.map[y])
 		y++;
-	if (ft_strchr(cub->map.map[y - 1], '0'))
+	if (ft_strchr(cub->map.map[y - 1], '0') || ft_strchr(cub->map.map[y - 1], 'N')\
+    || ft_strchr(cub->map.map[y - 1], 'S') || ft_strchr(cub->map.map[y - 1], 'W')\
+    || ft_strchr(cub->map.map[y - 1], 'E'))
 	{
         printf("6\n");
         ft_exit(cub, path, 1);
@@ -137,22 +141,22 @@ static void	check_first_c_last_c(t_cub *cub, char **path)
 void	check_map_closed(t_cub *cub, char **path)
 {
     int y;
+    int x;
 
-    if (ft_strlen(cub->map.map[0]) < ft_strlen(cub->map.map[1]) \
-    && (ft_strlen(cub->map.map[1]) - ft_strlen(cub->map.map[0])) >= 2)
-        {
-                    printf("9\n");
-                    ft_exit(cub, path, 1);
-                }
+    x = -1;
+    while (cub->map.map[0][++x])
+        if (orientation_player(cub->map.map[0][x]))
+            ft_exit(cub, path, 1);
     y = 0;
     while (cub->map.map[y])
         y++;
-    if (ft_strlen(cub->map.map[y - 1]) < ft_strlen(cub->map.map[y - 2]) \
-    && (ft_strlen(cub->map.map[y - 2]) - ft_strlen(cub->map.map[y - 1])) >= 2)
-    {
-        printf("10\n");
+    y--;
+    x = -1;
+    while (cub->map.map[y][++x])
+        if (orientation_player(cub->map.map[y][x]))
+            ft_exit(cub, path, 1);
+    if (!ft_strchr(cub->map.map[y], '1'))
         ft_exit(cub, path, 1);
-    }
     check_first_c_last_c(cub, path);
 	check_front_back(cub, path);
 	check_line_change_l(cub, path);

@@ -29,6 +29,7 @@ int	keypress_hook(int key_code, t_cub *cub)
 	else if (key_code == KEY_ESC)
 	{
 		printf("Exiting cub3D.\n");
+		free_matrix((void ***)&cub->map.map);
 		//memory_clean_exit
 		exit(0);
 	}

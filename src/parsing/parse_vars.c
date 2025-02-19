@@ -12,27 +12,28 @@
 
 #include "../../include/cub3d.h"
 
-static int	fill_color(t_cub *cub, t_parse *parse, char *s)
+static int	fill_color(t_parse *parse, char *s)
 {
 	int	i;
 	int	rgb[3];
 
 	i = -1;
+	check_including_letter(parse, s);
 	rgb[++i] = ft_atoi(s);
 	if (rgb[i] > 255 || rgb[i] < 0)
-		exit_parse(cub, 1, \
+		exit_parse(NULL, 1, \
 			"atoi overflow only can accept between 0 and 255", parse);
 	while (++i < 3)
 	{
 		while (ft_isdigit(*s))
 			s++;
-		if (*s != ',')
-			exit_parse(cub, 1, \
+		if (*s == ',' && !(ft_isdigit(*(s + 1))))
+			exit_parse(NULL, 1, \
 			"C or F must have 3 intergers separeted by a coma", parse);
 		s++;
 		rgb[i] = ft_atoi(s);
 		if (rgb[i] > 255 || rgb[i] < 0)
-			exit_parse(cub, 1, \
+			exit_parse(NULL, 1, \
 			"atoi overflow only can accept between 0 and 255", parse);
 	}
 	i = 255;
@@ -61,7 +62,7 @@ static int	fill_args(t_cub *cub, t_parse *parse, char *s, int path_i)
 		s += 1;
 		while (ft_isspace(*s))
 			s++;
-		cub->img.colors[cub->img.color_i] = fill_color(cub, parse, s);
+		cub->img.colors[cub->img.color_i] = fill_color(parse, s);
 	}
 	return (0);
 }

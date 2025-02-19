@@ -202,6 +202,8 @@ void	parse(t_cub *cub, char *argv);
 char	**parse_main(t_cub *cub, char *name);
 void	parse_file(t_cub *cub, t_parse *parse);
 int		get_vars(t_cub *cub, t_parse *parse);
+int		orientation_player(char c);
+void    check_including_letter(t_parse *parse, char *s);
 void	check_image_order(t_parse *parse, char *s);
 void	check_map(t_cub *cub, char **path);
 void	check_map_closed(t_cub *cub, char **path);
