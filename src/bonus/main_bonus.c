@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 	mlx_hook(cub.win, X_EVENT_KEY_PRESS, 1L << 0, keypress_hook, &cub);
 	mlx_hook(cub.win, X_EVENT_MOUSE_MOVE, 1L << 6, ft_mouse, &cub);
 	mlx_mouse_hook(cub.win, ft_click, &cub);
-	// mlx_loop_hook(cub.mlx, loop, &cub);
+	mlx_loop_hook(cub.mlx, loop, &cub);
 	mlx_loop(cub.mlx);
 	return (0);
 }
