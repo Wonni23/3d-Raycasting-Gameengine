@@ -67,18 +67,6 @@ static void	get_map(t_cub *cub, t_parse *parse, int y)
 	}
 }
 
-void	check_image_order(t_parse *parse, char *s)
-{
-	if (*s == 'N')
-		parse->num_vars = 0;
-	if (*s == 'S')
-		parse->num_vars = 1;
-	if (*s == 'W')
-		parse->num_vars = 2;
-	if (*s == 'E')
-		parse->num_vars = 3;
-}
-
 void	parse_file(t_cub *cub, t_parse *parse)
 {
 	int	y;
