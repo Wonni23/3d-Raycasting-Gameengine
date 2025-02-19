@@ -62,8 +62,8 @@
 # define CEILING 1
 
 # define MVSPEED 0.2
-# define RTSPEED_R 0.1
-# define RTSPEED_L -0.1
+# define RTSPEED_R 0.05
+# define RTSPEED_L -0.05
 
 # define SC 1
 # define SZ 8
@@ -159,6 +159,8 @@ typedef struct s_cub {
 	void		*mlx;
 	void		*win;
 	int			num_player;
+	int			mouse_x;
+	int			mouse_y;
 	t_img		img;
 	t_player	player;
 	t_map		map;
@@ -173,7 +175,7 @@ int		keypress_hook(int key_code, t_cub *cub);
 
 /* Rendering */
 void	boot(t_cub *cub);
-int		loop(int key_code, t_cub *cub);
+int		loop(t_cub *cub);
 
 /* Ray Casting */
 void	setup_dda(t_cub *cub, t_ray *ray);
@@ -205,7 +207,7 @@ void    check_including_letter(t_parse *parse, char *s);
 void	check_image_order(t_parse *parse, char *s);
 void	check_map(t_cub *cub, char **path);
 void	check_map_closed(t_cub *cub, char **path);
-void    check_map_empty(t_cub *cub, char **path);
+void	check_map_empty(t_cub *cub, char **path);
 void	free_matrix(void ***matrix);
 void	free_parse(t_parse *parse);
 void	free_array(char *array);
@@ -217,5 +219,6 @@ void	load_image(t_cub *cub, char **path_to_image);
 /* Bonus */
 void	paint_minimap(t_cub *cub);
 void	load_door(t_cub *cub);
+int		ft_mouse(int x, int y, t_cub *cub);
 
 #endif

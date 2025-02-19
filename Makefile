@@ -18,7 +18,7 @@ SRCS =	main.c \
 		src/utils/initialization.c \
 		src/utils/utils.c
 
-SRCS_B = main.c \
+SRCS_B = src/bonus/main_bonus.c \
 		src/parsing/check_map_closed.c \
 		src/parsing/check_map_empty.c \
 		src/parsing/check_elements.c \

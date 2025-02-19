@@ -12,6 +12,7 @@
 
 #include "include/cub3d.h"
 
+
 int	main(int argc, char **argv)
 {
 	t_cub	cub;
@@ -26,6 +27,7 @@ int	main(int argc, char **argv)
 	boot(&cub);
 	//mlx_hook(cub.win, X_EVENT_KEY_EXIT, 0, memory_clean_exit, &cub);
 	mlx_hook(cub.win, X_EVENT_KEY_PRESS, 1L << 0, keypress_hook, &cub);
+	mlx_hook(cub.win, 6, 1L << 6, ft_mouse, &cub);
 	mlx_loop_hook(cub.mlx, loop, &cub);
 	mlx_loop(cub.mlx);
 	return (0);

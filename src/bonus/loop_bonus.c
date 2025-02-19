@@ -12,25 +12,24 @@
 
 #include "../../include/cub3d.h"
 
-//void	interact_door(t_cub *cub)
-//{
-//	t_ray	ray;
-//	float	max_dist = 1; // 상호작용 최대 거리
+int	ft_mouse(int x, int y, t_cub *cub)
+{
+	int	mv_pos;
 
-//	ray.ray_dir_x = cub->player.dir_x;
-//	ray.ray_dir_y = cub->player.dir_y;
-//	ray.map_x = (int)cub->player.pos_x;
-//	ray.map_y = (int)cub->player.pos_y;
-//	setup_dda(cub, &ray);
-//	perform_dda(&ray, cub->map.map);
-//	if ((ray.hit == 2 || ray.hit == 3) && ray.perp_wall_dist <= max_dist)
-//	{
-//		if (cub->map.map[ray.map_y][ray.map_x] == '2')
-//			cub->map.map[ray.map_y][ray.map_x] = '3';
-//		else if (cub->map.map[ray.map_y][ray.map_x] == '3')
-//			cub->map.map[ray.map_y][ray.map_x] = '2';
-//	}
-//}
+	mlx_mouse_hide(cub->mlx, cub->win);
+	if (x == WIDTH / 2 && y == HEIGHT / 2)
+		return (0);
+	mv_pos = x - (WIDTH / 2);
+	if (abs(mv_pos) < 10)
+		return (0);
+	if (mv_pos > 0)
+		rotate_right(cub);
+	else
+		rotate_left(cub);
+	mlx_mouse_move(cub->mlx, cub->win, WIDTH / 2, HEIGHT / 2);
+	loop(cub);
+	return (0);
+}
 
 int	collide_door(t_cub *cub, double x, double y)
 {
@@ -120,7 +119,7 @@ int	keypress_hook(int key_code, t_cub *cub)
 	return (0);
 }
 
-int	loop(int key_code, t_cub *cub)
+int	loop(t_cub *cub)
 {
 	if (cub->img.img)
 	{
@@ -130,7 +129,7 @@ int	loop(int key_code, t_cub *cub)
 	cub->img.img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	cub->img.data = (int *)mlx_get_data_addr(cub->img.img, &cub->img.bpp,
 								&cub->img.line_size, &cub->img.endian);
-	keypress_hook(key_code, cub);
+	// keypress_hook(key_code, cub);
 	paint_background(cub);
 	raycasting(cub);
 	paint_minimap(cub);
