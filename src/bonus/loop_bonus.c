@@ -12,6 +12,38 @@
 
 #include "../../include/cub3d.h"
 
+void	ft_fire(t_cub *cub)
+{
+	int	i;
+
+	i = 1;
+	while (i < 5)
+	{
+		paint_background(cub);
+		raycasting(cub);
+		paint_minimap(cub);
+		paint_sprite(cub, i);
+		paint_img(cub);
+		mlx_do_sync(cub->mlx);
+		usleep(40000);
+		i++;
+	}
+	loop(cub);
+}
+
+int	ft_click(int button, int x, int y, void *param)
+{
+	t_cub	*cub;
+
+	cub = (t_cub *)param;
+	printf("Mouse button %d clicked at (%d, %d)\n", button, x, y);
+	if (button == 1)
+	{
+		ft_fire(cub);
+	}
+	return (0);
+}
+
 int	ft_mouse(int x, int y, t_cub *cub)
 {
 	int	mv_pos;
@@ -116,23 +148,17 @@ int	keypress_hook(int key_code, t_cub *cub)
 		printf("Exiting cub3D.\n");
 		exit(0);
 	}
+	loop(cub);
 	return (0);
 }
 
 int	loop(t_cub *cub)
 {
-	if (cub->img.img)
-	{
-		mlx_destroy_image(cub->mlx, cub->img.img);
-		cub->img.img = NULL;
-	}
-	cub->img.img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
-	cub->img.data = (int *)mlx_get_data_addr(cub->img.img, &cub->img.bpp,
-								&cub->img.line_size, &cub->img.endian);
-	// keypress_hook(key_code, cub);
+
 	paint_background(cub);
 	raycasting(cub);
 	paint_minimap(cub);
+	paint_sprite(cub, 0);
 	paint_img(cub);
 	return (0);
 }
@@ -150,5 +176,6 @@ void	boot(t_cub *cub)
 	paint_background(cub);
 	raycasting(cub);
 	paint_minimap(cub);
+	paint_sprite(cub, 0);
 	paint_img(cub);
 }
