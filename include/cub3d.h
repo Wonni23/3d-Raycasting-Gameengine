@@ -17,14 +17,14 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdio.h>
-//# include <sys/time.h>
+// # include <sys/time.h>
 # include <math.h>
 # include <string.h>
 
 # include "minilibx-linux/mlx.h"
 # include "libft/include/libft.h"
 
-# define X_EVENT_KEY_PRESS		2
+# define X_EVENT_KEY_PRESS	2
 # define X_EVENT_KEY_EXIT	17
 # define KEY_W 119
 # define KEY_A 97
@@ -73,7 +73,14 @@
 # define Y 0xF7E600
 # define RD 0x760c0c
 
+# define X_EVENT_MOUSE_MOVE 6
+
+# define SPSIZE (WIDTH / 3)
+# define SP_X (WIDTH - SPSIZE * 1.2)
+# define SP_Y (HEIGHT - SPSIZE)
+
 /* SC: Scale, SZ: tilesize, K ~ RD: color */
+
 
 typedef	struct s_parse
 {
@@ -122,6 +129,7 @@ typedef struct s_img
 	int			buffer[HEIGHT][WIDTH];
 	int			**walls;
 	int			*door;
+	int			**sprites;
 	int			color_i;
 	int			colors[2];
 }	t_img;
@@ -218,5 +226,12 @@ void	load_image(t_cub *cub, char **path_to_image);
 void	paint_minimap(t_cub *cub);
 void	load_door(t_cub *cub);
 int		ft_mouse(int x, int y, t_cub *cub);
+
+int	ft_click(int button, int x, int y, void *param);
+
+int		init_sprite(t_img *img);
+void	load_sprite_image(t_cub *cub);
+
+void	paint_sprite(t_cub *cub, int idx);
 
 #endif

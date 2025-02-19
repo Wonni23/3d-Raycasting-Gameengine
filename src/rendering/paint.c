@@ -16,18 +16,18 @@ void	paint_background(t_cub *cub)
 {
 	int	i;
 	int	j;
-	int	celling;
+	int	ceiling;
 	int	floor;
 
 	i = 0;
-	celling = cub->img.colors[1];
+	ceiling = cub->img.colors[1];
 	floor = cub->img.colors[0];
 	while (i < HEIGHT / 2)
 	{
 		j = 0;
 		while (j < WIDTH)
 		{
-			cub->img.buffer[i][j] = celling;
+			cub->img.buffer[i][j] = ceiling;
 			cub->img.buffer[HEIGHT - i - 1][j] = floor;
 			j++;
 		}

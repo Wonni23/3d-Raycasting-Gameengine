@@ -16,18 +16,18 @@ void	paint_background(t_cub *cub)
 {
 	int	i;
 	int	j;
-	int	celling;
+	int	ceiling;
 	int	floor;
 
 	i = 0;
-	celling = cub->img.colors[1];
+	ceiling = cub->img.colors[1];
 	floor = cub->img.colors[0];
 	while (i < HEIGHT / 2)
 	{
 		j = 0;
 		while (j < WIDTH)
 		{
-			cub->img.buffer[i][j] = celling;
+			cub->img.buffer[i][j] = ceiling;
 			cub->img.buffer[HEIGHT - i - 1][j] = floor;
 			j++;
 		}
@@ -95,6 +95,31 @@ void	paint_minimap(t_cub *cub)
 		}
 		fill_minimap(cub, (int)((cub->player.pos_x - 0.5) * 8 * SC),
 			(int)((cub->player.pos_y -0.5) * 8 * SC), RD);
+		y++;
+	}
+}
+
+void	paint_sprite(t_cub *cub, int idx)
+{
+	int	x;
+	int	y;
+	int src_x;
+	int src_y;
+	int pixel;
+
+	y = 0;
+	while (y < SPSIZE)
+	{
+		x = 0;
+		while (x < SPSIZE)
+		{
+			src_x = (x * TEX_WIDTH) / SPSIZE;
+			src_y = (y * TEX_HEIGHT) / SPSIZE;
+			pixel = cub->img.sprites[idx][(src_y * TEX_WIDTH) + src_x];
+			if (((pixel >> 24) & 0xFF) == 0)
+				cub->img.buffer[SP_Y + y][(int)(SP_X + x)] = pixel;
+			x++;
+		}
 		y++;
 	}
 }

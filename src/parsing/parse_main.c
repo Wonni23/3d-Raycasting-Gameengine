@@ -94,4 +94,7 @@ void	parse(t_cub *cub, char *name)
 	init_mlx(cub);
 	init_image(&cub->img);
 	load_image(cub, path);
+	init_sprite(&cub->img);
+	load_sprite_image(cub);
+	load_door(cub);
 }
