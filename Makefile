@@ -36,9 +36,6 @@ SRCS_B = src/bonus/main_bonus.c \
 		src/bonus/parse_imgs_bonus.c \
 		src/bonus/parse_main_bonus.c
 
-OBJS = $(SRCS:.c=.o)
-OBJS_B = $(SRCS_B:.c=.o)
-
 CFLAGS = -Wall -Werror -Wextra
 LDFLAGS = -lm
 MLXFLAGS = -I . -L minilibx-linux -lmlx -lXext -lX11
@@ -47,31 +44,23 @@ LIBFT = ./libft/libft.a
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	make -C ./minilibx-linux all
-	make -C ./libft all
-	cc $(CFLAGS) $(OBJS) $(LIBFT) $(LDFLAGS) $(MLXFLAGS) -g -o $(NAME)
+$(NAME): $(SRCS)
+		make -C ./minilibx-linux all
+		make -C ./libft all
+		cc $(CFLAGS) -g $(SRCS) $(LIBFT) $(LDFLAGS) $(MLXFLAGS) -o $(NAME)
 
-bonus: $(OBJS_B)
-	make -C ./minilibx-linux all
-	make -C ./libft all
-	cc $(CFLAGS) $(OBJS_B) $(LIBFT) $(LDFLAGS) $(MLXFLAGS) -g -o $(NAME)_bonus
-
-%.o: %.c
-	cc $(CFLAGS) -c $^ -I./ -o $@
-
-bonus/%.o: bonus/%.c
-	cc $(CFLAGS) -c $< -I./ -o $@
+bonus: $(SRCS_B)
+		make -C ./minilibx-linux all
+		make -C ./libft all
+		cc $(CFLAGS) -g $(SRCS_B) $(LIBFT) $(LDFLAGS) $(MLXFLAGS) -o $(NAME)_bonus
 
 clean:
-	rm -rf $(OBJS) $(OBJS_B)
-	make -C ./libft clean
+		@echo "오브젝트 파일은 존재하지 않습니다."
 
 fclean: clean
-	make -C ./libft fclean
-	rm -rf $(NAME) $(NAME)_bonus
+		make -C ./libft fclean
+		rm -rf $(NAME) $(NAME)_bonus
 
 re: fclean all
 
-.PHONY: all clean fclean re
-
+.PHONY: all bonus clean fclean re

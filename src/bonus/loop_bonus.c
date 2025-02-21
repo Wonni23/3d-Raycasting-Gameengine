@@ -139,7 +139,6 @@ int	keypress_hook(int key_code, t_cub *cub)
 	{
 		printf("Exiting cub3D.\n");
 		memory_clean_exit(cub);
-		exit(0);
 	}
 	loop(cub);
 	return (0);
