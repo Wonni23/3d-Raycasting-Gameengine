@@ -12,7 +12,6 @@
 
 #include "../../include/cub3d.h"
 
-
 static int	counting_lines(t_parse *parse, int y)
 {
 	int	count_lines;
