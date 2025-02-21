@@ -88,21 +88,26 @@ void	load_image(t_cub *cub, char **path_to_image)
 	}
 }
 
-int	init_sprite(t_img *img)
+int	init_sprite(t_cub *cub)
 {
 	int	i;
 
 	i = 0;
-	img->sprites = (int **)malloc(6 * sizeof(int *));
-	if (!img->sprites)
+	cub->img.spsize = (WIDTH / 3);
+	cub->img.sp_x = (WIDTH - cub->img.spsize * 1.2);
+	cub->img.sp_y = (HEIGHT - cub->img.spsize);
+	cub->img.sprites = (int **)malloc(6 * sizeof(int *));
+	if (!cub->img.sprites)
 		err_exit("sprites malloc error");
 	i = 0;
 	while (i < 5)
 	{
-		img->sprites[i] = (int *)malloc(sizeof(int) * TEX_WIDTH * TEX_HEIGHT);
-		if (!img->sprites[i])
+		cub->img.sprites[i] = \
+		(int *)malloc(sizeof(int) * TEX_WIDTH * TEX_HEIGHT);
+		if (!cub->img.sprites[i])
 			err_exit("sprites malloc error");
-		ft_memset(img->sprites[i], 0, (sizeof(int) * TEX_WIDTH * TEX_HEIGHT));
+		ft_memset(cub->img.sprites[i], 0, \
+		(sizeof(int) * TEX_WIDTH * TEX_HEIGHT));
 		i++;
 	}
 	return (0);

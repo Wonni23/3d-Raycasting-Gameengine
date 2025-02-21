@@ -82,7 +82,7 @@ void	check_map_empty(t_cub *cub, char **path)
 		x = 0;
 		while (cub->map.map[y][++x])
 		{
-			if (ft_isspace(cub->map.map[y][x]) && (cub->map.map[y - 1][x] == '0'\
+			if (cub->map.map[y][x] == ' ' && (cub->map.map[y - 1][x] == '0'\
 			|| cub->map.map[y + 1][x] == '0' || cub->map.map[y][x - 1] == '0'\
 			|| cub->map.map[y][x + 1] == '0'))
 				ft_exit(cub, path, 1);

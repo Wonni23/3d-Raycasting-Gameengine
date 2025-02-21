@@ -115,6 +115,9 @@ typedef struct s_img
 	int			**walls;
 	int			*door;
 	int			**sprites;
+	int			spsize;
+	int			sp_x;
+	int			sp_y;
 	int			color_i;
 	int			colors[2];
 }	t_img;

@@ -36,6 +36,8 @@ int	memory_clean_exit(t_cub *cub)
 {
 	mlx_destroy_image(cub->mlx, cub->img.img);
 	clean_int_array(cub->img.walls, 4);
+	clean_int_array(cub->img.sprites, 5);
+	free(cub->img.door);
 	free_matrix((void ***)&cub->map.map);
 	mlx_clear_window(cub->mlx, cub->win);
 	mlx_destroy_window(cub->mlx, cub->win);

@@ -28,13 +28,14 @@ SRCS_B = src/bonus/main_bonus.c \
 		src/rendering/movement.c \
 		src/rendering/rotation.c \
 		src/utils/initialization.c \
-		src/utils/utils.c \
 		src/bonus/loop_bonus.c \
 		src/bonus/paint_bonus.c \
 		src/bonus/raycasting_bonus.c \
 		src/bonus/check_map_bonus.c \
 		src/bonus/parse_imgs_bonus.c \
-		src/bonus/parse_main_bonus.c
+		src/bonus/parse_main_bonus.c \
+		src/bonus/initialization_bonus.c \
+		src/bonus/utils_bonus.c
 
 CFLAGS = -Wall -Werror -Wextra
 LDFLAGS = -lm

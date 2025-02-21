@@ -21,6 +21,7 @@ int	main(int argc, char **argv)
 		printf("Error\nThere must be only two files.\n");
 		return (1);
 	}
+	init_status(&cub);
 	parse(&cub, argv[1]);
 	init_player(&cub.player);
 	boot(&cub);

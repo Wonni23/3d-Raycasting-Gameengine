@@ -38,7 +38,7 @@ static int	check_invalid_char(t_cub *cub)
 	y = -1;
 	x = 0;
 	cub->num_player = 0;
-	while (cub->map.map[++y]) //
+	while (cub->map.map[++y])
 	{
 		x = -1;
 		while (cub->map.map[y][++x])

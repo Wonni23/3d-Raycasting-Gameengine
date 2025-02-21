@@ -72,29 +72,31 @@ void	fill_minimap(t_cub *cub, int x, int y, int color)
 	}
 }
 
-void	paint_minimap(t_cub *cub)
+void	paint_minimap(t_cub *c)
 {
 	int	y;
 	int	x;
 
 	y = 0;
-	while (y < cub->map.map_height)
+	while (y < c->map.map_height)
 	{
 		x = 0;
-		while (x < cub->map.map_width - 1)
+		while (c->map.map[y][x] && c->map.map[y][x]
+			!= '\n' && x < c->map.map_width)
 		{
-			if (cub->map.map[y][x] == '1')
-				fill_minimap(cub, (int)(SC * SZ * x), (int)(SC * SZ * y), K);
-			else if (cub->map.map[y][x] == '2')
-				fill_minimap(cub, (int)(SC * SZ * x), (int)(SC * SZ * y), B);
-			else if (cub->map.map[y][x] == '3')
-				fill_minimap(cub, (int)(SC * SZ * x), (int)(SC * SZ * y), Y);
-			else
-				fill_minimap(cub, (int)(SC * SZ * x), (int)(SC * SZ * y), WT);
+			if (c->map.map[y][x] == '1')
+				fill_minimap(c, (int)(SC * SZ * x), (int)(SC * SZ * y), K);
+			else if (c->map.map[y][x] == '2')
+				fill_minimap(c, (int)(SC * SZ * x), (int)(SC * SZ * y), B);
+			else if (c->map.map[y][x] == '3')
+				fill_minimap(c, (int)(SC * SZ * x), (int)(SC * SZ * y), Y);
+			else if (c->map.map[y][x] == '0'
+				|| orientation_player(c->map.map[y][x]))
+				fill_minimap(c, (int)(SC * SZ * x), (int)(SC * SZ * y), WT);
 			x++;
 		}
-		fill_minimap(cub, (int)((cub->player.pos_x - 0.5) * 8 * SC),
-			(int)((cub->player.pos_y -0.5) * 8 * SC), RD);
+		fill_minimap(c, (int)((c->player.pos_x - 0.5) * 8 * SC),
+			(int)((c->player.pos_y -0.5) * 8 * SC), RD);
 		y++;
 	}
 }
@@ -108,16 +110,17 @@ void	paint_sprite(t_cub *cub, int idx)
 	int	pixel;
 
 	y = 0;
-	while (y < SPSIZE)
+	while (y < cub->img.spsize)
 	{
 		x = 0;
-		while (x < SPSIZE)
+		while (x < cub->img.spsize)
 		{
-			src_x = (x * TEX_WIDTH) / SPSIZE;
-			src_y = (y * TEX_HEIGHT) / SPSIZE;
+			src_x = (x * TEX_WIDTH) / cub->img.spsize;
+			src_y = (y * TEX_HEIGHT) / cub->img.spsize;
 			pixel = cub->img.sprites[idx][(src_y * TEX_WIDTH) + src_x];
 			if (((pixel >> 24) & 0xFF) == 0)
-				cub->img.buffer[SP_Y + y][(int)(SP_X + x)] = pixel;
+				cub->img.buffer[cub->img.sp_y + y] \
+				[(int)(cub->img.sp_x + x)] = pixel;
 			x++;
 		}
 		y++;
