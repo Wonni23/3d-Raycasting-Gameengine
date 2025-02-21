@@ -23,6 +23,7 @@
 # define Y 0xF7E600
 # define RD 0x760c0c
 
+# define FPS 8333
 # define X_EVENT_MOUSE_MOVE 6
 # define KEY_E 101
 

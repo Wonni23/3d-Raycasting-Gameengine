@@ -24,7 +24,6 @@ int	ft_click(int button, int x, int y, void *param)
 		cub->anim_on = 1;
 		cub->anim_frame = 1;
 		cub->anim_lasttime = get_current_time_micro();
-		loop(cub);
 	}
 	return (0);
 }
@@ -33,7 +32,7 @@ int	ft_mouse(int x, int y, t_cub *cub)
 {
 	int	mv_pos;
 
-	// mlx_mouse_hide(cub->mlx, cub->win);
+	mlx_mouse_hide(cub->mlx, cub->win);
 	if (x == WIDTH / 2 && y == HEIGHT / 2)
 		return (0);
 	mv_pos = x - (WIDTH / 2);

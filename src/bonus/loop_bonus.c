@@ -37,28 +37,40 @@ int	keypress_hook(int key_code, t_cub *cub)
 	return (0);
 }
 
-int	loop(t_cub *cub)
+int	sprite(t_cub *cub)
 {
-	long long	curr_time;
-
-	curr_time = get_current_time_micro();
 	if (cub->anim_on)
 	{
-		if (curr_time - cub->anim_lasttime >= 50000)
+		cub->curr_time = get_current_time_micro();
+		if (cub->curr_time - cub->anim_lasttime >= 50000)
 		{
 			cub->anim_frame++;
-			cub->anim_lasttime = curr_time;
+			cub->anim_lasttime = cub->curr_time;
 			if (cub->anim_frame >= 5)
+			{
 				cub->anim_on = 0;
+				cub->anim_frame = 0;
+			}
 		}
+		loop(cub);
 	}
+	else
+	{
+		cub->start_time = get_current_time_micro();
+		cub->end_time = get_current_time_micro();
+		cub->frame_time = cub->end_time - cub->start_time;
+		if (cub->frame_time < FPS)
+			usleep(FPS - cub->frame_time);
+	}
+	return (0);
+}
+
+int	loop(t_cub *cub)
+{
 	paint_background(cub);
 	raycasting(cub);
 	paint_minimap(cub);
-	if (cub->anim_on)
-		paint_sprite(cub, cub->anim_frame);
-	else
-		paint_sprite(cub, 0);
+	paint_sprite(cub, cub->anim_frame);
 	buffer_to_img_n_window(cub);
 	return (0);
 }

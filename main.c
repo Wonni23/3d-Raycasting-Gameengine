@@ -26,7 +26,6 @@ int	main(int argc, char **argv)
 	boot(&cub);
 	mlx_hook(cub.win, X_EVENT_KEY_EXIT, 0, memory_clean_exit, &cub);
 	mlx_hook(cub.win, X_EVENT_KEY_PRESS, 1L << 0, keypress_hook, &cub);
-	mlx_loop_hook(cub.mlx, loop, &cub);
 	mlx_loop(cub.mlx);
 	return (0);
 }

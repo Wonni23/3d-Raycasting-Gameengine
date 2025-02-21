@@ -53,9 +53,6 @@
 # define WIDTH 1080
 # define HEIGHT 720
 
-# define FRAME_RATE 60
-# define TBD 69
-
 # define FLOOR 0
 # define CEILING 1
 
@@ -149,9 +146,14 @@ typedef struct s_cub {
 	int			num_player;
 	int			mouse_x;
 	int			mouse_y;
+	int			move_on;
 	int			anim_on;
 	int			anim_frame;
 	long long	anim_lasttime;
+	long long	curr_time;
+	long long	start_time;
+	long long	end_time;
+	long long	frame_time;
 	t_img		img;
 	t_player	player;
 	t_map		map;

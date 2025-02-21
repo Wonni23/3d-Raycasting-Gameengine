@@ -26,10 +26,12 @@ int	init_sprite(t_cub *cub)
 	i = 0;
 	while (i < 5)
 	{
-		cub->img.sprites[i] = (int *)malloc(sizeof(int) * TEX_WIDTH * TEX_HEIGHT);
+		cub->img.sprites[i] = \
+			(int *)malloc(sizeof(int) * TEX_WIDTH * TEX_HEIGHT);
 		if (!cub->img.sprites[i])
 			err_exit("sprites malloc error");
-		ft_memset(cub->img.sprites[i], 0, (sizeof(int) * TEX_WIDTH * TEX_HEIGHT));
+		ft_memset(cub->img.sprites[i], 0, (sizeof(int) * TEX_WIDTH \
+			* TEX_HEIGHT));
 		i++;
 	}
 	return (0);
