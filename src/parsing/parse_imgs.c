@@ -58,3 +58,32 @@ void	fill_wall_arr_pixel(t_cub *cub, int i)
 		y++;
 	}
 }
+
+void	load_image(t_cub *cub, char **path_to_image)
+{
+	char	*path;
+	int		i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (i == N)
+			path = path_to_image[0];
+		else if (i == S)
+			path = path_to_image[1];
+		else if (i == W)
+			path = path_to_image[2];
+		else
+			path = path_to_image[3];
+		cub->img.img = mlx_xpm_file_to_image(cub->mlx, path, \
+			&cub->img.w, &cub->img.h);
+		if (cub->img.w != TEX_WIDTH || cub->img.h != TEX_HEIGHT
+			|| cub->img.img == NULL)
+			exit_parse(cub, 1, "image_load xpm file error", NULL);
+		cub->img.data = (int *)mlx_get_data_addr(cub->img.img, \
+					&cub->img.bpp, &cub->img.line_size, &cub->img.endian);
+		fill_wall_arr_pixel(cub, i);
+		mlx_destroy_image(cub->mlx, cub->img.img);
+		i++;
+	}
+}

@@ -34,8 +34,6 @@
 # define KEY_RIGHT 65363
 # define KEY_ESC 65307
 
-# define KEY_E 101
-
 # define UP 0
 # define DOWN 1
 # define LEFT 2
@@ -75,21 +73,23 @@
 
 # define X_EVENT_MOUSE_MOVE 6
 
+# define KEY_E 101
+
 # define SPSIZE (WIDTH / 3)
 # define SP_X (WIDTH - SPSIZE * 1.2)
 # define SP_Y (HEIGHT - SPSIZE)
 
 /* SC: Scale, SZ: tilesize, K ~ RD: color */
 
-
-typedef	struct s_parse
+typedef struct s_parse
 {
 	char	**file;
 	char	**path_to_img;
 	int		num_vars;
 }	t_parse;
 
-typedef struct s_ray {
+typedef struct s_ray
+{
 	double	ray_dir_x;
 	double	ray_dir_y;
 	int		map_x;
@@ -105,7 +105,8 @@ typedef struct s_ray {
 	double	perp_wall_dist;
 }	t_ray;
 
-typedef struct s_texturing {
+typedef struct s_texturing
+{
 	int		draw_start;
 	int		draw_end;
 	int		line_height;
@@ -149,18 +150,10 @@ typedef struct s_player
 
 typedef struct s_map
 {
-	char		**map; // debug, should be **map
-	//char		*no_path;
-	//char		*so_path;
-	//char		*we_path;
-	//char		*ea_path;
-	//int			floor;
-	//int			ceiling;
+	char		**map;
 	int			map_width;
 	int			map_height;
-	//int			mcount;
-	//int			start;
-	//int			ret;
+
 }	t_map;
 
 typedef struct s_cub {
@@ -231,6 +224,7 @@ void	load_image(t_cub *cub, char **path_to_image);
 /* Bonus */
 void	paint_minimap(t_cub *cub);
 void	load_door(t_cub *cub);
+
 int		ft_mouse(int x, int y, t_cub *cub);
 
 int		ft_click(int button, int x, int y, void *param);
