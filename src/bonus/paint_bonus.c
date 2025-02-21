@@ -103,9 +103,9 @@ void	paint_sprite(t_cub *cub, int idx)
 {
 	int	x;
 	int	y;
-	int src_x;
-	int src_y;
-	int pixel;
+	int	src_x;
+	int	src_y;
+	int	pixel;
 
 	y = 0;
 	while (y < SPSIZE)

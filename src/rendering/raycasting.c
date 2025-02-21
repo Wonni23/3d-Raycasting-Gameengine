@@ -23,7 +23,7 @@ void	init_ray(t_cub *cub, t_ray *ray, int x)
 	ray->map_y = (int)cub->player.pos_y;
 }
 
-void	setup_dda(t_cub *cub, t_ray *ray)
+void	setup_dda_divbyzero_handle(t_ray *ray)
 {
 	if (ray->ray_dir_x == 0)
 		ray->delta_dist_x = 1e30;
@@ -33,6 +33,11 @@ void	setup_dda(t_cub *cub, t_ray *ray)
 		ray->delta_dist_y = 1e30;
 	else
 		ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
+}
+
+void	setup_dda(t_cub *cub, t_ray *ray)
+{
+	setup_dda_divbyzero_handle(ray);
 	if (ray->ray_dir_x < 0)
 	{
 		ray->step_x = -1;

@@ -45,7 +45,7 @@ int	loop(t_cub *cub)
 	}
 	cub->img.img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	cub->img.data = (int *)mlx_get_data_addr(cub->img.img, &cub->img.bpp,
-								&cub->img.line_size, &cub->img.endian);
+			&cub->img.line_size, &cub->img.endian);
 	paint_background(cub);
 	raycasting(cub);
 	buffer_to_img_n_window(cub);
@@ -56,7 +56,7 @@ void	boot(t_cub *cub)
 {
 	cub->img.img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	cub->img.data = (int *)mlx_get_data_addr(cub->img.img, &cub->img.bpp,
-								&cub->img.line_size, &cub->img.endian);
+			&cub->img.line_size, &cub->img.endian);
 	paint_background(cub);
 	raycasting(cub);
 	buffer_to_img_n_window(cub);

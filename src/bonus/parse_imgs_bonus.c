@@ -75,10 +75,11 @@ void	load_image(t_cub *cub, char **path_to_image)
 			path = path_to_image[2];
 		else
 			path = path_to_image[3];
-		cub->img.img = mlx_xpm_file_to_image(cub->mlx, path, &cub->img.w, &cub->img.h);
+		cub->img.img = mlx_xpm_file_to_image(cub->mlx, path, \
+			&cub->img.w, &cub->img.h);
 		if (cub->img.w != TEX_WIDTH || cub->img.h != TEX_HEIGHT
 			|| cub->img.img == NULL)
-			exit_parse(cub, 1, "image_load xpm file error", NULL); // change function: free : map, img.walls
+			exit_parse(cub, 1, "image_load xpm file error", NULL);
 		cub->img.data = (int *)mlx_get_data_addr(cub->img.img, \
 					&cub->img.bpp, &cub->img.line_size, &cub->img.endian);
 		fill_wall_arr_pixel(cub, i);
@@ -126,7 +127,7 @@ void	fill_sprite_arr_pixel(t_cub *cub, int i)
 	}
 }
 
-void	load_sprite_image(t_cub *cub)
+void	load_sprite_image(t_cub *c)
 {
 	char	*path;
 	int		i;
@@ -144,14 +145,14 @@ void	load_sprite_image(t_cub *cub)
 			path = "images/sprites/4.xpm";
 		else
 			path = "images/sprites/5.xpm";
-		cub->img.img = mlx_xpm_file_to_image(cub->mlx, path, &cub->img.w, &cub->img.h);
-		if (cub->img.w != TEX_WIDTH || cub->img.h != TEX_HEIGHT
-			|| cub->img.img == NULL)
-			exit_parse(cub, 1, "image_load xpm file error", NULL); // change function: free : map, img.walls
-		cub->img.data = (int *)mlx_get_data_addr(cub->img.img, \
-					&cub->img.bpp, &cub->img.line_size, &cub->img.endian);
-		fill_sprite_arr_pixel(cub, i);
-		mlx_destroy_image(cub->mlx, cub->img.img);
+		c->img.img = mlx_xpm_file_to_image(c->mlx, path, &c->img.w, &c->img.h);
+		if (c->img.w != TEX_WIDTH || c->img.h != TEX_HEIGHT
+			|| c->img.img == NULL)
+			exit_parse(c, 1, "image_load xpm file error", NULL);
+		c->img.data = (int *)mlx_get_data_addr(c->img.img, \
+					&c->img.bpp, &c->img.line_size, &c->img.endian);
+		fill_sprite_arr_pixel(c, i);
+		mlx_destroy_image(c->mlx, c->img.img);
 	}
 }
 
@@ -180,10 +181,11 @@ void	load_door(t_cub *cub)
 
 	path = "./images/door.xpm";
 	cub->img.door = (int *)malloc(sizeof(int) * TEX_WIDTH * TEX_HEIGHT);
-	cub->img.img = mlx_xpm_file_to_image(cub->mlx, path, &cub->img.w, &cub->img.h);
+	cub->img.img = mlx_xpm_file_to_image(cub->mlx, path, \
+			&cub->img.w, &cub->img.h);
 	if (cub->img.w != TEX_WIDTH || cub->img.h != TEX_HEIGHT
 		|| cub->img.img == NULL)
-		exit_parse(cub, 1, "image_load xpm file error", NULL); // change function: free : map, img.walls
+		exit_parse(cub, 1, "image_load xpm file error", NULL);
 	cub->img.data = (int *)mlx_get_data_addr(cub->img.img, \
 			&cub->img.bpp, &cub->img.line_size, &cub->img.endian);
 	fill_door_arr_pixel(cub);

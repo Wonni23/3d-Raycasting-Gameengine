@@ -12,9 +12,9 @@
 
 #include "../../include/cub3d.h"
 
-void    check_including_letter(t_parse *parse, char *s)
+void	check_including_letter(t_parse *parse, char *s)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	if (s[0] == ',')

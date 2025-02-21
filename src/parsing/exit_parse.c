@@ -43,7 +43,7 @@ void	free_matrix(void ***matrix)
 	int	i;
 
 	if (!matrix || !(*matrix))
-		return;
+		return ;
 	i = 0;
 	while ((*matrix)[i])
 	{

@@ -12,10 +12,10 @@
 
 #include "../../include/cub3d.h"
 
-static void check_line_change_r(t_cub *cub, char **path)
+static void	check_line_change_r(t_cub *cub, char **path)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = 0;
 	y = 0;
@@ -79,7 +79,6 @@ static void	check_line_change_l(t_cub *cub, char **path)
 				}
 		}
 	}
-	
 }
 
 static void	check_front_back(t_cub *cub, char **path)
@@ -87,17 +86,17 @@ static void	check_front_back(t_cub *cub, char **path)
 	int	y;
 
 	y = 0;
-	if (ft_strchr(cub->map.map[y], '0') || ft_strchr(cub->map.map[y], 'N')\
-	|| ft_strchr(cub->map.map[y], 'S') || ft_strchr(cub->map.map[y], 'W')\
+	if (ft_strchr(cub->map.map[y], '0') || ft_strchr(cub->map.map[y], 'N') \
+	|| ft_strchr(cub->map.map[y], 'S') || ft_strchr(cub->map.map[y], 'W') \
 	|| ft_strchr(cub->map.map[y], 'E'))
-		{
-			printf("5\n");
-			ft_exit(cub, path, 1);
-		}
+	{
+		printf("5\n");
+		ft_exit(cub, path, 1);
+	}
 	while (cub->map.map[y])
 		y++;
-	if (ft_strchr(cub->map.map[y - 1], '0') || ft_strchr(cub->map.map[y - 1], 'N')\
-	|| ft_strchr(cub->map.map[y - 1], 'S') || ft_strchr(cub->map.map[y - 1], 'W')\
+	if (ft_strchr(cub->map.map[y - 1], '0') || ft_strchr(cub->map.map[y - 1], 'N') \
+	|| ft_strchr(cub->map.map[y - 1], 'S') || ft_strchr(cub->map.map[y - 1], 'W') \
 	|| ft_strchr(cub->map.map[y - 1], 'E'))
 	{
 		printf("6\n");
@@ -118,10 +117,10 @@ static void	check_first_c_last_c(t_cub *cub, char **path)
 		while (ft_isspace(cub->map.map[y][x]))
 			x++;
 		if (cub->map.map[y][x] == '0')
-			{
-					printf("7\n");
-					ft_exit(cub, path, 1);
-				}
+		{
+			printf("7\n");
+			ft_exit(cub, path, 1);
+		}
 	}
 	x = 0;
 	y = -1;
@@ -131,17 +130,17 @@ static void	check_first_c_last_c(t_cub *cub, char **path)
 		while (cub->map.map[y][x])
 			x++;
 		if (cub->map.map[y][x - 2] == '0')
-			{
-					printf("8\n");
-					ft_exit(cub, path, 1);
-				}
+		{
+			printf("8\n");
+			ft_exit(cub, path, 1);
+		}
 	}
 }
 
 void	check_map_closed(t_cub *cub, char **path)
 {
-	int y;
-	int x;
+	int	y;
+	int	x;
 
 	x = -1;
 	while (cub->map.map[0][++x])

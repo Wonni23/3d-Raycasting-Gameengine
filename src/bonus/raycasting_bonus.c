@@ -23,7 +23,7 @@ void	init_ray(t_cub *cub, t_ray *ray, int x)
 	ray->map_y = (int)cub->player.pos_y;
 }
 
-void	setup_dda(t_cub *cub, t_ray *ray)
+void	setup_dda_divbyzero_handle(t_ray *ray)
 {
 	if (ray->ray_dir_x == 0)
 		ray->delta_dist_x = 1e30;
@@ -33,6 +33,11 @@ void	setup_dda(t_cub *cub, t_ray *ray)
 		ray->delta_dist_y = 1e30;
 	else
 		ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
+}
+
+void	setup_dda(t_cub *cub, t_ray *ray)
+{
+	setup_dda_divbyzero_handle(ray);
 	if (ray->ray_dir_x < 0)
 	{
 		ray->step_x = -1;
@@ -119,6 +124,27 @@ void	calculate_texture_coords(t_cub *cub, t_ray *ray, t_texturing *tex)
 		+ tex->line_height / 2) * tex->step;
 }
 
+int	set_buffer_choose_img(t_cub *cub, t_ray *ray, t_texturing *tex)
+{
+	if (ray->hit == 2)
+		return (cub->img.door[TEX_HEIGHT * tex->tex_y + tex->tex_x]);
+	else if (ray->side == WALL_X)
+	{
+		if (ray->ray_dir_x >= 0)
+			return (cub->img.walls[E][TEX_HEIGHT * tex->tex_y + tex->tex_x]);
+		else
+			return (cub->img.walls[W][TEX_HEIGHT * tex->tex_y + tex->tex_x]);
+	}
+	else if (ray->side == WALL_Y)
+	{
+		if (ray->ray_dir_y >= 0)
+			return (cub->img.walls[S][TEX_HEIGHT * tex->tex_y + tex->tex_x]);
+		else
+			return (cub->img.walls[N][TEX_HEIGHT * tex->tex_y + tex->tex_x]);
+	}
+	return (0);
+}
+
 void	set_buffer(t_cub *cub, t_ray *ray, t_texturing *tex, int x)
 {
 	int		color;
@@ -128,22 +154,7 @@ void	set_buffer(t_cub *cub, t_ray *ray, t_texturing *tex, int x)
 	while (y < tex->draw_end)
 	{
 		tex->tex_y = (int)tex->tex_pos & (TEX_HEIGHT - 1);
-		if (ray->hit == 2)
-			color = cub->img.door[TEX_HEIGHT * tex->tex_y + tex->tex_x];
-		else if (ray->side == WALL_X)
-		{
-			if (ray->ray_dir_x >= 0)
-				color = cub->img.walls[E][TEX_HEIGHT * tex->tex_y + tex->tex_x];
-			else
-				color = cub->img.walls[W][TEX_HEIGHT * tex->tex_y + tex->tex_x];
-		}
-		else if (ray->side == WALL_Y)
-		{
-			if (ray->ray_dir_y >= 0)
-				color = cub->img.walls[S][TEX_HEIGHT * tex->tex_y + tex->tex_x];
-			else
-				color = cub->img.walls[N][TEX_HEIGHT * tex->tex_y + tex->tex_x];
-		}
+		color = set_buffer_choose_img(cub, ray, tex);
 		cub->img.buffer[y][x] = color;
 		tex->tex_pos += tex->step;
 		y++;

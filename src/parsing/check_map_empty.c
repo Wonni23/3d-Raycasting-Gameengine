@@ -12,10 +12,10 @@
 
 #include "../../include/cub3d.h"
 
-static void check_last_line_space(t_cub *cub, char **path)
+static void	check_last_line_space(t_cub *cub, char **path)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (cub->map.map[y])
@@ -25,32 +25,32 @@ static void check_last_line_space(t_cub *cub, char **path)
 	while (cub->map.map[y][++x])
 	{
 		if (ft_isspace(cub->map.map[y][x]) && cub->map.map[y - 1][x] == '0')
-			{
-					printf("11\n");
-					ft_exit(cub, path, 1);
-				}
+		{
+			printf("11\n");
+			ft_exit(cub, path, 1);
+		}
 	}
 }
 
-static void check_first_line_space(t_cub *cub, char **path)
+static void	check_first_line_space(t_cub *cub, char **path)
 {
-	int x;
+	int	x;
 
 	x = -1;
 	while (cub->map.map[0][++x])
 	{
 		if (ft_isspace(cub->map.map[0][x]) && cub->map.map[1][x] == '0')
-			{
-					printf("12\n");
-					ft_exit(cub, path, 1);
-				}
+		{
+			printf("12\n");
+			ft_exit(cub, path, 1);
+		}
 	}
 }
 
-static void check_player_around_space(t_cub *cub, char **path)
+static void	check_player_around_space(t_cub *cub, char **path)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = 0;
 	y = 1;
@@ -59,8 +59,8 @@ static void check_player_around_space(t_cub *cub, char **path)
 		x = -1;
 		while (cub->map.map[y][++x])
 		{
-			if (orientation_player(cub->map.map[y][x]) && (ft_isspace(cub->map.map[y + 1][x])\
-			|| ft_isspace(cub->map.map[y - 1][x]) || ft_isspace(cub->map.map[y][x + 1]) ||\
+			if (orientation_player(cub->map.map[y][x]) && (ft_isspace(cub->map.map[y + 1][x]) \
+			|| ft_isspace(cub->map.map[y - 1][x]) || ft_isspace(cub->map.map[y][x + 1]) || \
 			ft_isspace(cub->map.map[y][x - 1])))
 				ft_exit(cub, path, 1);
 		}
@@ -68,10 +68,10 @@ static void check_player_around_space(t_cub *cub, char **path)
 	}
 }
 
-void    check_map_empty(t_cub *cub, char **path)
+void	check_map_empty(t_cub *cub, char **path)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	check_first_line_space(cub, path);
 	check_last_line_space(cub, path);

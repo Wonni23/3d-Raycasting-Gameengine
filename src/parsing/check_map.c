@@ -26,7 +26,6 @@ static int	valid_chars(char c)
 static void	set_player(t_cub *cub, int x, int y)
 {
 	cub->player.status = cub->map.map[y][x];
-	//cub->map.map[y][x] = '0';
 	cub->player.pos_x = x + 0.5;
 	cub->player.pos_y = y + 0.5;
 }
@@ -59,28 +58,28 @@ static int	check_invalid_char(t_cub *cub)
 	return (0);
 }
 
-void	check_map(t_cub *cub, char **path)
+void	check_map(t_cub *c, char **path)
 {
 	int	y;
 
-	if (check_invalid_char(cub))
+	if (check_invalid_char(c))
 	{
 		printf("The map must valid chars and one player position\n");
-		ft_exit(cub, path, 0);
+		ft_exit(c, path, 0);
 	}
-	if (cub->num_player == 0)
+	if (c->num_player == 0)
 	{
 		printf("The player must exist\n");
-		ft_exit(cub, path, 0);
+		ft_exit(c, path, 0);
 	}
 	y = -1;
-	cub->map.map_width = ft_strlen(cub->map.map[0]);
-	while (cub->map.map[++y])
+	c->map.map_width = ft_strlen(c->map.map[0]);
+	while (c->map.map[++y])
 	{
-		if (y >= 1 && ft_strlen(cub->map.map[y]) > ft_strlen(cub->map.map[y - 1]) \
-		&& (int)ft_strlen(cub->map.map[y]) > cub->map.map_width)
-			cub->map.map_width = ft_strlen(cub->map.map[y]);
+		if (y >= 1 && ft_strlen(c->map.map[y]) > ft_strlen(c->map.map[y - 1]) \
+		&& (int)ft_strlen(c->map.map[y]) > c->map.map_width)
+			c->map.map_width = ft_strlen(c->map.map[y]);
 	}
-	check_map_closed(cub, path);
-	check_map_empty(cub, path);
+	check_map_closed(c, path);
+	check_map_empty(c, path);
 }

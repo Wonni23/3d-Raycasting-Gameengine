@@ -12,11 +12,12 @@
 
 #include "../../include/cub3d.h"
 
-long long get_current_time_micro(void)
+long long	get_current_time_micro(void)
 {
-	struct timeval tv;
+	struct timeval	tv;
+
 	gettimeofday(&tv, NULL);
-	return ( (long long)tv.tv_sec * 1000000LL + tv.tv_usec );
+	return ((long long)tv.tv_sec * 1000000LL + tv.tv_usec);
 }
 
 int	ft_click(int button, int x, int y, void *param)
@@ -27,7 +28,6 @@ int	ft_click(int button, int x, int y, void *param)
 	printf("Mouse button %d clicked at (%d, %d)\n", button, x, y);
 	if (button == 1)
 	{
-		// ft_fire(cub);
 		cub->anim_on = 1;
 		cub->anim_frame = 1;
 		cub->anim_lasttime = get_current_time_micro();
@@ -174,7 +174,7 @@ void	boot(t_cub *cub)
 {
 	cub->img.img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	cub->img.data = (int *)mlx_get_data_addr(cub->img.img, &cub->img.bpp,
-								&cub->img.line_size, &cub->img.endian);
+			&cub->img.line_size, &cub->img.endian);
 	paint_background(cub);
 	raycasting(cub);
 	paint_minimap(cub);
