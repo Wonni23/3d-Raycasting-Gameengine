@@ -24,7 +24,7 @@ static void	check_line_change_r(t_cub *c, char **path)
 		x = 0;
 		if (ft_strlen(c->map.map[y]) < ft_strlen(c->map.map[y - 1]))
 		{
-			x = ft_strlen(c->map.map[y]) - 1;
+			x = ft_strlen(c->map.map[y]) - 2;
 			while (c->map.map[y - 1][x++])
 				if (c->map.map[y - 1][x] == '0' || c->map.map[y - 1][x] == ' ')
 					ft_exit(c, path, 1);
