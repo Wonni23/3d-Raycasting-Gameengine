@@ -25,6 +25,7 @@ int	main(int argc, char **argv)
 	parse(&cub, argv[1]);
 	init_player(&cub.player);
 	boot(&cub);
+	
 	mlx_hook(cub.win, X_EVENT_KEY_EXIT, 0, memory_clean_exit, &cub);
 	mlx_hook(cub.win, X_EVENT_KEY_PRESS, 1L << 0, keypress_hook, &cub);
 	mlx_hook(cub.win, X_EVENT_MOUSE_MOVE, 1L << 6, ft_mouse, &cub);

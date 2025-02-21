@@ -24,7 +24,7 @@ void	clean_int_array(int **arr, int idx)
 	int	i;
 
 	i = 0;
-	while(i < idx)
+	while (i < idx)
 	{
 		free(arr[i]);
 		i++;
