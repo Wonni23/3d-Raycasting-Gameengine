@@ -1,4 +1,5 @@
 NAME = cub3D
+NAME_BONUS = $(NAME)_bonus
 
 SRCS =	main.c \
 		src/parsing/check_map.c \
@@ -42,6 +43,9 @@ SRCS_B = src/bonus/main_bonus.c \
 		src/bonus/raycasting_setup_bonus.c \
 		src/bonus/utils_bonus.c
 
+OBJS = $(SRCS:.c=.o)
+OBJS_B = $(SRCS_B:.c=.o)
+
 CFLAGS = -Wall -Werror -Wextra
 LDFLAGS = -lm
 MLXFLAGS = -I . -L minilibx-linux -lmlx -lXext -lX11
@@ -50,23 +54,31 @@ LIBFT = ./libft/libft.a
 
 all: $(NAME)
 
-$(NAME): $(SRCS)
-		make -C ./minilibx-linux all
-		make -C ./libft all
-		cc $(CFLAGS) -g $(SRCS) $(LIBFT) $(LDFLAGS) $(MLXFLAGS) -o $(NAME)
+$(NAME): $(OBJS)
+	make -C ./minilibx-linux all
+	make -C ./libft all
+	cc $(CFLAGS) $(OBJS) $(LIBFT) $(LDFLAGS) $(MLXFLAGS) -g -o $(NAME)
 
-bonus: $(SRCS_B)
-		make -C ./minilibx-linux all
-		make -C ./libft all
-		cc $(CFLAGS) -g $(SRCS_B) $(LIBFT) $(LDFLAGS) $(MLXFLAGS) -o $(NAME)_bonus
+# Add a phony target for bonus and make the actual compilation depend on the binary
+bonus: $(NAME_BONUS)
+
+# Create a separate rule for the bonus binary that depends on the object files
+$(NAME_BONUS): $(OBJS_B)
+	make -C ./minilibx-linux all
+	make -C ./libft all
+	cc $(CFLAGS) $(OBJS_B) $(LIBFT) $(LDFLAGS) $(MLXFLAGS) -g -o $(NAME_BONUS)
+
+%.o: %.c
+	cc $(CFLAGS) -c $^ -I./ -o $@
 
 clean:
-		@echo "오브젝트 파일은 존재하지 않습니다."
+	rm -rf $(OBJS) $(OBJS_B)
+	make -C ./libft clean
 
 fclean: clean
-		make -C ./libft fclean
-		rm -rf $(NAME) $(NAME)_bonus
+	make -C ./libft fclean
+	rm -rf $(NAME) $(NAME_BONUS)
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re
+.PHONY: all clean fclean re bonus
