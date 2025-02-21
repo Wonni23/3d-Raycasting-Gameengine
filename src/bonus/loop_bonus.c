@@ -25,7 +25,6 @@ int	ft_click(int button, int x, int y, void *param)
 	t_cub	*cub;
 
 	cub = (t_cub *)param;
-	printf("Mouse button %d clicked at (%d, %d)\n", button, x, y);
 	if (button == 1)
 	{
 		cub->anim_on = 1;
@@ -120,7 +119,6 @@ void	interact_door(t_cub *cub)
 
 int	keypress_hook(int key_code, t_cub *cub)
 {
-	printf("%d\n", key_code);
 	if (key_code == KEY_W)
 		move_w(cub);
 	else if (key_code == KEY_A)
