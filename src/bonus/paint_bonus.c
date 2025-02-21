@@ -110,6 +110,8 @@ void	paint_sprite(t_cub *cub, int idx)
 	int	pixel;
 
 	y = 0;
+	if (idx > 4)
+		return ;
 	while (y < cub->img.spsize)
 	{
 		x = 0;

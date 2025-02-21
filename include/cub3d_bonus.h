@@ -23,6 +23,7 @@
 # define Y 0xF7E600
 # define RD 0x760c0c
 
+# define FPS 8333
 # define X_EVENT_MOUSE_MOVE 6
 # define KEY_E 101
 
@@ -33,13 +34,19 @@ void	init_status(t_cub *cub);
 void	paint_minimap(t_cub *cub);
 void	load_door(t_cub *cub);
 
-int		ft_mouse(int x, int y, t_cub *cub);
+int		collide_door(t_cub *cub, double x, double y);
+void	door_coordination(t_cub *cub, int *map_x, int *map_y, int res);
+void	interact_door(t_cub *cub);
 
+int		ft_mouse(int x, int y, t_cub *cub);
 int		ft_click(int button, int x, int y, void *param);
 
 int		init_sprite(t_cub *cub);
 void	load_sprite_image(t_cub *cub);
-
 void	paint_sprite(t_cub *cub, int idx);
+
+int		sprite(t_cub *cub);
+
+long long	get_current_time_micro(void);
 
 #endif

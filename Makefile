@@ -14,6 +14,7 @@ SRCS =	main.c \
 		src/rendering/rotation.c \
 		src/rendering/loop.c \
 		src/rendering/raycasting.c \
+		src/rendering/raycasting_setup.c \
 		src/rendering/paint.c \
 		src/utils/initialization.c \
 		src/utils/utils.c
@@ -28,13 +29,17 @@ SRCS_B = src/bonus/main_bonus.c \
 		src/rendering/movement.c \
 		src/rendering/rotation.c \
 		src/utils/initialization.c \
-		src/bonus/loop_bonus.c \
-		src/bonus/paint_bonus.c \
-		src/bonus/raycasting_bonus.c \
 		src/bonus/check_map_bonus.c \
+		src/bonus/door_bonus.c \
+		src/bonus/loop_bonus.c \
+		src/bonus/mouse_bonus.c \
+		src/bonus/paint_bonus.c \
 		src/bonus/parse_imgs_bonus.c \
 		src/bonus/parse_main_bonus.c \
-		src/bonus/initialization_bonus.c \
+		src/bonus/parse_sprite_bonus.c \
+		src/bonus/raycasting_bonus.c \
+		src/bonus/raycasting_main_bonus.c \
+		src/bonus/raycasting_setup_bonus.c \
 		src/bonus/utils_bonus.c
 
 CFLAGS = -Wall -Werror -Wextra

@@ -19,12 +19,25 @@ void	err_exit(char *msg)
 	exit(1);
 }
 
+void	init_status(t_cub *cub)
+{
+	ft_bzero(cub, sizeof(*cub));
+}
+
+long long	get_current_time_micro(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return ((long long)tv.tv_sec * 1000000LL + tv.tv_usec);
+}
+
 void	clean_int_array(int **arr, int idx)
 {
 	int	i;
 
 	i = 0;
-	while(i < idx)
+	while (i < idx)
 	{
 		free(arr[i]);
 		i++;
