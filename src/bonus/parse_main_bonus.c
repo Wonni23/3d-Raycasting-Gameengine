@@ -72,8 +72,8 @@ char	**parse_main(t_cub *cub, char *name)
 	parse.file = NULL;
 	parse.path_to_img = NULL;
 	parse.num_vars = -1;
-	if (ft_strncmp(ft_strrchr(name, '.'), ".cub", 5))
-		exit_parse(cub, 1, "The argument must end with .cub", &parse);
+	if (ft_strcmp(ft_strrchr(name, '.'), ".cub"))
+		exit_parse(NULL, 1, "The argument must end with .cub", &parse);
 	fd = open_file(cub, name, &parse);
 	parse.file = read_file(NULL, fd, 0);
 	close(fd);

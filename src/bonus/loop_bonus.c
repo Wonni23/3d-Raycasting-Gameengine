@@ -24,6 +24,8 @@ int	ft_click(int button, int x, int y, void *param)
 {
 	t_cub	*cub;
 
+	(void)x;
+	(void)y;
 	cub = (t_cub *)param;
 	if (button == 1)
 	{

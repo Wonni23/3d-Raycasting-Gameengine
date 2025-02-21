@@ -12,18 +12,6 @@
 
 #include "../../include/cub3d.h"
 
-static int	valid_line(char *s)
-{
-	int	i;
-
-	if (ft_strlen(s) < 2)
-		return (1);
-	i = -1;
-	while (s[++i] && s[i] != '\n')
-		if (s[i] > 8 && s[i] < 14)
-			return (0);
-	return (1);
-}
 
 static int	counting_lines(t_parse *parse, int y)
 {
@@ -32,8 +20,6 @@ static int	counting_lines(t_parse *parse, int y)
 	count_lines = 0;
 	while (parse->file[y])
 	{
-		if (!valid_line(parse->file[y]))
-			return (-1);
 		count_lines++;
 		y++;
 	}
@@ -52,8 +38,6 @@ static void	get_map(t_cub *cub, t_parse *parse, int y)
 		y++;
 	}
 	num_lines = counting_lines(parse, y);
-	if (num_lines == -1)
-		exit_parse(cub, 1, "Invalid map", parse);
 	cub->map.map = ft_calloc(num_lines + 1, sizeof(char *));
 	if (!cub->map.map)
 		exit_parse(cub, 1, "malloc with map", parse);
