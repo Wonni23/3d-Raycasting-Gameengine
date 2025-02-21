@@ -29,14 +29,14 @@ int	keypress_hook(int key_code, t_cub *cub)
 	else if (key_code == KEY_ESC)
 	{
 		printf("Exiting cub3D.\n");
-		free_matrix((void ***)&cub->map.map);
-		//memory_clean_exit
+		// memory_clean_exit //add
 		exit(0);
 	}
+	loop(cub);
 	return (0);
 }
 
-int	loop(int key_code, t_cub *cub)
+int	loop(t_cub *cub)
 {
 	if (cub->img.img)
 	{
@@ -46,25 +46,18 @@ int	loop(int key_code, t_cub *cub)
 	cub->img.img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	cub->img.data = (int *)mlx_get_data_addr(cub->img.img, &cub->img.bpp,
 								&cub->img.line_size, &cub->img.endian);
-	keypress_hook(key_code, cub);
 	paint_background(cub);
 	raycasting(cub);
-	paint_img(cub);
+	buffer_to_img_n_window(cub);
 	return (0);
 }
 
 void	boot(t_cub *cub)
 {
-	//if (cub->img.img)
-	//{
-	//	mlx_destroy_image(cub->mlx, cub->img.img);
-	//	cub->img.img = NULL;
-	//}
 	cub->img.img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	cub->img.data = (int *)mlx_get_data_addr(cub->img.img, &cub->img.bpp,
 								&cub->img.line_size, &cub->img.endian);
 	paint_background(cub);
 	raycasting(cub);
-	//paint_minimap(cub);
-	paint_img(cub);
+	buffer_to_img_n_window(cub);
 }

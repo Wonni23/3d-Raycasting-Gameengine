@@ -76,8 +76,6 @@ void	perform_dda(t_ray *ray, char **map)
 		}
 		if (map[ray->map_y][ray->map_x] == '1')
 			ray->hit = 1;
-		//else if (map[ray->map_y][ray->map_x] == '2')
-		//	ray->hit = 2;
 	}
 	if (ray->side == WALL_X)
 		ray->perp_wall_dist = ray->side_dist_x - ray->delta_dist_x;
@@ -128,8 +126,6 @@ void	set_buffer(t_cub *cub, t_ray *ray, t_texturing *tex, int x)
 	while (y < tex->draw_end)
 	{
 		tex->tex_y = (int)tex->tex_pos & (TEX_HEIGHT - 1);
-		//if (ray->hit == 2)
-		//	color = cub->img.door[TEX_HEIGHT * tex->tex_y + tex->tex_x];
 		if (ray->side == WALL_X)
 		{
 			if (ray->ray_dir_x >= 0)

@@ -14,18 +14,18 @@
 
 void    check_including_letter(t_parse *parse, char *s)
 {
-    int i;
+	int i;
 
-    i = -1;
-    if (s[0] == ',')
-        exit_parse(NULL, 1, \
+	i = -1;
+	if (s[0] == ',')
+		exit_parse(NULL, 1, \
 			"C or F must have 3 intergers separeted by a coma", parse);
-    while (s[++i])
-    {
-        if (!ft_isdigit(s[i]) && s[i] != ',' && !(s[i] > 8 && s[i] < 14))
-            exit_parse(NULL, 1, \
+	while (s[++i])
+	{
+		if (!ft_isdigit(s[i]) && s[i] != ',' && !(s[i] > 8 && s[i] < 14))
+			exit_parse(NULL, 1, \
 			"C or F must not contain any characters", parse);
-    }
+	}
 }
 
 void	check_image_order(t_parse *parse, char *s)

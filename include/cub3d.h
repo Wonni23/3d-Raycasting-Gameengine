@@ -178,8 +178,9 @@ typedef struct s_cub {
 }	t_cub;
 
 /* initializing */
-void	initialization(t_cub *cub);
 void	init_mlx(t_cub *cub);
+void	init_player(t_player *player);
+void	init_player_2(t_player *player);
 
 /* Mlx related */
 int		keypress_hook(int key_code, t_cub *cub);
@@ -203,7 +204,7 @@ void	rotate_right(t_cub *cub);
 
 /* Painting */
 void	paint_background(t_cub *cub);
-void	paint_img(t_cub *cub);
+void	buffer_to_img_n_window(t_cub *cub);
 
 /* Utils */
 void	err_exit(char *msg);
@@ -232,7 +233,7 @@ void	paint_minimap(t_cub *cub);
 void	load_door(t_cub *cub);
 int		ft_mouse(int x, int y, t_cub *cub);
 
-int	ft_click(int button, int x, int y, void *param);
+int		ft_click(int button, int x, int y, void *param);
 
 int		init_sprite(t_img *img);
 void	load_sprite_image(t_cub *cub);

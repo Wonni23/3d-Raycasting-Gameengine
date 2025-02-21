@@ -35,16 +35,6 @@ void	move_w(t_cub *cub)
 	mv_pos_y = cub->player.pos_y + cub->player.dir_y * MVSPEED;
 	if (!collide_wall(cub, mv_pos_x, mv_pos_y))
 	{
-		//if ((int)mv_pos_y != (int)cub->player.pos_y || (int)mv_pos_x != (int)cub->player.pos_x)
-		//{
-		//	if (cub->map.map[(int)mv_pos_y][(int)mv_pos_x] != '2' && cub->map.map[(int)mv_pos_y][(int)mv_pos_x] != '3')
-		//	{
-		//		if (cub->map.map[(int)cub->player.pos_y][(int)cub->player.pos_x] != '2' && 
-		//			cub->map.map[(int)cub->player.pos_y][(int)cub->player.pos_x] != '3') 
-		//		cub->map.map[(int)mv_pos_y][(int)mv_pos_x] = cub->map.map[(int)cub->player.pos_y][(int)cub->player.pos_x];
-		//		cub->map.map[(int)cub->player.pos_y][(int)cub->player.pos_x] = '0';
-		//	}
-		//}
 		cub->player.pos_x = mv_pos_x;
 		cub->player.pos_y = mv_pos_y;
 	}

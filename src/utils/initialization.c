@@ -34,7 +34,13 @@ void	init_player(t_player *player)
 		player->plane_x = 0;
 		player->plane_y = 0.66;
 	}
-	else if (player->status == 'S')
+	else 
+		init_player_2(player);
+}
+
+void	init_player_2(t_player *player)
+{
+	if (player->status == 'S')
 	{
 		player->dir_x = 0; 
 		player->dir_y = 1;
@@ -48,12 +54,4 @@ void	init_player(t_player *player)
 		player->plane_x = 0;
 		player->plane_y = -0.66;
 	}
-}
-
-void	initialization(t_cub *cub)
-{
-	init_player(&cub->player);
-	//cub->img.img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
-	//cub->img.data = (int *)mlx_get_data_addr(cub->img.img, &cub->img.bpp,
-	//							&cub->img.line_size, &cub->img.endian);
 }

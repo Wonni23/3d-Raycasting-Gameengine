@@ -38,19 +38,6 @@ void	ft_exit(t_cub *cub, char **path, int status)
 	}
 }
 
-/*void	free_matrix(void **matrix)
-{
-	int	i;
-
-	i = -1;
-	if (!matrix)
-		return ;
-	while (matrix[++i])
-		free(matrix[i]);
-	free(matrix);
-	matrix = NULL;
-}*/
-
 void	free_matrix(void ***matrix)
 {
 	int	i;

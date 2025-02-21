@@ -35,7 +35,7 @@ void	paint_background(t_cub *cub)
 	}	
 }
 
-void	paint_img(t_cub *cub)
+void	buffer_to_img_n_window(t_cub *cub)
 {
 	int	y;
 	int	x;

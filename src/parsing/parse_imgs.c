@@ -85,7 +85,6 @@ void	load_image(t_cub *cub, char **path_to_image)
 		mlx_destroy_image(cub->mlx, cub->img.img);
 		i++;
 	}
-	// load_door(cub); //manda
 }
 
 void	fill_door_arr_pixel(t_cub *cub)

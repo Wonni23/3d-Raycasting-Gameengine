@@ -24,7 +24,6 @@ SRCS_B = src/bonus/main_bonus.c \
 		src/parsing/check_elements.c \
 		src/parsing/exit_parse.c \
 		src/parsing/parse_file.c \
-		src/parsing/parse_main.c \
 		src/parsing/parse_vars.c \
 		src/rendering/movement.c \
 		src/rendering/rotation.c \
@@ -34,7 +33,8 @@ SRCS_B = src/bonus/main_bonus.c \
 		src/bonus/paint_bonus.c \
 		src/bonus/raycasting_bonus.c \
 		src/bonus/check_map_bonus.c \
-		src/bonus/parse_imgs_bonus.c
+		src/bonus/parse_imgs_bonus.c \
+		src/bonus/parse_main_bonus.c
 
 OBJS = $(SRCS:.c=.o)
 OBJS_B = $(SRCS_B:.c=.o)

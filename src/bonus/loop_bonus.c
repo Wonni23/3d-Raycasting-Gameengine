@@ -16,7 +16,7 @@ long long get_current_time_micro(void)
 {
 	struct timeval tv;
 	gettimeofday(&tv, NULL);
-	return ((long long)tv.tv_sec * 1000000LL + tv.tv_usec);
+	return ( (long long)tv.tv_sec * 1000000LL + tv.tv_usec );
 }
 
 int	ft_click(int button, int x, int y, void *param)
@@ -166,17 +166,12 @@ int	loop(t_cub *cub)
 		paint_sprite(cub, cub->anim_frame);
 	else
 		paint_sprite(cub, 0);
-	paint_img(cub);
+	buffer_to_img_n_window(cub);
 	return (0);
 }
 
 void	boot(t_cub *cub)
 {
-	//if (cub->img.img != NULL)
-	//{
-	//	mlx_destroy_image(cub->mlx, cub->img.img);
-	//	cub->img.img = NULL;
-	//}
 	cub->img.img = mlx_new_image(cub->mlx, WIDTH, HEIGHT);
 	cub->img.data = (int *)mlx_get_data_addr(cub->img.img, &cub->img.bpp,
 								&cub->img.line_size, &cub->img.endian);
@@ -184,5 +179,5 @@ void	boot(t_cub *cub)
 	raycasting(cub);
 	paint_minimap(cub);
 	paint_sprite(cub, 0);
-	paint_img(cub);
+	buffer_to_img_n_window(cub);
 }
