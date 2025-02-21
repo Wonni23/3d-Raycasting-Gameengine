@@ -113,6 +113,8 @@ typedef struct s_img
 	int			h;
 	int			buffer[HEIGHT][WIDTH];
 	int			**walls;
+	int			*door;
+	int			**sprites;
 	int			color_i;
 	int			colors[2];
 }	t_img;

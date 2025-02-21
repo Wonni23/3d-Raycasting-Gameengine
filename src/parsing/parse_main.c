@@ -81,7 +81,8 @@ char	**parse_main(t_cub *cub, char *name)
 	parse_file(cub, &parse);
 	path = parse.path_to_img;
 	parse.path_to_img = NULL;
-	free_parse(&parse);
+	if (parse.file)
+		free_matrix((void ***)&parse.file);
 	return (path);
 }
 
@@ -95,4 +96,5 @@ void	parse(t_cub *cub, char *name)
 	init_mlx(cub);
 	init_image(&cub->img);
 	load_image(cub, path);
+	free_matrix((void ***)&path);
 }

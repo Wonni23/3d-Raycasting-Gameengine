@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d_bonus.h"
+#include "../../include/cub3d.h"
 
 int	init_image(t_img *img)
 {
