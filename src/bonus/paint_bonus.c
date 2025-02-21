@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../include/cub3d_bonus.h"
 
 void	paint_background(t_cub *cub)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../../include/cub3d_bonus.h"
 
 long long	get_current_time_micro(void)
 {
@@ -138,6 +138,7 @@ int	keypress_hook(int key_code, t_cub *cub)
 	else if (key_code == KEY_ESC)
 	{
 		printf("Exiting cub3D.\n");
+		memory_clean_exit(cub);
 		exit(0);
 	}
 	loop(cub);

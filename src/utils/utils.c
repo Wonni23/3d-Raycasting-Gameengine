@@ -19,13 +19,13 @@ void	err_exit(char *msg)
 	exit(1);
 }
 
-void	memory_clean_exit(t_cub *cub)
+int	memory_clean_exit(t_cub *cub)
 {
 	if (cub->img.sprites)
 		free_matrix((void ***)&cub->img.sprites);
 	if (cub->img.door)
-		free_matrix((void ***)&cub->img.door);
-	free_matrix((void ***)&cub->img.data);
+		free(cub->img.door);
+	free(cub->img.data);
 	free_matrix((void ***)&cub->img.walls);
 	free_matrix((void ***)&cub->map.map);
 	mlx_clear_window(cub->mlx, cub->win);
@@ -34,4 +34,5 @@ void	memory_clean_exit(t_cub *cub)
 	mlx_destroy_display(cub->mlx);
 	free(cub->mlx);
 	exit(0);
+	return (1);
 }

@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # include <stdlib.h>
 # include <fcntl.h>
@@ -62,6 +62,21 @@
 # define MVSPEED 0.2
 # define RTSPEED_R 0.05
 # define RTSPEED_L -0.05
+
+# define SC 1
+# define SZ 8
+# define K 0x000000
+# define WT 0xffffff
+# define B 0x005666
+# define Y 0xF7E600
+# define RD 0x760c0c
+
+# define X_EVENT_MOUSE_MOVE 6
+# define KEY_E 101
+
+# define SPSIZE (WIDTH / 3)
+# define SP_X (WIDTH - SPSIZE * 1.2)
+# define SP_Y (HEIGHT - SPSIZE)
 
 /* SC: Scale, SZ: tilesize, K ~ RD: color */
 
@@ -205,5 +220,18 @@ void	exit_parse(t_cub *cub, int status, char *str, t_parse *parse);
 void	ft_exit(t_cub *cub, char **path, int status);
 int		init_image(t_img *img);
 void	load_image(t_cub *cub, char **path_to_image);
+
+/* Bonus */
+void	paint_minimap(t_cub *cub);
+void	load_door(t_cub *cub);
+
+int		ft_mouse(int x, int y, t_cub *cub);
+
+int		ft_click(int button, int x, int y, void *param);
+
+int		init_sprite(t_img *img);
+void	load_sprite_image(t_cub *cub);
+
+void	paint_sprite(t_cub *cub, int idx);
 
 #endif
