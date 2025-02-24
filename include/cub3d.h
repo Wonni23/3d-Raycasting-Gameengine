@@ -44,8 +44,8 @@
 # define W 2
 # define E 3
 
-# define WALL_X 6
-# define WALL_Y 9
+# define WALL_X 5
+# define WALL_Y 6
 
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
@@ -137,16 +137,13 @@ typedef struct s_map
 	char		**map;
 	int			map_width;
 	int			map_height;
-
+	int			num_player;
 }	t_map;
 
-typedef struct s_cub {
-	void		*mlx;
-	void		*win;
-	int			num_player;
+typedef struct s_bonus
+{
 	int			mouse_x;
 	int			mouse_y;
-	int			move_on;
 	int			anim_on;
 	int			anim_frame;
 	long long	anim_lasttime;
@@ -154,9 +151,16 @@ typedef struct s_cub {
 	long long	start_time;
 	long long	end_time;
 	long long	frame_time;
+}	t_bonus;
+
+typedef struct s_cub
+{
+	void		*mlx;
+	void		*win;
 	t_img		img;
 	t_player	player;
 	t_map		map;
+	t_bonus		b;
 }	t_cub;
 
 /* initializing */

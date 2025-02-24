@@ -21,9 +21,9 @@ int	ft_click(int button, int x, int y, void *param)
 	cub = (t_cub *)param;
 	if (button == 1)
 	{
-		cub->anim_on = 1;
-		cub->anim_frame = 1;
-		cub->anim_lasttime = get_current_time_micro();
+		cub->b.anim_on = 1;
+		cub->b.anim_frame = 1;
+		cub->b.anim_lasttime = get_current_time_micro();
 	}
 	return (0);
 }

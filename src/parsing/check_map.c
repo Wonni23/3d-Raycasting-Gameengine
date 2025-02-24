@@ -37,7 +37,7 @@ static int	check_invalid_char(t_cub *cub)
 
 	y = -1;
 	x = 0;
-	cub->num_player = 0;
+	cub->map.num_player = 0;
 	while (cub->map.map[++y])
 	{
 		x = -1;
@@ -47,8 +47,8 @@ static int	check_invalid_char(t_cub *cub)
 				return (1);
 			if (orientation_player(cub->map.map[y][x]))
 			{
-				cub->num_player++;
-				if (cub->num_player != 1)
+				cub->map.num_player++;
+				if (cub->map.num_player != 1)
 					return (1);
 				set_player(cub, x, y);
 			}
@@ -67,7 +67,7 @@ void	check_map(t_cub *c, char **path)
 		printf("The map must valid chars and one player position\n");
 		ft_exit(c, path, 0);
 	}
-	if (c->num_player == 0)
+	if (c->map.num_player == 0)
 	{
 		printf("The player must exist\n");
 		ft_exit(c, path, 0);

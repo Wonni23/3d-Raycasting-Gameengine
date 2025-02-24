@@ -39,28 +39,28 @@ int	keypress_hook(int key_code, t_cub *cub)
 
 int	sprite(t_cub *cub)
 {
-	if (cub->anim_on)
+	if (cub->b.anim_on)
 	{
-		cub->curr_time = get_current_time_micro();
-		if (cub->curr_time - cub->anim_lasttime >= 50000)
+		cub->b.curr_time = get_current_time_micro();
+		if (cub->b.curr_time - cub->b.anim_lasttime >= 50000)
 		{
-			cub->anim_frame++;
-			cub->anim_lasttime = cub->curr_time;
-			if (cub->anim_frame >= 5)
+			cub->b.anim_frame++;
+			cub->b.anim_lasttime = cub->b.curr_time;
+			if (cub->b.anim_frame >= 5)
 			{
-				cub->anim_on = 0;
-				cub->anim_frame = 0;
+				cub->b.anim_on = 0;
+				cub->b.anim_frame = 0;
 			}
 		}
 		loop(cub);
 	}
 	else
 	{
-		cub->start_time = get_current_time_micro();
-		cub->end_time = get_current_time_micro();
-		cub->frame_time = cub->end_time - cub->start_time;
-		if (cub->frame_time < FPS)
-			usleep(FPS - cub->frame_time);
+		cub->b.start_time = get_current_time_micro();
+		cub->b.end_time = get_current_time_micro();
+		cub->b.frame_time = cub->b.end_time - cub->b.start_time;
+		if (cub->b.frame_time < FPS)
+			usleep(FPS - cub->b.frame_time);
 	}
 	return (0);
 }
@@ -70,7 +70,7 @@ int	loop(t_cub *cub)
 	paint_background(cub);
 	raycasting(cub);
 	paint_minimap(cub);
-	paint_sprite(cub, cub->anim_frame);
+	paint_sprite(cub, cub->b.anim_frame);
 	buffer_to_img_n_window(cub);
 	return (0);
 }
