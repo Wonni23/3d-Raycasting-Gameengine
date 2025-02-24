@@ -177,7 +177,7 @@ int		loop(t_cub *cub);
 
 /* Ray Casting */
 void	init_ray(t_cub *cub, t_ray *ray, int x);
-void	setup_dda(t_cub *cub, t_ray *ray);
+void	setup_dda(t_cub *cub, t_ray *ray, int x);
 void	perform_dda(t_ray *ray, char **map);
 void	calculate_line_height(t_ray *ray, t_texturing *tex);
 void	calculate_texture_coords(t_cub *cub, t_ray *ray, t_texturing *tex);

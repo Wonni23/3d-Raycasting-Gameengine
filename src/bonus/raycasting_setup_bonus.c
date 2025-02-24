@@ -23,7 +23,24 @@ void	init_ray(t_cub *cub, t_ray *ray, int x)
 	ray->map_y = (int)cub->player.pos_y;
 }
 
-void	setup_dda_divbyzero_handle(t_ray *ray)
+/*	delta_dist_x = sqrt(1 + (ray_dir_y * ray_dir_y) / (ray_dir_x * ray_dir_x))
+	delta_dist_y = sqrt(1 + (ray_dir_x * ray_dir_x) / (ray_dir_y * ray_dir_y))
+
+	But this can be simplified to:
+	delta_dist_x = abs(|v| / ray_dir_x)
+	delta_dist_y = abs(|v| / ray_dir_y)
+
+	Where |v| is the length of the vector ray_dir_x, ray_dir_y
+	(that is sqrt(ray_dir_x * ray_dir_x + ray_dir_y * ray_dir_y)).
+	
+	However, we can use 1 instead of |v|, 
+	because only the *ratio* between them matters (not the actual distance)
+	so we get:
+
+	delta_dist_x = abs(1 / ray_dir_x)
+	delta_dist_y = abs(1 / ray_dir_y)	*/
+
+void	setup_dda_deltadist(t_ray *ray)
 {
 	if (ray->ray_dir_x == 0)
 		ray->delta_dist_x = 1e30;
@@ -35,9 +52,14 @@ void	setup_dda_divbyzero_handle(t_ray *ray)
 		ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
 }
 
-void	setup_dda(t_cub *cub, t_ray *ray)
+/*	Using similarity between right triangles to get side_dist_x
+	so we get:
+
+	side_dist_x : delta_dist_x = (map + 1) - pos_x : 1
+	side_dise_t = delta_dist_x(map + 1 - pos_x) */
+
+void	setup_dda_step_n_sidedist(t_cub *cub, t_ray *ray)
 {
-	setup_dda_divbyzero_handle(ray);
 	if (ray->ray_dir_x < 0)
 	{
 		ray->step_x = -1;
@@ -60,4 +82,11 @@ void	setup_dda(t_cub *cub, t_ray *ray)
 		ray->side_dist_y = (ray->map_y + 1.0 - cub->player.pos_y) \
 		* ray->delta_dist_y;
 	}
+}
+
+void	setup_dda(t_cub *cub, t_ray *ray, int x)
+{
+	init_ray(cub, ray, x);
+	setup_dda_deltadist(ray);
+	setup_dda_step_n_sidedist(cub, ray);
 }

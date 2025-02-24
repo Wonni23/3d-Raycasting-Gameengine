@@ -110,8 +110,7 @@ void	raycasting(t_cub *cub)
 	x = 0;
 	while (x < WIDTH)
 	{
-		init_ray(cub, &ray, x);
-		setup_dda(cub, &ray);
+		setup_dda(cub, &ray, x);
 		perform_dda(&ray, cub->map.map);
 		calculate_line_height(&ray, &tex);
 		calculate_texture_coords(cub, &ray, &tex);
