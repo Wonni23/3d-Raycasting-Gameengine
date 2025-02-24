@@ -68,7 +68,8 @@ void	free_parse(t_parse *parse)
 
 void	exit_parse(t_cub *cub, int status, char *str, t_parse *parse)
 {
-	free_parse(parse);
+	if (parse)
+		free_parse(parse);
 	if (status)
 		printf("Error: %s\n", str);
 	else

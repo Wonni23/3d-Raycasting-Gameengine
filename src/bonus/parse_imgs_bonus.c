@@ -117,7 +117,7 @@ void	load_door(t_cub *cub)
 			&cub->img.w, &cub->img.h);
 	if (cub->img.w != TEX_WIDTH || cub->img.h != TEX_HEIGHT
 		|| cub->img.img == NULL)
-		exit_parse(cub, 1, "image_load xpm file error", NULL);
+		exit_parse(cub, 1, "door xpm file error", NULL);
 	cub->img.data = (int *)mlx_get_data_addr(cub->img.img, \
 			&cub->img.bpp, &cub->img.line_size, &cub->img.endian);
 	fill_door_arr_pixel(cub);
