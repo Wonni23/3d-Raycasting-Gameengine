@@ -12,6 +12,24 @@
 
 #include "../../include/cub3d.h"
 
+/*
+	perpendicular_wall_distance logic:
+
+	(map_x - pos_x + offset:(1 - step_x) / 2 / ray_dir_x
+
+	this computes the initial “hypotenuse” distance along the ray
+	from the player's position to the first vertical grid boundary (wall).
+
+	But actually, the same value initializes side_dist_x.
+
+	(map_x - pos_x + offset:(1 - step_x) / 2 / ray_dir_x = side_dist_x * delta_x
+
+	In the DDA loop, we add deltaDistX at each step as the ray traverses the grid.
+	When a wall is hit, sideDistX has advanced one extra step,
+	so subtracting deltaDistX recovers the exact distance
+	from the player to the wall along the ray's path.
+*/
+
 void	perform_dda(t_ray *ray, char **map)
 {
 	ray->hit = 0;
@@ -64,9 +82,9 @@ void	calculate_texture_coords(t_cub *cub, t_ray *ray, t_texturing *tex)
 	tex->wall_x -= floor(tex->wall_x);
 	tex->tex_x = (int)(tex->wall_x * (double)TEX_WIDTH);
 	if (ray->side == WALL_X && ray->ray_dir_x < 0)
-		tex->tex_x = TEX_WIDTH - tex->tex_x - 1;
+		tex->tex_x = (TEX_WIDTH - 1) - tex->tex_x;
 	if (ray->side == WALL_Y && ray->ray_dir_y > 0)
-		tex->tex_x = TEX_WIDTH - tex->tex_x - 1;
+		tex->tex_x = (TEX_WIDTH - 1) - tex->tex_x;
 	tex->step = 1.0 * TEX_HEIGHT / tex->line_height;
 	tex->tex_pos = (tex->draw_start - HEIGHT / 2 \
 		+ tex->line_height / 2) * tex->step;

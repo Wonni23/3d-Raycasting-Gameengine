@@ -23,7 +23,8 @@ void	init_ray(t_cub *cub, t_ray *ray, int x)
 	ray->map_y = (int)cub->player.pos_y;
 }
 
-/*	delta_dist_x = sqrt(1 + (ray_dir_y * ray_dir_y) / (ray_dir_x * ray_dir_x))
+/*
+	delta_dist_x = sqrt(1 + (ray_dir_y * ray_dir_y) / (ray_dir_x * ray_dir_x))
 	delta_dist_y = sqrt(1 + (ray_dir_x * ray_dir_x) / (ray_dir_y * ray_dir_y))
 
 	But this can be simplified to:
@@ -38,7 +39,8 @@ void	init_ray(t_cub *cub, t_ray *ray, int x)
 	so we get:
 
 	delta_dist_x = abs(1 / ray_dir_x)
-	delta_dist_y = abs(1 / ray_dir_y)	*/
+	delta_dist_y = abs(1 / ray_dir_y)
+*/
 
 void	setup_dda_deltadist(t_ray *ray)
 {
@@ -52,11 +54,13 @@ void	setup_dda_deltadist(t_ray *ray)
 		ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
 }
 
-/*	Using similarity between right triangles to get side_dist_x
+/*
+	Using similarity between right triangles to get side_dist_x
 	so we get:
 
 	side_dist_x : delta_dist_x = (map + 1) - pos_x : 1
-	side_dise_t = delta_dist_x(map + 1 - pos_x) */
+	side_dist_x = delta_dist_x(map + 1 - pos_x)
+*/
 
 void	setup_dda_step_n_sidedist(t_cub *cub, t_ray *ray)
 {

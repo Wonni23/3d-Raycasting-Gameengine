@@ -66,9 +66,9 @@ void	calculate_texture_coords(t_cub *cub, t_ray *ray, t_texturing *tex)
 	tex->wall_x -= floor(tex->wall_x);
 	tex->tex_x = (int)(tex->wall_x * (double)TEX_WIDTH);
 	if (ray->side == WALL_X && ray->ray_dir_x < 0)
-		tex->tex_x = TEX_WIDTH - tex->tex_x - 1;
+		tex->tex_x = (TEX_WIDTH - 1) - tex->tex_x;
 	if (ray->side == WALL_Y && ray->ray_dir_y > 0)
-		tex->tex_x = TEX_WIDTH - tex->tex_x - 1;
+		tex->tex_x = (TEX_WIDTH - 1) - tex->tex_x;
 	tex->step = 1.0 * TEX_HEIGHT / tex->line_height;
 	tex->tex_pos = (tex->draw_start - HEIGHT / 2 \
 		+ tex->line_height / 2) * tex->step;

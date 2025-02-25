@@ -91,7 +91,6 @@ typedef struct s_texturing
 	int		draw_start;
 	int		draw_end;
 	int		line_height;
-	int		tex_side;
 	double	wall_x;
 	int		tex_x;
 	int		tex_y;

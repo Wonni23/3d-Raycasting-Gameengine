@@ -12,6 +12,13 @@
 
 #include "../../include/cub3d.h"
 
+/*
+	2D Rotation Matrix
+
+	[x'] = {cos(θ)	-sin(θ)}
+	[y']   {sin(θ)	 cos(θ)}
+*/
+
 void	rotate_left(t_cub *cub)
 {
 	double	old_dirx;
