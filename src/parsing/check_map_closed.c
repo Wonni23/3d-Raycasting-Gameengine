@@ -26,14 +26,14 @@ static void	check_line_change_r(t_cub *c, char **path)
 		{
 			x = ft_strlen(c->map.map[y]) - 2;
 			while (c->map.map[y - 1][x++])
-				if (c->map.map[y - 1][x] == '0' || c->map.map[y - 1][x] == ' ')
+				if (c->map.map[y - 1][x] == '0')
 					ft_exit(c, path, 1);
 		}
 		if (ft_strlen(c->map.map[y]) > ft_strlen(c->map.map[y - 1]))
 		{
 			x = ft_strlen(c->map.map[y - 1]) - 1;
 			while (c->map.map[y][x++])
-				if (c->map.map[y][x] == '0' || c->map.map[y][x] == ' ')
+				if (c->map.map[y][x] == '0')
 					ft_exit(c, path, 1);
 		}
 	}
@@ -126,7 +126,7 @@ void	check_map_closed(t_cub *cub, char **path)
 	while (cub->map.map[y][++x])
 		if (orientation_player(cub->map.map[y][x]))
 			ft_exit(cub, path, 1);
-	if (!ft_strchr(cub->map.map[y], '1'))
+	if (y == 2 && !ft_strchr(cub->map.map[y], '1'))
 		ft_exit(cub, path, 1);
 	check_first_c_last_c(cub, path);
 	check_front_back(cub, path);

@@ -43,19 +43,15 @@ void	check_spaces_between_digits(t_parse *parse, char *s)
 
 	i = -1;
 	j = 0;
-	printf("%s", s);
 	while (s[++i])
 	{
-		printf("char: %c\n", s[i]);
 		if (ft_isdigit(s[i]))
 		{
-			// i++;
 			if (s[i + 1] == ' ')
 			{
 				j = i + 1;
 				while (s[j] == ' ')
 					j++;
-				printf("new func: %c\n", s[j]);
 				if (ft_isdigit(s[j]))
 					exit_parse(NULL, 1, \
 					"Space exists between digits", parse);
