@@ -19,6 +19,7 @@ static int	fill_color(t_parse *parse, char *s)
 
 	i = -1;
 	check_including_letter(parse, s);
+	check_spaces_between_digits(parse, s);
 	rgb[++i] = ft_atoi(s);
 	if (rgb[i] > 255 || rgb[i] < 0)
 		exit_parse(NULL, 1, \
@@ -36,6 +37,7 @@ static int	fill_color(t_parse *parse, char *s)
 			exit_parse(NULL, 1, \
 			"atoi overflow only can accept between 0 and 255", parse);
 	}
+	printf("color str: %scolor after atoi: R: %d, G: %d, B: %d\n", s, rgb[0], rgb[1], rgb[2]);
 	i = 255;
 	return (i << 24 | rgb[0] << 16 | rgb[1] << 8 | rgb[2]);
 }
@@ -79,7 +81,7 @@ static int	find_args(t_cub *cub, t_parse *parse, char *s, char *compare)
 		else
 			check_image_order(parse, s);
 		if (fill_args(cub, parse, s, parse->num_vars))
-			exit_parse(cub, 1, "Error with malloc", parse);
+			exit_parse(NULL, 1, "Error with malloc", parse);
 		return (0);
 	}
 	return (1);

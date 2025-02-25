@@ -224,5 +224,6 @@ void	ft_exit(t_cub *cub, char **path, int status);
 int		init_image(t_img *img);
 void	load_image(t_cub *cub, char **path_to_image);
 int		num_vars_check(t_parse *parse);
+void	check_spaces_between_digits(t_parse *parse, char *s);
 
 #endif
