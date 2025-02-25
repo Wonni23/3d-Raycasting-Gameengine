@@ -1,7 +1,8 @@
-NO textures/wall_n.xpm
-SO textures/wall_s.xpm
-WE textures/wall_w.xpm
-EA textures/wall_e.xpm
+NO textures/north.xpm
+SO textures/south.xpm
+WE textures/west.xpm
+EA textures/east.xpm
+
 F 20,20,20
 C 200,200,200
 
