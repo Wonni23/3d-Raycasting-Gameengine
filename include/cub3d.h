@@ -67,6 +67,12 @@ typedef struct s_parse
 	char	**file;
 	char	**path_to_img;
 	int		num_vars;
+	int		has_n;
+	int		has_w;
+	int		has_e;
+	int		has_s;
+	int		has_c;
+	int		has_f;
 }	t_parse;
 
 typedef struct s_ray

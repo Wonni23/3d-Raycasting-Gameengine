@@ -48,6 +48,28 @@ void	check_image_order(t_parse *parse, char *s)
 		parse->num_vars = 3;
 }
 
+void	num_vars_check_3(int *num, int *val)
+{
+	(*num)++;
+	(*val)++;
+}
+
+void	num_vars_check_2(t_parse *parse, char *file, int *num)
+{
+	if (!ft_strncmp(file, "NO", 2))
+		num_vars_check_3(num, &parse->has_n);
+	else if (!ft_strncmp(file, "SO", 2))
+		num_vars_check_3(num, &parse->has_s);
+	else if (!ft_strncmp(file, "WE", 2))
+		num_vars_check_3(num, &parse->has_w);
+	else if (!ft_strncmp(file, "EA", 2))
+		num_vars_check_3(num, &parse->has_e);
+	else if (!ft_strncmp(file, "F", 1))
+		num_vars_check_3(num, &parse->has_f);
+	else if (!ft_strncmp(file, "C", 1))
+		num_vars_check_3(num, &parse->has_c);
+}
+
 int	num_vars_check(t_parse *parse)
 {
 	int	num;
@@ -55,17 +77,17 @@ int	num_vars_check(t_parse *parse)
 
 	i = -1;
 	num = 0;
+	parse->has_n = 0;
+	parse->has_s = 0;
+	parse->has_e = 0;
+	parse->has_w = 0;
+	parse->has_c = 0;
+	parse->has_f = 0;
 	while (parse->file[++i])
-	{
-		if (!ft_strncmp(parse->file[i], "NO", 2)
-			|| !ft_strncmp(parse->file[i], "SO", 2)
-			|| !ft_strncmp(parse->file[i], "WE", 2)
-			|| !ft_strncmp(parse->file[i], "EA", 2)
-			|| !ft_strncmp(parse->file[i], "F", 1)
-			|| !ft_strncmp(parse->file[i], "C", 1))
-			num++;
-	}
-	if (num == 6)
+		num_vars_check_2(parse, parse->file[i], &num);
+	if (num == 6 && parse->has_n == 1 && parse->has_s == 1 \
+		&& parse->has_e == 1 && parse->has_w == 1 \
+		&& parse->has_c == 1 && parse->has_f == 1)
 		return (0);
 	else
 		return (1);

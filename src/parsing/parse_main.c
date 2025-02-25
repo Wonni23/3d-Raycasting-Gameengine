@@ -77,7 +77,7 @@ char	**parse_main(t_cub *cub, char *name)
 	parse.file = read_file(NULL, fd, 0);
 	close(fd);
 	if (!parse.file)
-		exit_parse(cub, 1, "The file must not be empty", &parse);
+		exit_parse(NULL, 1, "The file must not be empty", &parse);
 	parse_file(cub, &parse);
 	path = parse.path_to_img;
 	parse.path_to_img = NULL;
