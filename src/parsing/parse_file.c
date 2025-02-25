@@ -39,7 +39,7 @@ static void	get_map(t_cub *cub, t_parse *parse, int y)
 	num_lines = counting_lines(parse, y);
 	cub->map.map = ft_calloc(num_lines + 1, sizeof(char *));
 	if (!cub->map.map)
-		exit_parse(cub, 1, "malloc with map", parse);
+		exit_parse(NULL, 1, "malloc with map", parse);
 	i = -1;
 	while (parse->file[y])
 	{
@@ -48,6 +48,18 @@ static void	get_map(t_cub *cub, t_parse *parse, int y)
 			exit_parse(cub, 1, "malloc with map", parse);
 		y++;
 	}
+}
+
+void	check_image_order(t_parse *parse, char *s)
+{
+	if (*s == 'N')
+		parse->num_vars = 0;
+	if (*s == 'S')
+		parse->num_vars = 1;
+	if (*s == 'W')
+		parse->num_vars = 2;
+	if (*s == 'E')
+		parse->num_vars = 3;
 }
 
 void	parse_file(t_cub *cub, t_parse *parse)

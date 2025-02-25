@@ -36,16 +36,32 @@ void	check_including_letter(t_parse *parse, char *s)
 			"C or F must have 3 intergers separeted by a coma", parse);
 }
 
-void	check_image_order(t_parse *parse, char *s)
+void	check_spaces_between_digits(t_parse *parse, char *s)
 {
-	if (*s == 'N')
-		parse->num_vars = 0;
-	if (*s == 'S')
-		parse->num_vars = 1;
-	if (*s == 'W')
-		parse->num_vars = 2;
-	if (*s == 'E')
-		parse->num_vars = 3;
+	int	i;
+	int	j;
+
+	i = -1;
+	j = 0;
+	printf("%s", s);
+	while (s[++i])
+	{
+		printf("char: %c\n", s[i]);
+		if (ft_isdigit(s[i]))
+		{
+			// i++;
+			if (s[i + 1] == ' ')
+			{
+				j = i + 1;
+				while (s[j] == ' ')
+					j++;
+				printf("new func: %c\n", s[j]);
+				if (ft_isdigit(s[j]))
+					exit_parse(NULL, 1, \
+					"Space exists between digits", parse);
+			}
+		}
+	}
 }
 
 void	num_vars_check_3(int *num, int *val)
