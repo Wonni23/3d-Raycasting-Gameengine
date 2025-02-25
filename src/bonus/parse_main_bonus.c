@@ -27,17 +27,10 @@ static char	**read_file(char **map, int fd, int counter)
 	return (map);
 }
 
-static int	open_file(t_cub *cub, char *name, t_parse *parse)
+static int	open_file(char *name, t_parse *parse)
 {
 	int	fd;
 
-	fd = open(name, __O_DIRECTORY);
-	if (fd != -1)
-	{
-		close(fd);
-		exit_parse(NULL, 1, \
-		"The argument passed must not be a directory", parse);
-	}
 	fd = open(name, O_RDONLY);
 	if (fd == -1)
 		exit_parse(NULL, 1, "The argument passed must exist", parse);
@@ -74,7 +67,7 @@ char	**parse_main(t_cub *cub, char *name)
 	parse.num_vars = -1;
 	if (ft_strcmp(ft_strrchr(name, '.'), ".cub"))
 		exit_parse(NULL, 1, "The argument must end with .cub", &parse);
-	fd = open_file(cub, name, &parse);
+	fd = open_file(name, &parse);
 	parse.file = read_file(NULL, fd, 0);
 	close(fd);
 	if (!parse.file)

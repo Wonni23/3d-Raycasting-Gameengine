@@ -65,15 +65,15 @@ void	load_sprite_image(t_cub *c)
 	while (++i < 5)
 	{
 		if (i == 0)
-			path = "images/sprites/1.xpm";
+			path = "textures/sprites/1.xpm";
 		else if (i == 1)
-			path = "images/sprites/2.xpm";
+			path = "textures/sprites/2.xpm";
 		else if (i == 2)
-			path = "images/sprites/3.xpm";
+			path = "textures/sprites/3.xpm";
 		else if (i == 3)
-			path = "images/sprites/4.xpm";
+			path = "textures/sprites/4.xpm";
 		else
-			path = "images/sprites/5.xpm";
+			path = "textures/sprites/5.xpm";
 		c->img.img = mlx_xpm_file_to_image(c->mlx, path, &c->img.w, &c->img.h);
 		if (c->img.w != TEX_WIDTH || c->img.h != TEX_HEIGHT
 			|| c->img.img == NULL)

@@ -111,7 +111,7 @@ void	load_door(t_cub *cub)
 {
 	char	*path;
 
-	path = "./images/door.xpm";
+	path = "./textures/door.xpm";
 	cub->img.door = (int *)malloc(sizeof(int) * TEX_WIDTH * TEX_HEIGHT);
 	cub->img.img = mlx_xpm_file_to_image(cub->mlx, path, \
 			&cub->img.w, &cub->img.h);

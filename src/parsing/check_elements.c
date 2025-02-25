@@ -68,6 +68,8 @@ void	num_vars_check_3(int *num, int *val)
 
 void	num_vars_check_2(t_parse *parse, char *file, int *num)
 {
+	while(ft_isspace(*file))
+		file++;
 	if (!ft_strncmp(file, "NO", 2))
 		num_vars_check_3(num, &parse->has_n);
 	else if (!ft_strncmp(file, "SO", 2))
