@@ -26,9 +26,9 @@ void	ft_exit(t_cub *cub, char **path, int status)
 	if (status)
 	{
 		if (status == 1)
-			printf("The map must closed by a wall\n");
+			printf("Error\nThe map must closed by a wall\n");
 		if (status == 2)
-			printf("Empty space mut not exist in the map\n");
+			printf("Error\nEmpty space mut not exist in the map\n");
 		free_matrix((void ***)&path);
 		free_matrix((void ***)&cub->map.map);
 		exit(1);
@@ -71,9 +71,9 @@ void	exit_parse(t_cub *cub, int status, char *str, t_parse *parse)
 	if (parse)
 		free_parse(parse);
 	if (status)
-		printf("Error: %s\n", str);
+		printf("Error\n%s\n", str);
 	else
-		printf("%s\n", str);
+		printf("Error\n%s\n", str);
 	if (cub)
 	{
 		if (cub->map.map)

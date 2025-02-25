@@ -54,7 +54,7 @@ static void	check_image_exist(t_cub *cub, char **path)
 		fd = open(path[i], O_RDONLY);
 		if (fd == -1)
 		{
-			printf("Error : The argument passed must exist\n");
+			printf("Error\nThe argument passed must exist\n");
 			free_matrix((void ***)&path);
 			free_matrix((void ***)&cub->map.map);
 			exit(1);

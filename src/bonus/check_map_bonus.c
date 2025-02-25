@@ -64,12 +64,12 @@ void	check_map(t_cub *c, char **path)
 
 	if (check_invalid_char(c))
 	{
-		printf("The map must valid chars and one player position\n");
+		printf("Error\nThe map must valid chars and one player position\n");
 		ft_exit(c, path, 0);
 	}
 	if (c->map.num_player == 0)
 	{
-		printf("The player must exist\n");
+		printf("Error\nThe player must exist\n");
 		ft_exit(c, path, 0);
 	}
 	y = -1;
