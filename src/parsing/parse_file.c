@@ -55,12 +55,15 @@ void	parse_file(t_cub *cub, t_parse *parse)
 	int	y;
 	int	i;
 
+	parse->path_to_img = ft_calloc(5, sizeof(char *));
+	if (!parse->path_to_img)
+		exit_parse(NULL, 1, "Error with malloc", parse);
 	y = get_vars(cub, parse);
 	i = -1;
 	while (parse->path_to_img[++i])
 		;
 	if (i != 4)
-		exit_parse(cub, 1, "must contain NO SO WE EA path to the files" \
+		exit_parse(NULL, 1, "must contain NO SO WE EA path to the files" \
 		, parse);
 	get_map(cub, parse, y);
 }

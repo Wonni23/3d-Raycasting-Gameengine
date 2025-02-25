@@ -217,5 +217,6 @@ void	exit_parse(t_cub *cub, int status, char *str, t_parse *parse);
 void	ft_exit(t_cub *cub, char **path, int status);
 int		init_image(t_img *img);
 void	load_image(t_cub *cub, char **path_to_image);
+int		num_vars_check(t_parse *parse);
 
 #endif

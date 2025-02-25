@@ -25,9 +25,9 @@ static int	fill_color(t_parse *parse, char *s)
 			"atoi overflow only can accept between 0 and 255", parse);
 	while (++i < 3)
 	{
-		while (ft_isdigit(*s))
+		while (ft_isdigit(*s) || ft_isspace(*s))
 			s++;
-		if (*s == ',' && !(ft_isdigit(*(s + 1))))
+		if (*s == ',' && !(ft_isdigit(*(s + 1))) && !(*(s + 1) == ' '))
 			exit_parse(NULL, 1, \
 			"C or F must have 3 intergers separeted by a coma", parse);
 		s++;
@@ -108,9 +108,8 @@ int	get_vars(t_cub *cub, t_parse *parse)
 	int	j;
 	int	num_vars;
 
-	parse->path_to_img = ft_calloc(5, sizeof(char *));
-	if (!parse->path_to_img)
-		exit_parse(cub, 1, "Error with malloc", parse);
+	if (num_vars_check(parse))
+		exit_parse(NULL, 1, "Identifier count error", parse);
 	num_vars = 0;
 	i = -1;
 	while (parse->file[++i] && num_vars != 6)
