@@ -78,6 +78,14 @@ void	exit_parse(t_cub *cub, int status, char *str, t_parse *parse)
 	{
 		if (cub->map.map)
 			free_matrix((void ***)&cub->map.map);
+		if (status == 88)
+		{
+			clean_int_array(cub->img.walls, 4);
+			mlx_clear_window(cub->mlx, cub->win);
+			mlx_destroy_window(cub->mlx, cub->win);
+			mlx_destroy_display(cub->mlx);
+			free(cub->mlx);
+		}
 	}
 	exit(status);
 }

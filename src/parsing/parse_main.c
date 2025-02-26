@@ -30,6 +30,9 @@ static int	open_file(char *name, t_parse *parse)
 {
 	int	fd;
 
+	fd = open(name, __O_DIRECTORY);
+	if (fd != -1)
+		exit_parse(NULL, 1, "Argument is a directory", parse);
 	fd = open(name, O_RDONLY);
 	if (fd == -1)
 		exit_parse(NULL, 1, "Open failed", parse);

@@ -14,31 +14,37 @@
 
 static void	check_last_line_space(t_cub *cub, char **path)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	char	*s;
 
 	y = 0;
 	while (cub->map.map[y])
 		y++;
 	y--;
+	s = ft_strtrim(cub->map.map[y], " \n\t");
 	x = -1;
-	while (cub->map.map[y][++x])
+	while (s[++x])
 	{
-		if (ft_isspace(cub->map.map[y][x]) && cub->map.map[y - 1][x] == '0')
+		if (ft_isspace(s[x]) && cub->map.map[y - 1][x] == '0')
 			ft_exit(cub, path, 2);
 	}
+	free_array(s);
 }
 
 static void	check_first_line_space(t_cub *cub, char **path)
 {
-	int	x;
+	int		x;
+	char	*s;
 
 	x = -1;
-	while (cub->map.map[0][++x])
+	s = ft_strtrim(cub->map.map[0], " \n\t");
+	while (s[++x])
 	{
-		if (ft_isspace(cub->map.map[0][x]) && cub->map.map[1][x] == '0')
+		if (ft_isspace(s[x]) && cub->map.map[1][x] == '0')
 			ft_exit(cub, path, 2);
 	}
+	free_array(s);
 }
 
 static void	check_player_around_space(t_cub *cub, char **path)
@@ -54,10 +60,12 @@ static void	check_player_around_space(t_cub *cub, char **path)
 		while (cub->map.map[y][++x])
 		{
 			if (orientation_player(cub->map.map[y][x]) && \
-			(ft_isspace(cub->map.map[y + 1][x])
-			|| ft_isspace(cub->map.map[y - 1][x])
-			|| ft_isspace(cub->map.map[y][x + 1])
+			(ft_isspace(cub->map.map[y][x + 1])
 			|| ft_isspace(cub->map.map[y][x - 1])))
+				ft_exit(cub, path, 2);
+			if (orientation_player(cub->map.map[y][x]) && \
+			(cub->map.map[y + 1][x] == '\n'
+			|| cub->map.map[y + 1][x] == 0))
 				ft_exit(cub, path, 2);
 		}
 		y++;
@@ -82,8 +90,7 @@ void	check_map_empty(t_cub *cub, char **path)
 		x = 0;
 		while (cub->map.map[y][++x])
 		{
-			if (cub->map.map[y][x] == ' ' && (cub->map.map[y - 1][x] == '0'\
-			|| cub->map.map[y + 1][x] == '0' || cub->map.map[y][x - 1] == '0'\
+			if (cub->map.map[y][x] == ' ' && (cub->map.map[y][x - 1] == '0'\
 			|| cub->map.map[y][x + 1] == '0'))
 				ft_exit(cub, path, 2);
 		}

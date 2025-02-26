@@ -59,6 +59,18 @@ void	fill_wall_arr_pixel(t_cub *cub, int i)
 	}
 }
 
+static char	*choose_path_idx(char **path_to_image, int i)
+{
+	if (i == N)
+		return (path_to_image[0]);
+	else if (i == S)
+		return (path_to_image[1]);
+	else if (i == W)
+		return (path_to_image[2]);
+	else
+		return (path_to_image[3]);
+}
+
 void	load_image(t_cub *cub, char **path_to_image)
 {
 	char	*path;
@@ -67,19 +79,15 @@ void	load_image(t_cub *cub, char **path_to_image)
 	i = 0;
 	while (i < 4)
 	{
-		if (i == N)
-			path = path_to_image[0];
-		else if (i == S)
-			path = path_to_image[1];
-		else if (i == W)
-			path = path_to_image[2];
-		else
-			path = path_to_image[3];
+		path = choose_path_idx(path_to_image, i);
 		cub->img.img = mlx_xpm_file_to_image(cub->mlx, path, \
 			&cub->img.w, &cub->img.h);
 		if (cub->img.w != TEX_WIDTH || cub->img.h != TEX_HEIGHT
 			|| cub->img.img == NULL)
-			exit_parse(cub, 1, "image_load xpm file error", NULL);
+		{
+			free_matrix((void ***)&path_to_image);
+			exit_parse(cub, 88, "image_load xpm file error", NULL);
+		}
 		cub->img.data = (int *)mlx_get_data_addr(cub->img.img, \
 					&cub->img.bpp, &cub->img.line_size, &cub->img.endian);
 		fill_wall_arr_pixel(cub, i);

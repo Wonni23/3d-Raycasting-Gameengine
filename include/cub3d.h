@@ -204,6 +204,7 @@ void	buffer_to_img_n_window(t_cub *cub);
 /* Utils */
 void	err_exit(char *msg);
 int		memory_clean_exit(t_cub *cub);
+void	clean_int_array(int **arr, int idx);
 
 /* Parsing */
 void	parse(t_cub *cub, char *argv);
