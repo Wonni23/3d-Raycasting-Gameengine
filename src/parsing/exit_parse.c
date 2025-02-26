@@ -70,10 +70,7 @@ void	exit_parse(t_cub *cub, int status, char *str, t_parse *parse)
 {
 	if (parse)
 		free_parse(parse);
-	if (status)
-		printf("Error\n%s\n", str);
-	else
-		printf("Error\n%s\n", str);
+	printf("Error\n%s\n", str);
 	if (cub)
 	{
 		if (cub->map.map)

@@ -32,7 +32,7 @@
 /* Bonus */
 void		init_status(t_cub *cub);
 void		paint_minimap(t_cub *cub);
-void		load_door(t_cub *cub);
+void		load_door(t_cub *cub, char **path);
 
 int			collide_door(t_cub *cub, double x, double y);
 void		door_coordination(t_cub *cub, int *map_x, int *map_y, int res);
@@ -42,11 +42,13 @@ int			ft_mouse(int x, int y, t_cub *cub);
 int			ft_click(int button, int x, int y, void *param);
 
 int			init_sprite(t_cub *cub);
-void		load_sprite_image(t_cub *cub);
+void		load_sprite_image(t_cub *c, char **path);
 void		paint_sprite(t_cub *cub, int idx);
 
 int			sprite(t_cub *cub);
 
 long long	get_current_time_micro(void);
+
+int			memory_clean_exit_bonus(t_cub *cub, char **p, int stat, char *msg);
 
 #endif

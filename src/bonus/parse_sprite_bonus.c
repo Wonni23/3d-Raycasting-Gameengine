@@ -56,7 +56,7 @@ void	fill_sprite_arr_pixel(t_cub *cub, int i)
 	}
 }
 
-void	load_sprite_image(t_cub *c)
+void	load_sprite_image(t_cub *c, char **p_path)
 {
 	char	*path;
 	int		i;
@@ -77,7 +77,7 @@ void	load_sprite_image(t_cub *c)
 		c->img.img = mlx_xpm_file_to_image(c->mlx, path, &c->img.w, &c->img.h);
 		if (c->img.w != TEX_WIDTH || c->img.h != TEX_HEIGHT
 			|| c->img.img == NULL)
-			memory_clean_exit(c);
+			memory_clean_exit_bonus(c, p_path, 1, "Sprite load error");
 		c->img.data = (int *)mlx_get_data_addr(c->img.img, \
 					&c->img.bpp, &c->img.line_size, &c->img.endian);
 		fill_sprite_arr_pixel(c, i);

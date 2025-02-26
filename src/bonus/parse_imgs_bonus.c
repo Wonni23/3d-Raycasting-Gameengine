@@ -79,10 +79,7 @@ void	load_image(t_cub *cub, char **path_to_image)
 			&cub->img.w, &cub->img.h);
 		if (cub->img.w != TEX_WIDTH || cub->img.h != TEX_HEIGHT
 			|| cub->img.img == NULL)
-		{
-			free_matrix((void ***)&path_to_image);
-			exit_parse(cub, 88, "image_load xpm file error", NULL);
-		}
+			memory_clean_exit_bonus(cub, path_to_image, 1, "wall load error");
 		cub->img.data = (int *)mlx_get_data_addr(cub->img.img, \
 					&cub->img.bpp, &cub->img.line_size, &cub->img.endian);
 		fill_wall_arr_pixel(cub, i);
@@ -110,7 +107,7 @@ void	fill_door_arr_pixel(t_cub *cub)
 	}
 }
 
-void	load_door(t_cub *cub)
+void	load_door(t_cub *cub, char **p_path)
 {
 	char	*path;
 
@@ -120,7 +117,7 @@ void	load_door(t_cub *cub)
 			&cub->img.w, &cub->img.h);
 	if (cub->img.w != TEX_WIDTH || cub->img.h != TEX_HEIGHT
 		|| cub->img.img == NULL)
-		exit_parse(cub, 88, "door xpm file error", NULL);
+		memory_clean_exit_bonus(cub, p_path, 1, "door load error");
 	cub->img.data = (int *)mlx_get_data_addr(cub->img.img, \
 			&cub->img.bpp, &cub->img.line_size, &cub->img.endian);
 	fill_door_arr_pixel(cub);

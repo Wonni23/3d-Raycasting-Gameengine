@@ -91,7 +91,7 @@ void	parse(t_cub *cub, char *name)
 	init_image(&cub->img);
 	load_image(cub, path);
 	init_sprite(cub);
-	load_sprite_image(cub);
-	load_door(cub);
+	load_sprite_image(cub, path);
+	load_door(cub, path);
 	free_matrix((void ***)&path);
 }

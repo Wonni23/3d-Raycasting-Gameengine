@@ -31,7 +31,7 @@ int	keypress_hook(int key_code, t_cub *cub)
 	else if (key_code == KEY_ESC)
 	{
 		printf("Exiting cub3D.\n");
-		memory_clean_exit(cub);
+		memory_clean_exit_bonus(cub, NULL, 0, NULL);
 	}
 	loop(cub);
 	return (0);
