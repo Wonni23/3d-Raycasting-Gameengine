@@ -17,33 +17,13 @@ static void	check_midlines_space(t_cub *cub, char **path, char *s, int y)
 	int	x;
 
 	x = 0;
-	while (s[0] && ++x != cub->map.s_len)
+	while (s[0] && s[++x])
 	{
-		if ((ft_strchr(s, ' ') && ft_strchr(cub->map.map[y - 1], '0')) || \
-		(ft_strchr(s, ' ') && ft_strchr(cub->map.map[y + 1], '0')))
+		if (s[x] == ' ' && (s[x - 1] == '0' || s[x + 1] == '0' || \
+		cub->map.map[y - 1][x] == '0' || cub->map.map[y + 1][x] == '0'))
 		{
-			if (s[x] == ' ' && (s[x - 1] == '0' || s[x + 1] == '0' || \
-			cub->map.map[y - 1][x] == '0' || cub->map.map[y + 1][x] == '0'))
-			{
-				free_array(s);
-				ft_exit(cub, path, 2);
-			}
+			ft_exit(cub, path, 2);
 		}
-	}
-}
-
-static void	checking_idx_init(t_cub *cub, char *s, int y)
-{
-	cub->map.s_len = ft_strlen(s);
-	cub->map.forward_len = ft_strlen(cub->map.map[y - 1]);
-	cub->map.back_len = ft_strlen(cub->map.map[y + 1]);
-	if (cub->map.s_len > cub->map.forward_len || \
-	cub->map.s_len > cub->map.back_len)
-	{
-		if (cub->map.forward_len > cub->map.back_len)
-			cub->map.s_len = cub->map.back_len;
-		else
-			cub->map.s_len = cub->map.forward_len;
 	}
 }
 
@@ -60,9 +40,7 @@ void	check_map_empty(t_cub *cub, char **path)
 		y++;
 	while (y-- > 1)
 	{
-		s = trim_it(cub->map.map[y], " \n\t");
-		checking_idx_init(cub, s, y);
+		s = cub->map.map[y];
 		check_midlines_space(cub, path, s, y);
-		free_array(s);
 	}
 }

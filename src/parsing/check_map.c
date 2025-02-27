@@ -64,12 +64,12 @@ void	check_map(t_cub *c, char **path)
 
 	if (check_invalid_char(c))
 	{
-		printf("Error\nThe map must valid chars and one player position\n");
+		printf("Error\nInvalid chars or multiple player position\n");
 		ft_exit(c, path, 0);
 	}
 	if (c->map.num_player == 0)
 	{
-		printf("Error\nThe player must exist\n");
+		printf("Error\nPlayer not found\n");
 		ft_exit(c, path, 0);
 	}
 	y = -1;
@@ -80,6 +80,7 @@ void	check_map(t_cub *c, char **path)
 		&& (int)ft_strlen(c->map.map[y]) > c->map.map_width)
 			c->map.map_width = ft_strlen(c->map.map[y]);
 	}
+	fill_space_n_dup_map(c, path);
 	check_map_closed(c, path);
 	check_map_empty(c, path);
 }

@@ -12,27 +12,6 @@
 
 #include "../../include/cub3d.h"
 
-char	*trim_it(char *s1, char *set)
-{
-	size_t	s1_len;
-	size_t	i;
-	char	*dest;
-
-	if (!s1 || !set)
-		return (NULL);
-	s1_len = ft_strlen(s1);
-	while (s1_len > 0 && ft_strchr(set, s1[s1_len - 1]))
-		s1_len--;
-	dest = (char *)malloc(sizeof(char) * (s1_len + 1));
-	if (!dest)
-		return (NULL);
-	i = -1;
-	while (++i < s1_len)
-		dest[i] = s1[i];
-	dest[s1_len] = '\0';
-	return (dest);
-}
-
 void	check_player_around_space(t_cub *cub, char **path)
 {
 	int	x;
@@ -47,15 +26,10 @@ void	check_player_around_space(t_cub *cub, char **path)
 		{
 			if (orientation_player(cub->map.map[y][x]) && \
 			(ft_isspace(cub->map.map[y][x + 1])
-			|| ft_isspace(cub->map.map[y][x - 1])))
-				ft_exit(cub, path, 2);
-			if (orientation_player(cub->map.map[y][x]) && \
-			ft_strlen(cub->map.map[y + 1]) < 2)
-				ft_exit(cub, path, 2);
-			if (orientation_player(cub->map.map[y][x]) && \
-			(cub->map.map[y + 1][x] == '\n'
-			|| cub->map.map[y + 1][x] == 0))
-				ft_exit(cub, path, 2);
+			|| ft_isspace(cub->map.map[y][x - 1]) \
+			|| ft_isspace(cub->map.map[y - 1][x]) \
+			|| ft_isspace(cub->map.map[y + 1][x])))
+				ft_exit(cub, path, 24);
 		}
 		y++;
 	}
@@ -71,22 +45,15 @@ void	check_last_line_space(t_cub *cub, char **path)
 	while (cub->map.map[y])
 		y++;
 	y--;
-	s = trim_it(cub->map.map[y], " \n\t");
+	s = cub->map.map[y];
 	x = -1;
 	while (s[++x])
 	{
 		if (ft_isspace(s[x]) && cub->map.map[y - 1][x] == '0')
-		{
-			free_array(s);
-			ft_exit(cub, path, 2);
-		}
+			ft_exit(cub, path, 1);
 	}
 	if (!s[x] && cub->map.map[y - 1][x] == '0')
-	{
-		free_array(s);
-		ft_exit(cub, path, 2);
-	}
-	free_array(s);
+		ft_exit(cub, path, 23);
 }
 
 void	check_first_line_space(t_cub *cub, char **path)
@@ -95,26 +62,62 @@ void	check_first_line_space(t_cub *cub, char **path)
 	char	*s;
 
 	x = -1;
-	s = trim_it(cub->map.map[0], " \n\t");
+	s = cub->map.map[0];
 	while (s[++x])
 	{
 		if (ft_isspace(s[x]) && cub->map.map[1][x] == '0')
-		{
-			free_array(s);
-			ft_exit(cub, path, 2);
-		}
+			ft_exit(cub, path, 22);
 	}
-	free_array(s);
 }
 
-int	line_len_check(t_cub *c, int y)
+void	dup_tmp_map(t_cub *c)
 {
-	if ((ft_strlen(c->map.map[y]) < ft_strlen(c->map.map[y - 1])) && \
-	ft_strchr(c->map.map[y], '1'))
-		return (1);
-	else if ((ft_strlen(c->map.map[y]) > ft_strlen(c->map.map[y - 1])) && \
-	ft_strchr(c->map.map[y], '1'))
-		return (2);
-	else
-		return (0);
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (i < c->map.map_height && c->map.map[i] != NULL)
+	{
+		j = 0;
+		while (j < c->map.map_width && c->map.map[i][j] != '\0')
+		{
+			if (c->map.map[i][j] == '\n')
+				c->map.tmp[i][j] = ' ';
+			else
+				c->map.tmp[i][j] = c->map.map[i][j];
+			j++;
+		}
+		i++;
+	}
+	free_matrix((void ***)&c->map.map);
+	c->map.map = c->map.tmp;
+	c->map.tmp = NULL;
+}
+
+void	fill_space_n_dup_map(t_cub *c, char **path)
+{
+	int	i;
+
+	c->map.tmp = (char **)malloc(sizeof(char *) * (c->map.map_height + 1));
+	if (!c->map.tmp)
+	{
+		printf("Error\nmalloc failed\n");
+		ft_exit(c, path, 0);
+	}
+	i = 0;
+	while (i < c->map.map_height)
+	{
+		c->map.tmp[i] = (char *)malloc(sizeof(char) * (c->map.map_width + 1));
+		if (!c->map.tmp[i])
+		{
+			printf("Error\nmalloc failed\n");
+			ft_exit(c, path, 0);
+		}
+		ft_memset(c->map.tmp[i], ' ', c->map.map_width);
+		c->map.tmp[i][c->map.map_width] = '\0';
+		i++;
+	}
+	c->map.tmp[c->map.map_height] = NULL;
+	dup_tmp_map(c);
 }
