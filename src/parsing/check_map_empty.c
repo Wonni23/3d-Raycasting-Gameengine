@@ -12,120 +12,57 @@
 
 #include "../../include/cub3d.h"
 
-static char	*trim_it(char *s1, char *set)
-{
-	size_t	s1_len;
-	size_t	i;
-	char	*dest;
-
-	if (!s1 || !set)
-		return (NULL);
-	s1_len = ft_strlen(s1);
-	while (s1_len > 0 && ft_strchr(set, s1[s1_len - 1]))
-		s1_len--;
-	dest = (char *)malloc(sizeof(char) * (s1_len + 1));
-	if (!dest)
-		return (NULL);
-	i = 0;
-	while (i < s1_len)
-	{
-		dest[i] = s1[i];
-		i++;
-	}
-	dest[s1_len] = '\0';
-	return (dest);
-}
-
-static void	check_last_line_space(t_cub *cub, char **path)
-{
-	int		x;
-	int		y;
-	char	*s;
-
-	y = 0;
-	while (cub->map.map[y])
-		y++;
-	y--;
-	s = trim_it(cub->map.map[y], " \n\t");
-	x = -1;
-	while (s[++x])
-	{
-		if (ft_isspace(s[x]) && cub->map.map[y - 1][x] == '0')
-		{
-			free_array(s);
-			ft_exit(cub, path, 2);
-		}
-	}
-	free_array(s);
-}
-
-static void	check_first_line_space(t_cub *cub, char **path)
-{
-	int		x;
-	char	*s;
-
-	x = -1;
-	s = trim_it(cub->map.map[0], " \n\t");
-	while (s[++x])
-	{
-		if (ft_isspace(s[x]) && cub->map.map[1][x] == '0')
-		{
-			free_array(s);
-			ft_exit(cub, path, 2);
-		}
-	}
-	free_array(s);
-}
-
-static void	check_player_around_space(t_cub *cub, char **path)
+static void	check_midlines_space(t_cub *cub, char **path, char *s, int y)
 {
 	int	x;
-	int	y;
 
 	x = 0;
-	y = 1;
-	while (cub->map.map[y + 1])
+	while (s[0] && ++x != cub->map.s_len)
 	{
-		x = -1;
-		while (cub->map.map[y][++x])
+		if ((ft_strchr(s, ' ') && ft_strchr(cub->map.map[y - 1], '0')) || \
+		(ft_strchr(s, ' ') && ft_strchr(cub->map.map[y + 1], '0')))
 		{
-			if (orientation_player(cub->map.map[y][x]) && \
-			(ft_isspace(cub->map.map[y][x + 1])
-			|| ft_isspace(cub->map.map[y][x - 1])))
+			if (s[x] == ' ' && (s[x - 1] == '0' || s[x + 1] == '0' || \
+			cub->map.map[y - 1][x] == '0' || cub->map.map[y + 1][x] == '0'))
+			{
+				free_array(s);
 				ft_exit(cub, path, 2);
-			if (orientation_player(cub->map.map[y][x]) && \
-			ft_strlen(cub->map.map[y + 1]) < 2)
-				ft_exit(cub, path, 2);
-			if (orientation_player(cub->map.map[y][x]) && \
-			(cub->map.map[y + 1][x] == '\n'
-			|| cub->map.map[y + 1][x] == 0))
-				ft_exit(cub, path, 2);
+			}
 		}
-		y++;
+	}
+}
+
+static void	checking_idx_init(t_cub *cub, char *s, int y)
+{
+	cub->map.s_len = ft_strlen(s);
+	cub->map.forward_len = ft_strlen(cub->map.map[y - 1]);
+	cub->map.back_len = ft_strlen(cub->map.map[y + 1]);
+	if (cub->map.s_len > cub->map.forward_len || \
+	cub->map.s_len > cub->map.back_len)
+	{
+		if (cub->map.forward_len > cub->map.back_len)
+			cub->map.s_len = cub->map.back_len;
+		else
+			cub->map.s_len = cub->map.forward_len;
 	}
 }
 
 void	check_map_empty(t_cub *cub, char **path)
 {
-	int	x;
-	int	y;
+	int		y;
+	char	*s;
 
 	check_first_line_space(cub, path);
 	check_last_line_space(cub, path);
 	check_player_around_space(cub, path);
-	x = 0;
 	y = 0;
-	while (cub->map.map[y])
+	while (cub->map.map[y + 1])
 		y++;
-	y -= 1;
 	while (y-- > 1)
 	{
-		x = 0;
-		while (cub->map.map[y][++x])
-		{
-			if (cub->map.map[y][x] == ' ' && (cub->map.map[y][x - 1] == '0'\
-			|| cub->map.map[y][x + 1] == '0'))
-				ft_exit(cub, path, 2);
-		}
+		s = trim_it(cub->map.map[y], " \n\t");
+		checking_idx_init(cub, s, y);
+		check_midlines_space(cub, path, s, y);
+		free_array(s);
 	}
 }

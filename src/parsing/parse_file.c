@@ -62,6 +62,33 @@ void	check_image_order(t_parse *parse, char *s)
 		parse->num_vars = 3;
 }
 
+void	delete_just_newline(t_cub *cub)
+{
+	int		i;
+	int		y;
+	int		new_size;
+	char	**new_map;
+
+	y = 0;
+	while (cub->map.map[y])
+		y++;
+	while (y > 0 && !ft_strchr(cub->map.map[y - 1], '1'))
+	{
+		free(cub->map.map[y - 1]);
+		cub->map.map[y - 1] = NULL;
+		y--;
+	}
+	new_size = y;
+	new_map = ft_calloc(new_size + 1, sizeof(char *));
+	if (!new_map)
+		exit_parse(cub, 1, "malloc failed while resizing map", NULL);
+	i = -1;
+	while (++i < new_size)
+		new_map[i] = cub->map.map[i];
+	free(cub->map.map);
+	cub->map.map = new_map;
+}
+
 void	parse_file(t_cub *cub, t_parse *parse)
 {
 	int	y;
@@ -78,4 +105,5 @@ void	parse_file(t_cub *cub, t_parse *parse)
 		exit_parse(NULL, 1, "must contain NO SO WE EA path to the files" \
 		, parse);
 	get_map(cub, parse, y);
+	delete_just_newline(cub);
 }

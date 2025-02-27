@@ -18,7 +18,8 @@ SRCS =	main.c \
 		src/rendering/raycasting_setup.c \
 		src/rendering/paint.c \
 		src/utils/initialization.c \
-		src/utils/utils.c
+		src/utils/utils.c \
+		src/parsing/check_map_utils.c
 
 SRCS_B = src/bonus/main_bonus.c \
 		src/parsing/check_map_closed.c \
@@ -41,7 +42,8 @@ SRCS_B = src/bonus/main_bonus.c \
 		src/bonus/raycasting_bonus.c \
 		src/bonus/raycasting_main_bonus.c \
 		src/bonus/raycasting_setup_bonus.c \
-		src/bonus/utils_bonus.c
+		src/bonus/utils_bonus.c \
+		src/parsing/check_map_utils.c
 
 OBJS = $(SRCS:.c=.o)
 OBJS_B = $(SRCS_B:.c=.o)

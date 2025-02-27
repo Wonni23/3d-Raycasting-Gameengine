@@ -143,6 +143,9 @@ typedef struct s_map
 	int			map_width;
 	int			map_height;
 	int			num_player;
+	int			s_len;
+	int			forward_len;
+	int			back_len;
 }	t_map;
 
 typedef struct s_bonus
@@ -226,5 +229,10 @@ int		init_image(t_img *img);
 void	load_image(t_cub *cub, char **path_to_image);
 int		num_vars_check(t_parse *parse);
 void	check_spaces_between_digits(t_parse *parse, char *s);
+int		line_len_check(t_cub *c, int y);
+void	check_player_around_space(t_cub *cub, char **path);
+char	*trim_it(char *s1, char *set);
+void	check_first_line_space(t_cub *cub, char **path);
+void	check_last_line_space(t_cub *cub, char **path);
 
 #endif
