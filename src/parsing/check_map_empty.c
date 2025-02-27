@@ -47,6 +47,18 @@ static void	checking_idx_init(t_cub *cub, char *s, int y)
 	}
 }
 
+// static void	check_again(t_cub *cub, char **path, char *s)
+// {
+// 	int	x;
+
+// 	x = 0;
+// 	while (s[++x] != '\n')
+// 	{
+// 		if (s[x] && s[x + 1] && s[x] == '0' && (s[x - 1] == ' ' || s[x + 1] == ' '))
+// 			ft_exit(cub, path, 2);
+// 	}
+// }
+
 void	check_map_empty(t_cub *cub, char **path)
 {
 	int		y;
@@ -63,6 +75,7 @@ void	check_map_empty(t_cub *cub, char **path)
 		s = trim_it(cub->map.map[y], " \n\t");
 		checking_idx_init(cub, s, y);
 		check_midlines_space(cub, path, s, y);
+		//check_again(cub, path, s);
 		free_array(s);
 	}
 }

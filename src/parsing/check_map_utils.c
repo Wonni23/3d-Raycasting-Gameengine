@@ -112,9 +112,8 @@ int	line_len_check(t_cub *c, int y)
 	if ((ft_strlen(c->map.map[y]) < ft_strlen(c->map.map[y - 1])) && \
 	ft_strchr(c->map.map[y], '1'))
 		return (1);
-	else if ((ft_strlen(c->map.map[y]) > ft_strlen(c->map.map[y - 1])) && \
+	if ((ft_strlen(c->map.map[y]) > ft_strlen(c->map.map[y - 1])) && \
 	ft_strchr(c->map.map[y], '1'))
 		return (2);
-	else
-		return (0);
+	return (0);
 }
