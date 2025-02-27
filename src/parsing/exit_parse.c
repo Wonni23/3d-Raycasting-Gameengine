@@ -23,12 +23,11 @@ void	free_array(char *array)
 
 void	ft_exit(t_cub *cub, char **path, int status)
 {
+	printf("%d\n", status);
 	if (status)
 	{
 		if (status == 1)
 			printf("Error\nThe map must closed by a wall\n");
-		if (status == 2)
-			printf("Error\nEmpty space mut not exist in the map\n");
 		free_matrix((void ***)&path);
 		free_matrix((void ***)&cub->map.map);
 		exit(1);
