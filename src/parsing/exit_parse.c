@@ -82,5 +82,5 @@ void	exit_parse(t_cub *cub, int status, char *str, t_parse *parse)
 			free(cub->mlx);
 		}
 	}
-	exit(status);
+	exit(1);
 }
