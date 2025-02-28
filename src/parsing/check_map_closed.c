@@ -20,13 +20,13 @@ static void	check_front_back(t_cub *c, char **path)
 	if (ft_strchr(c->map.map[y], '0') || ft_strchr(c->map.map[y], 'N') \
 	|| ft_strchr(c->map.map[y], 'S') || ft_strchr(c->map.map[y], 'W') \
 	|| ft_strchr(c->map.map[y], 'E'))
-		ft_exit(c, path, 16);
+		ft_exit(c, path, 1);
 	while (c->map.map[y])
 		y++;
 	if (ft_strchr(c->map.map[y - 1], '0') || ft_strchr(c->map.map[y - 1], 'N') \
 	|| ft_strchr(c->map.map[y - 1], 'S') || ft_strchr(c->map.map[y - 1], 'W') \
 	|| ft_strchr(c->map.map[y - 1], 'E'))
-		ft_exit(c, path, 15);
+		ft_exit(c, path, 1);
 }
 
 static void	check_first_c_last_c(t_cub *cub, char **path)
@@ -42,7 +42,7 @@ static void	check_first_c_last_c(t_cub *cub, char **path)
 		while (ft_isspace(cub->map.map[y][x]))
 			x++;
 		if (cub->map.map[y][x] == '0')
-			ft_exit(cub, path, 14);
+			ft_exit(cub, path, 1);
 	}
 	x = 0;
 	y = -1;
@@ -54,7 +54,7 @@ static void	check_first_c_last_c(t_cub *cub, char **path)
 		if (x == 1 || x == 0)
 			break ;
 		if (cub->map.map[y][x - 2] == '0')
-			ft_exit(cub, path, 13);
+			ft_exit(cub, path, 1);
 	}
 }
 
@@ -66,7 +66,7 @@ void	check_map_closed(t_cub *cub, char **path)
 	x = -1;
 	while (cub->map.map[0][++x])
 		if (orientation_player(cub->map.map[0][x]))
-			ft_exit(cub, path, 11);
+			ft_exit(cub, path, 1);
 	y = 0;
 	while (cub->map.map[y])
 		y++;
@@ -74,7 +74,7 @@ void	check_map_closed(t_cub *cub, char **path)
 	x = -1;
 	while (cub->map.map[y][++x])
 		if (orientation_player(cub->map.map[y][x]))
-			ft_exit(cub, path, 12);
+			ft_exit(cub, path, 1);
 	if (cub->map.map[y][0] == '1' && cub->map.map[y][1] == 0)
 		ft_exit(cub, path, 1);
 	check_first_c_last_c(cub, path);

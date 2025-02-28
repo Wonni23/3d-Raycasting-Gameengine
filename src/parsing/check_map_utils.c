@@ -29,7 +29,7 @@ void	check_player_around_space(t_cub *cub, char **path)
 			|| ft_isspace(cub->map.map[y][x - 1]) \
 			|| ft_isspace(cub->map.map[y - 1][x]) \
 			|| ft_isspace(cub->map.map[y + 1][x])))
-				ft_exit(cub, path, 24);
+				ft_exit(cub, path, 1);
 		}
 		y++;
 	}
@@ -53,7 +53,7 @@ void	check_last_line_space(t_cub *cub, char **path)
 			ft_exit(cub, path, 1);
 	}
 	if (!s[x] && cub->map.map[y - 1][x] == '0')
-		ft_exit(cub, path, 23);
+		ft_exit(cub, path, 1);
 }
 
 void	check_first_line_space(t_cub *cub, char **path)
@@ -66,7 +66,7 @@ void	check_first_line_space(t_cub *cub, char **path)
 	while (s[++x])
 	{
 		if (ft_isspace(s[x]) && cub->map.map[1][x] == '0')
-			ft_exit(cub, path, 22);
+			ft_exit(cub, path, 1);
 	}
 }
 
