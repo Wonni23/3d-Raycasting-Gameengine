@@ -12,22 +12,54 @@
 
 #include "../../include/cub3d.h"
 
-void	err_exit(char *msg)
+void	clean_int_array(int **arr, int idx)
 {
-	ft_putstr_fd("Error\n", 2);
-	ft_putstr_fd(msg, 2);
-	exit(1);
+	int	i;
+
+	i = 0;
+	if (!arr || !arr[0])
+		return ;
+	while (i < idx)
+	{
+		if (arr[i])
+			free(arr[i]);
+		i++;
+	}
+	free(arr);
 }
 
-void	init_status(t_cub *cub)
+void	memory_clean_imgs(t_cub *cub)
 {
-	ft_bzero(cub, sizeof(*cub));
+	if (cub->img.img)
+		mlx_destroy_image(cub->mlx, cub->img.img);
+	if (cub->img.walls)
+		clean_int_array(cub->img.walls, 4);
+	if (cub->img.sprites)
+		clean_int_array(cub->img.sprites, 5);
+	if (cub->img.door)
+		free(cub->img.door);
+	if (cub->img.enemy)
+		clean_int_array(cub->img.enemy, 3);
 }
 
-long long	get_current_time_micro(void)
+int	memory_clean_exit_bonus(t_cub *cub, char **path, int status, char *msg)
 {
-	struct timeval	tv;
-
-	gettimeofday(&tv, NULL);
-	return ((long long)tv.tv_sec * 1000000LL + tv.tv_usec);
+	if (msg)
+		printf("Error\n%s\n", msg);
+	if (path)
+		free_matrix((void ***)&path);
+	memory_clean_imgs(cub);
+	if (cub->map.map)
+		free_matrix((void ***)&cub->map.map);
+	if (cub->zbuffer)
+		free(cub->zbuffer);
+	if (cub->mlx && cub->win)
+		mlx_destroy_window(cub->mlx, cub->win);
+	if (cub->mlx)
+	{
+		mlx_destroy_display(cub->mlx);
+		free(cub->mlx);
+	}
+	exit(status);
+	return (1);
 }

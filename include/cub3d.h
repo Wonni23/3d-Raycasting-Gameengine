@@ -117,6 +117,7 @@ typedef struct s_img
 	int			**walls;
 	int			*door;
 	int			**sprites;
+	int			**enemy;
 	int			spsize;
 	int			sp_x;
 	int			sp_y;
@@ -159,10 +160,29 @@ typedef struct s_bonus
 	long long	frame_time;
 }	t_bonus;
 
+typedef struct s_sprite
+{
+	double	x;
+	double	y;
+	double	distance;
+	double	transform_x;
+	double	transform_y;
+	int		screen_x;
+	int		width;
+	int		draw_start_y;
+	int		draw_end_y;
+	int		sprite_height;
+	int		tex_x;
+	int		tex_y;
+	int		stripe;
+	int		status;
+}	t_sprite;
+
 typedef struct s_cub
 {
 	void		*mlx;
 	void		*win;
+	double		*zbuffer;
 	t_img		img;
 	t_player	player;
 	t_map		map;
@@ -184,6 +204,8 @@ int		loop(t_cub *cub);
 /* Ray Casting */
 void	init_ray(t_cub *cub, t_ray *ray, int x);
 void	setup_dda(t_cub *cub, t_ray *ray, int x);
+void	setup_dda_deltadist(t_ray *ray);
+void	setup_dda_step_n_sidedist(t_cub *cub, t_ray *ray);
 void	perform_dda(t_ray *ray, char **map);
 void	calculate_line_height(t_ray *ray, t_texturing *tex);
 void	calculate_texture_coords(t_cub *cub, t_ray *ray, t_texturing *tex);

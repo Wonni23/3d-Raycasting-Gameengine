@@ -77,8 +77,8 @@ void	paint_minimap(t_cub *c)
 	int	y;
 	int	x;
 
-	y = 0;
-	while (y < c->map.map_height)
+	y = -1;
+	while (++y < c->map.map_height)
 	{
 		x = 0;
 		while (c->map.map[y][x] && c->map.map[y][x]
@@ -90,14 +90,14 @@ void	paint_minimap(t_cub *c)
 				fill_minimap(c, (int)(SC * SZ * x), (int)(SC * SZ * y), B);
 			else if (c->map.map[y][x] == '3')
 				fill_minimap(c, (int)(SC * SZ * x), (int)(SC * SZ * y), Y);
-			else if (c->map.map[y][x] == '0'
+			else if (c->map.map[y][x] == '0' || c->map.map[y][x] == '4' || \
+				c->map.map[y][x] == '5' || c->map.map[y][x] == '6' \
 				|| orientation_player(c->map.map[y][x]))
 				fill_minimap(c, (int)(SC * SZ * x), (int)(SC * SZ * y), WT);
 			x++;
 		}
 		fill_minimap(c, (int)((c->player.pos_x - 0.5) * 8 * SC),
 			(int)((c->player.pos_y -0.5) * 8 * SC), RD);
-		y++;
 	}
 }
 

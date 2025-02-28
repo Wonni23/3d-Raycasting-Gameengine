@@ -69,6 +69,7 @@ int	loop(t_cub *cub)
 {
 	paint_background(cub);
 	raycasting(cub);
+	render_enemy_sprites(cub, cub->zbuffer);
 	paint_minimap(cub);
 	paint_sprite(cub, cub->b.anim_frame);
 	buffer_to_img_n_window(cub);
@@ -82,6 +83,7 @@ void	boot(t_cub *cub)
 			&cub->img.line_size, &cub->img.endian);
 	paint_background(cub);
 	raycasting(cub);
+	render_enemy_sprites(cub, cub->zbuffer);
 	paint_minimap(cub);
 	paint_sprite(cub, 0);
 	buffer_to_img_n_window(cub);

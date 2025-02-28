@@ -35,6 +35,7 @@ SRCS_B = src/bonus/main_bonus.c \
 		src/bonus/door_bonus.c \
 		src/bonus/loop_bonus.c \
 		src/bonus/mouse_bonus.c \
+		src/bonus/shoot_bonus.c \
 		src/bonus/paint_bonus.c \
 		src/bonus/parse_imgs_bonus.c \
 		src/bonus/parse_main_bonus.c \
@@ -43,7 +44,11 @@ SRCS_B = src/bonus/main_bonus.c \
 		src/bonus/raycasting_main_bonus.c \
 		src/bonus/raycasting_setup_bonus.c \
 		src/bonus/utils_bonus.c \
-		src/parsing/check_map_utils.c
+		src/parsing/check_map_utils.c \
+		src/bonus/parse_enemy_bonus.c \
+		src/bonus/enemy_draw_bonus.c \
+		src/bonus/enemy_set_bonus.c \
+		src/bonus/utils_free_bonus.c
 
 OBJS = $(SRCS:.c=.o)
 OBJS_B = $(SRCS_B:.c=.o)

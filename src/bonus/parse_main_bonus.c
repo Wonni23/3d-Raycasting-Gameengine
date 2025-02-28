@@ -93,5 +93,7 @@ void	parse(t_cub *cub, char *name)
 	init_sprite(cub);
 	load_sprite_image(cub, path);
 	load_door(cub, path);
+	init_enemy(cub);
+	load_enemy_image(cub, path);
 	free_matrix((void ***)&path);
 }
