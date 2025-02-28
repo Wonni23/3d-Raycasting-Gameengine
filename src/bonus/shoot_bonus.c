@@ -32,9 +32,9 @@ void	process_ray_hit(char **map, t_ray ray)
 		map[ray.map_y][ray.map_x] = '6';
 }
 
-static void perform_shoot_dda(t_ray *ray, char **map)
+static void	perform_shoot_dda(t_ray *ray, char **map)
 {
-	char cell;
+	char	cell;
 
 	while (ray->hit == 0)
 	{
@@ -77,4 +77,3 @@ void	shoot_ray(t_cub *cub, char **map)
 		ray.perp_wall_dist = ray.side_dist_y - ray.delta_dist_y;
 	process_ray_hit(map, ray);
 }
-
