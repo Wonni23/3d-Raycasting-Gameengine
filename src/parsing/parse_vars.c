@@ -37,8 +37,7 @@ static int	fill_color(t_parse *parse, char *s)
 			exit_parse(NULL, 1, \
 			"atoi overflow only can accept between 0 and 255", parse);
 	}
-	i = 255;
-	return (i << 24 | rgb[0] << 16 | rgb[1] << 8 | rgb[2]);
+	return (rgb[0] << 16 | rgb[1] << 8 | rgb[2]);
 }
 
 static int	fill_args(t_cub *cub, t_parse *parse, char *s, int path_i)

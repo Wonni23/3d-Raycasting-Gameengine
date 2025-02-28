@@ -25,6 +25,7 @@ int	ft_click(int button, int x, int y, void *param)
 		cub->b.anim_frame = 1;
 		cub->b.anim_lasttime = get_current_time_micro();
 	}
+	shoot_ray(cub, cub->map.map);
 	return (0);
 }
 

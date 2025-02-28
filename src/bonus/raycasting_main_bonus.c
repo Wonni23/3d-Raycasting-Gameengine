@@ -23,6 +23,7 @@ void	raycasting(t_cub *cub)
 	{
 		setup_dda(cub, &ray, x);
 		perform_dda(&ray, cub->map.map);
+		cub->zbuffer[x] = ray.perp_wall_dist;
 		calculate_line_height(&ray, &tex);
 		calculate_texture_coords(cub, &ray, &tex);
 		set_buffer(cub, &ray, &tex, x);

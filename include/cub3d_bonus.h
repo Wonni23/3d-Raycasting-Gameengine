@@ -40,6 +40,7 @@ void		interact_door(t_cub *cub);
 
 int			ft_mouse(int x, int y, t_cub *cub);
 int			ft_click(int button, int x, int y, void *param);
+void		shoot_ray(t_cub *cub, char **map);
 
 int			init_sprite(t_cub *cub);
 void		load_sprite_image(t_cub *c, char **path);
@@ -50,5 +51,14 @@ int			sprite(t_cub *cub);
 long long	get_current_time_micro(void);
 
 int			memory_clean_exit_bonus(t_cub *cub, char **p, int stat, char *msg);
+
+int			init_enemy(t_cub *cub);
+void		load_enemy_image(t_cub *c, char **p_path);
+void		render_enemy_sprites(t_cub *cub, double *zBuffer);
+
+void		sort_sprites(t_sprite *sprites, int count);
+void		fill_sprite_array(t_cub *cub, t_sprite *sprites, int *sprite_count);
+void		transform_sprites(t_cub *cub, t_sprite *sprites, int count);
+void		compute_sprite_projection(t_sprite *sprite);
 
 #endif
