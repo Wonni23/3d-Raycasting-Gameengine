@@ -34,17 +34,15 @@ static void	check_first_c_last_c(t_cub *cub, char **path)
 	int	x;
 	int	y;
 
-	x = 0;
 	y = -1;
 	while (cub->map.map[++y])
 	{
 		x = 0;
 		while (ft_isspace(cub->map.map[y][x]))
 			x++;
-		if (cub->map.map[y][x] == '0')
+		if (cub->map.map[y][x] == '0' || orientation_player(cub->map.map[y][x]))
 			ft_exit(cub, path, 1);
 	}
-	x = 0;
 	y = -1;
 	while (cub->map.map[++y])
 	{
@@ -53,7 +51,7 @@ static void	check_first_c_last_c(t_cub *cub, char **path)
 			x++;
 		if (x == 1 || x == 0)
 			break ;
-		if (cub->map.map[y][x - 2] == '0')
+		if (cub->map.map[y][x - 2] == '0' )
 			ft_exit(cub, path, 1);
 	}
 }
