@@ -6,7 +6,7 @@
 /*   By: jisopark <lotooska@naver.com>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 14:12:10 by jisopark          #+#    #+#             */
-/*   Updated: 2025/02/06 14:19:13 by jisopark         ###   ########.fr       */
+/*   Updated: 2025/02/28 13:44:29 by jisopark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	free_array(char *array)
 
 void	ft_exit(t_cub *cub, char **path, int status)
 {
-	printf("%d\n", status);
 	if (status)
 	{
 		if (status == 1)
