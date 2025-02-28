@@ -20,10 +20,12 @@ static void	check_midlines_space(t_cub *cub, char **path, char *s, int y)
 	while (s[0] && s[++x])
 	{
 		if (s[x] == ' ' && (s[x - 1] == '0' || s[x + 1] == '0' || \
-		cub->map.map[y - 1][x] == '0' || cub->map.map[y + 1][x] == '0'))
-		{
+		s[x - 1] == '2' || s[x + 1] == '2' || \
+		s[x - 1] == '4' || s[x + 1] == '4' || \
+		cub->map.map[y - 1][x] == '0' || cub->map.map[y + 1][x] == '0' || \
+		cub->map.map[y - 1][x] == '2' || cub->map.map[y + 1][x] == '2' || \
+		cub->map.map[y - 1][x] == '4' || cub->map.map[y + 1][x] == '4'))
 			ft_exit(cub, path, 1);
-		}
 	}
 }
 

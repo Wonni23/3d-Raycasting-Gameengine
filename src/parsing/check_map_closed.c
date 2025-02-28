@@ -19,14 +19,25 @@ static void	check_front_back(t_cub *c, char **path)
 	y = 0;
 	if (ft_strchr(c->map.map[y], '0') || ft_strchr(c->map.map[y], 'N') \
 	|| ft_strchr(c->map.map[y], 'S') || ft_strchr(c->map.map[y], 'W') \
-	|| ft_strchr(c->map.map[y], 'E'))
+	|| ft_strchr(c->map.map[y], 'E') || ft_strchr(c->map.map[y], '2') \
+	|| ft_strchr(c->map.map[y], '4'))
 		ft_exit(c, path, 1);
 	while (c->map.map[y])
 		y++;
 	if (ft_strchr(c->map.map[y - 1], '0') || ft_strchr(c->map.map[y - 1], 'N') \
 	|| ft_strchr(c->map.map[y - 1], 'S') || ft_strchr(c->map.map[y - 1], 'W') \
-	|| ft_strchr(c->map.map[y - 1], 'E'))
+	|| ft_strchr(c->map.map[y - 1], 'E') || ft_strchr(c->map.map[y - 1], '2') \
+	|| ft_strchr(c->map.map[y - 1], '4'))
 		ft_exit(c, path, 1);
+}
+
+static int	valid_check(t_cub *cub, int x, int y)
+{
+	if (cub->map.map[y][x] == '0' || orientation_player(cub->map.map[y][x]) \
+	|| cub->map.map[y][x] == '2' || cub->map.map[y][x] == '4')
+		return (1);
+	else
+		return (0);
 }
 
 static void	check_first_c_last_c(t_cub *cub, char **path)
@@ -40,7 +51,7 @@ static void	check_first_c_last_c(t_cub *cub, char **path)
 		x = 0;
 		while (ft_isspace(cub->map.map[y][x]))
 			x++;
-		if (cub->map.map[y][x] == '0' || orientation_player(cub->map.map[y][x]))
+		if (valid_check(cub, x, y))
 			ft_exit(cub, path, 1);
 	}
 	y = -1;
@@ -51,7 +62,7 @@ static void	check_first_c_last_c(t_cub *cub, char **path)
 			x++;
 		if (x == 1 || x == 0)
 			break ;
-		if (cub->map.map[y][x - 2] == '0' )
+		if (valid_check(cub, x - 2, y))
 			ft_exit(cub, path, 1);
 	}
 }
